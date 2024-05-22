@@ -1,0 +1,68 @@
+[templates.astal]
+input_path = '~/.config/matugen/templates/astal.scss'
+output_path = '~/.config/astal/style/colors.scss'
+mode = "Dark" # First letter MUST be upper-case
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty.conf'
+output_path = '~/.config/kitty/colors.conf'
+mode = "Dark" # First letter MUST be upper-case
+
+[templates.foot]
+input_path = '~/.config/matugen/templates/foot.ini'
+output_path = '~/.config/foot/colors.ini'
+mode = "Dark" # First letter MUST be upper-case
+
+[templates.zed]
+input_path = '~/.config/matugen/templates/zed.json'
+output_path = '~/.config/zed/themes/material-you.json'
+mode = "Dark" # First letter MUST be upper-case
+
+[templates.gtk]
+input_path = '~/.config/matugen/templates/gtk.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+mode = "Dark" # First letter MUST be upper-case
+
+[templates.hypr]
+input_path = '~/.config/matugen/templates/hypr.conf'
+output_path = '~/.config/hypr/colors.conf'
+mode = "Dark" # First letter MUST be upper-case
+
+[templates.hyprlock]
+input_path = '~/.config/matugen/templates/hyprlock.conf'
+output_path = '~/.config/hypr/hyprlock.conf'
+mode = "Dark" # First letter MUST be upper-case
+
+[templates.yazi]
+input_path = '~/.config/matugen/templates/yazi.toml'
+output_path = '~/.config/yazi/theme.toml'
+mode = "Dark" # First letter MUST be upper-case
+
+[templates.zathura]
+input_path = '~/.config/matugen/templates/zathura'
+output_path = '~/.config/zathura/zathurarc'
+mode = "Dark" # First letter MUST be upper-case
+
+[config]
+reload_apps = true
+set_wallpaper = true
+wallpaper_tool = 'Swww'
+prefix = '@'
+swww_options = [
+    "--transition-type",
+    "center",
+]
+
+[config.reload_apps_list]
+waybar = false
+kitty = true
+gtk_theme = false
+dunst = false
+
+[config.colors_to_harmonize]
+red = "#f38ba8"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+blue = "#89b4fa"
+orange = "#fab387"
+purple = "#cba6f7"

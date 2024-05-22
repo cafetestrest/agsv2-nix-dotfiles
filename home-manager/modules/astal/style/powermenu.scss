@@ -1,0 +1,47 @@
+.powermenu {
+    padding: 24px;
+    border-radius: 30px;
+    background: $surface_transparent;
+    flowboxchild {
+        border-radius: 100px;
+    }
+}
+
+.powermenu__button {
+    background: $inverse_surface_transparent;
+    min-width: 100px;
+    min-height: 100px;
+    border-radius: 100px;
+    &:hover {
+        background: $primary;
+        color: $on_primary;
+    }
+    &:selected {
+        background: $primary;
+        border-radius: 100px;
+    }
+}
+
+.verification {
+    min-width: 200px;
+    padding: 24px;
+    border-radius: 30px;
+    background: $surface_transparent;
+    .title {
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .desc {
+        font-size: 16px;
+        font-weight: 400;
+    }
+    .verification__button {
+        background: $inverse_surface_transparent;
+        border-radius: 100px;
+        padding: 12px 0;
+        &:hover {
+            background: $primary;
+            color: $on_primary;
+        }
+    }
+}

@@ -1,0 +1,262 @@
+.control-center {
+    min-width: 450px;
+    margin: 12px;
+    border-radius: 38px;
+    padding: 14px;
+    background: $surface_transparent;
+	transition:
+		background-color 0.15s ease,
+		color 0.15s ease;
+}
+
+.control-center__button {
+	background-color: transparentize(#fff, 0.93);
+	color: $on_surface;
+    padding: 0 30px;
+	border-radius: 100px;
+	> * {
+		border-radius: 30px;
+	}
+	min-height: 64px;
+    font-weight: 600;
+	transition:
+		background-color 0.2s ease-in-out,
+		color 0.2s ease-in-out;
+
+    &.active {
+        background: $primary;
+        color: $on_primary;
+        &:hover {
+            background: $on_primary_container;
+        }
+    }
+
+	&:hover {
+		background-color: $surface_container_highest;
+	}
+
+}
+
+.control-center__brightness-slider,
+.control-center__volume-slider {
+    * {
+        padding: 0;
+        margin: 0;
+        border:none;
+    }
+
+    image {
+        color: $on_primary;
+        margin-left: 14px;
+    }
+
+	trough {
+		transition:
+			background-color 0.3s ease-in-out,
+			color 0.3s ease-in-out;
+		border-radius: 100px;
+		background-color: $inverse_surface_transparent;
+        min-height: 44px;
+
+		highlight{
+            min-width: 44px;
+			border-radius: 100px;
+			background-color: $primary;
+			border-radius: 100px;
+			transition:
+				background-color 0.3s ease-in-out,
+				color 0.3s ease-in-out;
+		}
+
+		slider {
+            min-width: 44px;
+            min-height: 44px;
+			border-radius: 100px;
+			background-color: transparent;
+            box-shadow: none;
+
+			transition:
+				background-color 0.3s ease-in-out,
+				color 0.3s ease-in-out;
+		}
+	}
+}
+
+
+
+.player__play-pause {
+    min-width: 60px;
+    min-height: 60px;
+    padding: 0;
+    background: $primary;
+    color: $on_primary;
+    border-radius: 0px;
+    transition: all 0.3s ease;
+    border-radius: 30px;
+
+    &.active {
+        border-radius: 20px;
+    }
+}
+
+.player__position-slider {
+	trough {
+		transition:
+			background-color 0.3s ease-in-out,
+			color 0.3s ease-in-out;
+		border-radius: 100px;
+
+
+		highlight {
+            border-radius: 100px;
+			background-color: $on_surface;
+			border-radius: 100px;
+			transition:
+				background-color 0.3s ease-in-out,
+				color 0.3s ease-in-out;
+		}
+
+		slider {
+            margin: -10px;
+            padding: 2px 0;
+            border-radius: 7px;
+			border-radius: 10px;
+            box-shadow: none;
+			background-color: $on_surface;
+
+			transition:
+				background-color 0.3s ease-in-out,
+				color 0.3s ease-in-out;
+		}
+	}
+}
+
+.player__indicator {
+    min-width: 8px;
+    min-height: 8px;
+    background: $inverse_surface_transparent_variant;
+    border-radius: 100px;
+    margin-bottom: 8px;
+    transition: 0.3s all ease-in-out;
+    &.active {
+        background: $inverse_surface;
+    }
+}
+
+.player__container {
+	border-radius: 30px;
+    min-height: 180px;
+}
+
+.player__cover {
+	border-radius: 30px;
+    background-size: cover;
+    background-position: center;
+    transition: 0.5s all ease;
+}
+
+.player {
+    border-radius: 30px;
+    padding: 20px 20px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.player__header {
+    color: $primary;
+}
+
+.player__sink {
+    border-radius: 100px;
+    padding: 2px 10px;
+    margin: 0;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    label {
+        font-size: 12px;
+    }
+}
+
+.player__title-box {
+    animation: slide-back 0.3s cubic-bezier(0.05, 0.7, 0.1, 1);
+
+    .title {
+        font-weight: 600;
+        font-size: 19px;
+        padding-right: 18px;
+    }
+
+    .artist {
+        padding-right: 18px;
+        font-weight: 400;
+        font-size: 17px;
+    }
+
+
+    &.dissappear {
+        animation: slide 0.3s cubic-bezier(0.3, 0, 0.8, 0.15);
+    }
+}
+
+.player__footer {
+    min-height: 24px;
+    > * {
+        font-size: 12px;
+        background:none;
+        padding: 0;
+    }
+}
+
+.control-center__settings-button {
+    min-width: 42px;
+    min-height: 42px;
+    background: $inverse_surface_transparent;
+    color: $on_surface;
+    border-radius: 100px;
+    transition: 0.15s all ease-in-out;
+    &:hover {
+        background: $tertiary;
+        color: $on_tertiary;
+    }
+}
+
+.control-center__powermenu-button {
+    min-width: 42px;
+    min-height: 42px;
+    background: $inverse_surface_transparent;
+    color: $on_surface;
+    border-radius: 100px;
+    transition: 0.15s all ease-in-out;
+    &:hover {
+        background: $secondary;
+        color: $on_secondary;
+    }
+}
+
+.control-center__uptime {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+@keyframes slide {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-back {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
