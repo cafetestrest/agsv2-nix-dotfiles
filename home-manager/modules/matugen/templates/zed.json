@@ -11,7 +11,7 @@
             "border.variant": "#00000000",
             "border.focused": "#b4befe",
             "border.selected": "#00000000",
-            "border.transparent": "{{harmonized_colors.green.hex}}",
+            "border.transparent": "{{colors.green.default.hex}}",
             "border.disabled": "#585b70",
             "elevated_surface.background": "{{colors.surface.default.hex}}",
             "surface.background": "{{colors.surface_container.default.hex}}",
@@ -59,7 +59,7 @@
             "editor.active_line.background": "{{colors.on_surface.default.hex}}12",
             "editor.highlighted_line.background": null,
             "editor.line_number": "#7f849c",
-            "editor.active_line_number": "{{harmonized_colors.purple.hex}}",
+            "editor.active_line_number": "{{colors.purple.default.hex}}",
             "editor.invisible": "#9399b2",
             "editor.wrap_guide": "#585b70",
             "editor.active_wrap_guide": "#585b70",
@@ -72,17 +72,17 @@
             "terminal.ansi.black": "#45475a",
             "terminal.ansi.bright_black": "#a6adc8",
             "terminal.ansi.dim_black": null,
-            "terminal.ansi.red": "{{harmonized_colors.red.hex}}",
-            "terminal.ansi.bright_red": "{{harmonized_colors.red.hex}}",
+            "terminal.ansi.red": "{{colors.red.default.hex}}",
+            "terminal.ansi.bright_red": "{{colors.red.default.hex}}",
             "terminal.ansi.dim_red": null,
-            "terminal.ansi.green": "{{harmonized_colors.green.hex}}",
-            "terminal.ansi.bright_green": "{{harmonized_colors.green.hex}}",
+            "terminal.ansi.green": "{{colors.green.default.hex}}",
+            "terminal.ansi.bright_green": "{{colors.green.default.hex}}",
             "terminal.ansi.dim_green": null,
-            "terminal.ansi.yellow": "{{harmonized_colors.yellow.hex}}",
-            "terminal.ansi.bright_yellow": "{{harmonized_colors.yellow.hex}}",
+            "terminal.ansi.yellow": "{{colors.yellow.default.hex}}",
+            "terminal.ansi.bright_yellow": "{{colors.yellow.default.hex}}",
             "terminal.ansi.dim_yellow": null,
-            "terminal.ansi.blue": "{{harmonized_colors.blue.hex}}",
-            "terminal.ansi.bright_blue": "{{harmonized_colors.blue.hex}}",
+            "terminal.ansi.blue": "{{colors.blue.default.hex}}",
+            "terminal.ansi.bright_blue": "{{colors.blue.default.hex}}",
             "terminal.ansi.dim_blue": null,
             "terminal.ansi.magenta": "#f5c2e7",
             "terminal.ansi.bright_magenta": "#f5c2e7",
@@ -94,17 +94,17 @@
             "terminal.ansi.bright_white": "{{colors.on_surface_variant.default.hex}}",
             "terminal.ansi.dim_white": null,
             "link_text.hover": "#89dceb",
-            "conflict": "{{harmonized_colors.purple.hex}}",
-            "conflict.border": "{{harmonized_colors.purple.hex}}",
+            "conflict": "{{colors.purple.default.hex}}",
+            "conflict.border": "{{colors.purple.default.hex}}",
             "conflict.background": "{{colors.surface.default.hex}}",
-            "created": "{{harmonized_colors.green.hex}}",
-            "created.border": "{{harmonized_colors.green.hex}}",
+            "created": "{{colors.green.default.hex}}",
+            "created.border": "{{colors.green.default.hex}}",
             "created.background": "{{colors.surface.default.hex}}",
-            "deleted": "{{harmonized_colors.red.hex}}",
-            "deleted.border": "{{harmonized_colors.red.hex}}",
+            "deleted": "{{colors.red.default.hex}}",
+            "deleted.border": "{{colors.red.default.hex}}",
             "deleted.background": "{{colors.surface.default.hex}}",
-            "error": "{{harmonized_colors.red.hex}}",
-            "error.border": "{{harmonized_colors.red.hex}}",
+            "error": "{{colors.red.default.hex}}",
+            "error.border": "{{colors.red.default.hex}}",
             "error.background": "{{colors.surface.default.hex}}",
             "hidden": "#6c7086",
             "hidden.border": "#6c7086",
@@ -117,9 +117,9 @@
             "ignored.background": "{{colors.surface.default.hex}}",
             "info": "#94e2d5",
             "info.border": "#94e2d5",
-            "info.background": "{{harmonized_colors.purple.hex}}66",
-            "modified": "{{harmonized_colors.yellow.hex}}",
-            "modified.border": "{{harmonized_colors.yellow.hex}}",
+            "info.background": "{{colors.purple.default.hex}}66",
+            "modified": "{{colors.yellow.default.hex}}",
+            "modified.border": "{{colors.yellow.default.hex}}",
             "modified.background": "{{colors.surface.default.hex}}",
             "predictive": "#7688ae",
             "predictive.border": "#b4befe",
@@ -127,14 +127,14 @@
             "renamed": "#74c7ec",
             "renamed.border": "#74c7ec",
             "renamed.background": "{{colors.surface.default.hex}}",
-            "success": "{{harmonized_colors.green.hex}}",
-            "success.border": "{{harmonized_colors.green.hex}}",
+            "success": "{{colors.green.default.hex}}",
+            "success.border": "{{colors.green.default.hex}}",
             "success.background": "{{colors.surface.default.hex}}",
-            "unreachable": "{{harmonized_colors.red.hex}}",
-            "unreachable.border": "{{harmonized_colors.red.hex}}",
+            "unreachable": "{{colors.red.default.hex}}",
+            "unreachable.border": "{{colors.red.default.hex}}",
             "unreachable.background": "{{colors.surface.default.hex}}",
-            "warning": "{{harmonized_colors.orange.hex}}",
-            "warning.border": "{{harmonized_colors.orange.hex}}",
+            "warning": "{{colors.orange.default.hex}}",
+            "warning.border": "{{colors.orange.default.hex}}",
             "warning.background": "{{colors.surface.default.hex}}",
             "players": [
                 {
@@ -180,12 +180,12 @@
                 ],
             "syntax": {
                 "attribute": {
-                    "color": "{{harmonized_colors.yellow.hex}}",
+                    "color": "{{colors.yellow.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
                 "boolean": {
-                    "color": "{{harmonized_colors.orange.hex}}",
+                    "color": "{{colors.orange.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
@@ -200,12 +200,12 @@
                     "font_weight": null
                 },
                 "constant": {
-                    "color": "{{harmonized_colors.orange.hex}}",
+                    "color": "{{colors.orange.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
                 "constructor": {
-                    "color": "{{harmonized_colors.blue.hex}}",
+                    "color": "{{colors.blue.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
@@ -215,12 +215,12 @@
                     "font_weight": null
                 },
                 "emphasis": {
-                    "color": "{{harmonized_colors.red.hex}}",
+                    "color": "{{colors.red.default.hex}}",
                     "font_style": "italic",
                     "font_weight": null
                 },
                 "emphasis.strong": {
-                    "color": "{{harmonized_colors.red.hex}}",
+                    "color": "{{colors.red.default.hex}}",
                     "font_style": null,
                     "font_weight": 700
                 },
@@ -230,7 +230,7 @@
                     "font_weight": 700
                 },
                 "function": {
-                    "color": "{{harmonized_colors.blue.hex}}",
+                    "color": "{{colors.blue.default.hex}}",
                     "font_style": "italic",
                     "font_weight": null
                 },
@@ -240,22 +240,22 @@
                     "font_weight": null
                 },
                 "keyword": {
-                    "color": "{{harmonized_colors.purple.hex}}",
+                    "color": "{{colors.purple.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
                 "link_text": {
-                    "color": "{{harmonized_colors.blue.hex}}",
+                    "color": "{{colors.blue.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
                 "link_uri": {
-                    "color": "{{harmonized_colors.blue.hex}}",
+                    "color": "{{colors.blue.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
                 "number": {
-                    "color": "{{harmonized_colors.orange.hex}}",
+                    "color": "{{colors.orange.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
@@ -270,7 +270,7 @@
                     "font_weight": null
                 },
                 "predoc": {
-                    "color": "{{harmonized_colors.red.hex}}",
+                    "color": "{{colors.red.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
@@ -280,7 +280,7 @@
                     "font_weight": null
                 },
                 "property": {
-                    "color": "{{harmonized_colors.blue.hex}}",
+                    "color": "{{colors.blue.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
@@ -310,12 +310,12 @@
                     "font_weight": null
                 },
                 "punctuation.special.symbol": {
-                    "color": "{{harmonized_colors.red.hex}}",
+                    "color": "{{colors.red.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
                 "string": {
-                    "color": "{{harmonized_colors.green.hex}}",
+                    "color": "{{colors.green.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
@@ -340,12 +340,12 @@
                     "font_weight": null
                 },
                 "tag": {
-                    "color": "{{harmonized_colors.blue.hex}}",
+                    "color": "{{colors.blue.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
                 "text.literal": {
-                    "color": "{{harmonized_colors.green.hex}}",
+                    "color": "{{colors.green.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 },
@@ -355,7 +355,7 @@
                     "font_weight": 800
                 },
                 "type": {
-                    "color": "{{harmonized_colors.yellow.hex}}",
+                    "color": "{{colors.yellow.default.hex}}",
                     "font_style": "italic",
                     "font_weight": null
                 },
@@ -370,7 +370,7 @@
                     "font_weight": null
                 },
                 "variant": {
-                    "color": "{{harmonized_colors.red.hex}}",
+                    "color": "{{colors.red.default.hex}}",
                     "font_style": null,
                     "font_weight": null
                 }

@@ -7,17 +7,26 @@
 in {
   imports = [
     ./packages.nix
-    ./modules/astal
+    # ./modules/astal
     ./modules/ags.nix
-    ./modules/wezterm.nix
     ./modules/zsh.nix
     ./modules/tmux.nix
     ./modules/git.nix
     ./modules/theme.nix
-    ./modules/vscode.nix
     ./modules/chromium.nix
     ./modules/nvim
   ];
+
+  dconf = {
+    enable = true;
+    settings."org/gnome/shell" = {
+      disable-user-extensions = false;
+      enabled-extensions = with pkgs.gnomeExtensions; [
+        blur-my-shell.extensionUuid
+        gsconnect.extensionUuid
+      ];
+    };
+  };
 
   xdg = {
     enable = true;
@@ -92,4 +101,3 @@ in {
     };
   };
 }
-

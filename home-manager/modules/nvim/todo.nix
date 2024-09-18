@@ -19,7 +19,6 @@
             })
           end
         '';
-        lua = true;
         options.silent = true;
       }
     ];

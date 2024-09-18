@@ -1,40 +1,6 @@
 {
   description = "NixOS configuration";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nbfc-linux = {
-      url = "github:nbfc-linux/nbfc-linux";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    yandex-music.url = "github:cucumber-sp/yandex-music-linux";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    hypridle.url = "github:hyprwm/hypridle";
-    ags.url = "github:Aylur/ags";
-    astal.url = "github:PoSayDone/astal";
-    matugen = {
-      url = "github:InioX/Matugen?ref=v2.2.0";
-    };
-    more-waita = {
-      url = "https://github.com/somepaulo/MoreWaita/archive/refs/heads/main.zip";
-      flake = false;
-    };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    transparent-nvim = {
-      url = "github:xiyaowong/transparent.nvim";
-      flake = false;
-    };
-  };
-
   outputs = inputs @ {
     home-manager,
     nixvim,
@@ -59,6 +25,7 @@
         home-manager.nixosModules.home-manager
         nixos-cosmic.nixosModules.default
         {
+          home-manager.backupFileExtension = "old";
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
@@ -69,5 +36,46 @@
       ];
     };
   };
-}
 
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nbfc-linux = {
+      url = "github:abdlrhman08/nbfc-linux/make_fix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    yandex-music.url = "github:cucumber-sp/yandex-music-linux";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprlock.url = "github:hyprwm/Hyprlock";
+    hypridle.url = "github:hyprwm/hypridle";
+    ags.url = "github:Aylur/ags";
+    astal.url = "github:PoSayDone/astal";
+    matugen = {
+      url = "github:InioX/Matugen?rev=0bd628f263b1d97f238849315f2ce3ab4439784e";
+    };
+    hyprgrass = {
+      url = "github:horriblename/hyprgrass";
+      inputs.hyprland.follows = "hyprland";
+    };
+    more-waita = {
+      url = "https://github.com/somepaulo/MoreWaita/archive/refs/heads/main.zip";
+      flake = false;
+    };
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    transparent-nvim = {
+      url = "github:xiyaowong/transparent.nvim";
+      flake = false;
+    };
+  };
+}

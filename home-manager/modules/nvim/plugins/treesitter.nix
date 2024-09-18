@@ -9,6 +9,7 @@
       indent = true;
 
       grammarPackages = with config.programs.nixvim.plugins.treesitter.package.builtGrammars; [
+        blueprint
         prisma
         svelte
         bash

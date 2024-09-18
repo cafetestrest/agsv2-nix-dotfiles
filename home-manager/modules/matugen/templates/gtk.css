@@ -1,5 +1,8 @@
-@define-color theme_selected_bg_color {{colors.source_color.default.hex}};
+<* for name, value in colors *>
+@define-color {{name}} {{value.default.hex}};
+<* endfor *>
 
+@define-color theme_selected_bg_color {{colors.source_color.default.hex}};
 @define-color accent_color {{colors.primary.default.hex}};
 @define-color accent_bg_color {{colors.primary_container.default.hex}};
 @define-color accent_fg_color {{colors.on_primary_container.default.hex}};
@@ -38,6 +41,36 @@
 @define-color secondary_sidebar_bg_color @sidebar_bg_color;
 @define-color sidebar_backdrop_color @sidebar_bg_color;
 @define-color secondary_sidebar_backdrop_color @sidebar_bg_color;
+
+switch {
+	border: 2px solid @outline;
+	border-radius: 100px;
+	background-color: @surface_container_highest;
+}
+
+switch slider {
+	box-shadow: none;
+	border-radius: 100px;
+	background-color: @outline;
+}
+
+switch:hover slider,
+switch:active slider {
+	background-color: @on_surface_variant;
+}
+
+switch:active {
+	background-color: @surface_container_highest;
+}
+
+switch:checked {
+	background-color: @primary;
+	border: 2px solid @primary;
+}
+
+switch:checked slider {
+	background-color: @on_primary;
+}
 
 .navigation-sidebar {
 	background-color: @sidebar_bg_color;

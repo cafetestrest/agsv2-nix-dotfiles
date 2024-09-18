@@ -11,10 +11,14 @@
     inputs.matugen.packages.${pkgs.system}.default
     dart-sass
     gtk3 # gtk-launch
+    material-symbols
   ];
 
   programs.ags = {
     enable = true;
-    extraPackages = [pkgs.libsoup_3];
+    extraPackages = [
+      pkgs.libsoup_3
+      pkgs.gtksourceview
+    ];
   };
 }

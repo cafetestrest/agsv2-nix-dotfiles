@@ -6,15 +6,15 @@ handle() {
     hyprctl dispatch moveworkspacetomonitor "2 1"
     hyprctl dispatch moveworkspacetomonitor "4 0"
     hyprctl dispatch moveworkspacetomonitor "6 0"
-    astal -q;
-    matugen image "$HOME/.cache/Astal/current_wallpaper";
+    ags -q;
+    matugen image "$HOME/.cache/current_wallpaper";
     gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark';
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark';
-    astal & disown;
+    ags & disown;
   esac
   case $1 in monitorremoved*)
-    astal -q;
-    astal & disown;
+    ags -q;
+    ags & disown;
   esac
 }
 

@@ -1,12 +1,16 @@
 {
-  pkgs,
   inputs,
+  pkgs,
   ...
-}: {
+}: let
+  nixpkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
+in {
   home.packages = with pkgs;
   with nodePackages_latest;
   with gnome; [
+    (pkgs.callPackage ../pkgs/hyprsettings/derivation.nix {})
     #cli
+    xclip
     btop
     fd
     ripgrep
@@ -20,6 +24,8 @@
     tesseract
 
     #tools
+    # (callPackage ./modules/hyprsettings/derivation.nix {})
+    rustdesk-flutter
     ripdrag
     nekoray
     wineWowPackages.waylandFull
@@ -28,7 +34,9 @@
     blueman
 
     #gui
+    lutris
     obs-studio
+    wpsoffice
     figma-linux
     zoom-us
     kitty
@@ -50,7 +58,6 @@
     socat # for monitor connect script
     hyprpicker
     hypridle
-    hyprlock
     wl-gammactl
     wl-clipboard
     wf-recorder
@@ -63,13 +70,13 @@
     corefonts
 
     # games
-    (prismlauncher.override {jdks = [jdk8 jdk17 jdk19];})
-    (pkgs.steam.override {extraPkgs = pkgs: with pkgs; [gamemode gamescope];})
+    (prismlauncher.override {jdks = [jdk8 jdk17 jdk21];})
 
     #development
     bruno
-    zed-editor
-    jetbrains.datagrip
+    nixpkgs-unstable.zed-editor
+    gnome-builder
+    flatpak-builder
     docker-compose
     android-studio
 
@@ -77,7 +84,7 @@
     nodejs
     bun
     sassc
-    typescript
+    # typescript
     meson
     yarn
   ];

@@ -13,31 +13,32 @@
   };
 
   hardware = {
+    enableRedistributableFirmware = true;
     system76.power-daemon = {
       enable = true;
-    };
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-      extraPackages = with pkgs; [
-        intel-compute-runtime
-        intel-media-driver
-        vaapiVdpau
-        libvdpau-va-gl
-      ];
     };
   };
 
   programs = {
+    steam.enable = true;
     hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      #      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      #      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    };
+    hyprlock = {
+      enable = true;
+      #     package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
     };
   };
 
   security = {
-    polkit.enable = true;
+    # pam.services.hyprlock = {
+    #   enable = true;
+    # };
+    polkit = {
+      enable = true;
+    };
     sudo = {
       enable = true;
       extraRules = [
@@ -62,7 +63,8 @@
     variables = {
       S76_POWER_PCI_RUNTIME_PM = 1;
     };
-    systemPackages = with pkgs.gnome; [
+    systemPackages = with pkgs;
+    with gnome; [
       inputs.nbfc-linux.packages.${pkgs.system}.default
       adwaita-icon-theme
       nautilus
@@ -77,21 +79,7 @@
     ];
   };
 
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "Starts gnome polkit service";
-      wantedBy = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-      };
-    };
-  };
-
   services = {
-    fprintd.enable = true;
     gvfs.enable = true;
     devmon.enable = true;
     udisks2.enable = true;

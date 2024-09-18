@@ -1,13 +1,13 @@
 {
   programs.nixvim.plugins.barbar = {
     enable = true;
-    autoHide = true;
     keymaps = {
-      silent = true;
-
-      next = "<TAB>";
-      previous = "<S-TAB>";
-      close = "<leader>x";
+      next.key = "<TAB>";
+      previous.key = "<S-TAB>";
+      close.key = "<leader>x";
+    };
+    settings = {
+      auto_hide = 0;
     };
   };
 }

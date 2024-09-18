@@ -1,9 +1,7 @@
 {
   lib,
-  inputs,
   pkgs,
   username,
-  system,
   ...
 }: {
   imports = [
@@ -47,16 +45,19 @@
   # packages
   environment = {
     systemPackages = with pkgs; [
+      polkit_gnome
       home-manager
       system-config-printer
       git
       wget
       intel-gpu-tools
       usbutils
+      gtklock
     ];
     sessionVariables.NIXOS_OZONE_WL = "1";
     binsh = "${pkgs.zsh}/bin/zsh";
   };
+  security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
 
   fonts.packages = with pkgs; [
     (nerdfonts.override {fonts = ["JetBrainsMono"];})
@@ -83,31 +84,37 @@
     zsh.enable = true;
   };
 
+  hardware.pulseaudio.enable = false;
   # services
   services = {
-    fprintd.enable = true;
     pipewire = {
       enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
+      audio.enable = true;
       pulse.enable = true;
-      wireplumber = {
+      alsa = {
         enable = true;
-        configPackages = [
-          (pkgs.writeTextDir "share/wireplumber/bluetooth.lua.d/51-bluez-config.lua" ''
-            bluez_monitor.properties = {
-            	["bluez5.enable-sbc-xq"] = true,
-            	["bluez5.enable-msbc"] = true,
-            	["bluez5.enable-hw-volume"] = true,
-            	["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
-            }
-          '')
-        ];
+        support32Bit = true;
       };
+      jack.enable = true;
+      configPackages = [
+        (pkgs.writeTextDir "share/wireplumber/bluetooth.lua.d/51-bluez-config.lua" ''
+          bluez_monitor.properties = {
+          	["bluez5.enable-sbc-xq"] = true,
+          	["bluez5.enable-msbc"] = true,
+          	["bluez5.enable-hw-volume"] = true,
+          	["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
+          }
+        '')
+      ];
     };
     printing.enable = true;
     printing.drivers = [pkgs.hplip];
     flatpak.enable = true;
+    # xserver = {
+    #   enable = true;
+    #   displayManager.gdm.enable = true;
+    #   desktopManager.gnome.enable = true;
+    # };
     xserver = {
       enable = true;
       excludePackages = [pkgs.xterm];
@@ -186,5 +193,5 @@
     consoleLogLevel = 0;
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "24.05";
 }
