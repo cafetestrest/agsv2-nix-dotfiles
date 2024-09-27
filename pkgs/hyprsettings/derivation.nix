@@ -1,7 +1,6 @@
 {
   blueprint-compiler,
   desktop-file-utils,
-  fetchFromGitHub,
   lib,
   libadwaita,
   libportal-gtk4,
@@ -10,7 +9,7 @@
   python3Packages,
   wrapGAppsHook4,
 }:
-python3Packages.buildPythonApplication rec {
+python3Packages.buildPythonApplication {
   pname = "hyprsettings";
   version = "0.0.1";
   format = "other";

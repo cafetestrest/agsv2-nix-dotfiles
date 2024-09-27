@@ -2,6 +2,7 @@
   nix.settings = {
     substituters = [
       "https://aseipp-nix-cache.global.ssl.fastly.net?priority=10"
+      "https://ags.cachix.org"
       "https://cosmic.cachix.org/"
       "https://anyrun.cachix.org"
       "https://fufexan.cachix.org"
@@ -14,6 +15,7 @@
 
     trusted-public-keys = [
       "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+      "ags.cachix.org-1:naAvMrz0CuYqeyGNyLgE010iUiuf/qx6kYrUv3NwAJ8="
       "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
       "fufexan.cachix.org-1:LwCDjCJNJQf5XD2BV+yamQIMZfcKWR9ISIFy5curUsY="
       "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="

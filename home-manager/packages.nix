@@ -8,7 +8,7 @@ in {
   home.packages = with pkgs;
   with nodePackages_latest;
   with gnome; [
-    (pkgs.callPackage ../pkgs/hyprsettings/derivation.nix {})
+    (nixpkgs-unstable.callPackage ../pkgs/hyprsettings/derivation.nix {})
     #cli
     xclip
     btop
@@ -39,14 +39,14 @@ in {
     wpsoffice
     figma-linux
     zoom-us
-    kitty
+    nixpkgs-unstable.kitty
     foot
     yazi
     mpv
     vesktop
     gimp
     zathura
-    telegram-desktop
+    nixpkgs-unstable.telegram-desktop
     mission-center
     loupe
     simple-scan
@@ -75,6 +75,7 @@ in {
     #development
     bruno
     nixpkgs-unstable.zed-editor
+    nixpkgs-unstable.cassette
     gnome-builder
     flatpak-builder
     docker-compose

@@ -3,7 +3,7 @@
     plugins = {
       lsp.servers.efm = {
         enable = true;
-        filetypes = ["nix" "bash" "sh" "typescript" "typescriptreact" "javascript" "svelte" "python" "html" "css"];
+        filetypes = ["nix" "bash" "sh" "typescript" "typescriptreact" "javascript" "javascriptreact" "svelte" "python" "html" "css"];
         extraOptions.init_options = {
           documentFormatting = true;
           documentRangeFormatting = true;

@@ -65,7 +65,10 @@
   ];
 
   #power management
-  powerManagement.enable = true;
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "powersave";
+  };
 
   #programs
   programs = {
@@ -166,7 +169,7 @@
     enableAllFirmware = true;
     bluetooth = {
       enable = true;
-      powerOnBoot = false;
+      powerOnBoot = true;
       settings.General.Experimental = true; # for gnome-bluetooth percentage
     };
     sane = {

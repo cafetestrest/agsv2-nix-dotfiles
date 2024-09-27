@@ -8,7 +8,7 @@ in {
   imports = [
     ./packages.nix
     # ./modules/astal
-    ./modules/ags.nix
+    ./modules/ags
     ./modules/zsh.nix
     ./modules/tmux.nix
     ./modules/git.nix
@@ -100,4 +100,24 @@ in {
       "inode/directory" = ["org.gnome.Nautilus.desktop"];
     };
   };
+
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    Unit = {
+      description = "polkit-gnome-authentication-agent-1";
+    };
+    Install = {
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+    };
+    Service = {
+      Type = "simple";
+      user = "posaydone";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
 }
+

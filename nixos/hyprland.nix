@@ -2,7 +2,9 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in {
   xdg = {
     autostart.enable = true;
     portal = {
@@ -14,8 +16,17 @@
 
   hardware = {
     enableRedistributableFirmware = true;
-    system76.power-daemon = {
-      enable = true;
+    opengl = {
+      package = pkgs-unstable.mesa.drivers;
+      package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        intel-compute-runtime
+        intel-media-driver
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
     };
   };
 
@@ -23,12 +34,12 @@
     steam.enable = true;
     hyprland = {
       enable = true;
-      #      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      #      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     };
     hyprlock = {
       enable = true;
-      #     package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
+      package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
     };
   };
 

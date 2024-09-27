@@ -42,37 +42,75 @@
 @define-color sidebar_backdrop_color @sidebar_bg_color;
 @define-color secondary_sidebar_backdrop_color @sidebar_bg_color;
 
-switch {
-	border: 2px solid @outline;
-	border-radius: 100px;
-	background-color: @surface_container_highest;
-}
-
-switch slider {
-	box-shadow: none;
-	border-radius: 100px;
-	background-color: @outline;
-}
-
-switch:hover slider,
-switch:active slider {
-	background-color: @on_surface_variant;
-}
-
-switch:active {
-	background-color: @surface_container_highest;
-}
-
-switch:checked {
-	background-color: @primary;
-	border: 2px solid @primary;
-}
-
-switch:checked slider {
-	background-color: @on_primary;
-}
-
-.navigation-sidebar {
-	background-color: @sidebar_bg_color;
-    color: @window_fg_color;
-}
+/* switch { */
+/* 	border: 2px solid @outline; */
+/* 	border-radius: 100px; */
+/* 	background-color: @surface_container_highest; */
+/* } */
+/**/
+/* switch slider { */
+/* 	box-shadow: none; */
+/* 	border-radius: 100px; */
+/* 	background-color: @outline; */
+/* } */
+/**/
+/* switch:hover slider, */
+/* switch:active slider { */
+/* 	background-color: @on_surface_variant; */
+/* } */
+/**/
+/* switch:active { */
+/* 	background-color: @surface_container_highest; */
+/* } */
+/**/
+/* switch:checked { */
+/* 	background-color: @primary; */
+/* 	border: 2px solid @primary; */
+/* } */
+/**/
+/* switch:checked slider { */
+/* 	background-color: @on_primary; */
+/* } */
+/**/
+/* .navigation-sidebar { */
+/*     background-color: @sidebar_bg_color; */
+/* } */
+/**/
+/* .navigation-sidebar row, .sidebar-row, NautilusGtkSidebarRow { */
+/*     transition: 0.1s all ease-in-out; */
+/*     padding: 6px; */
+/*     border-radius: 100px; */
+/* } */
+/**/
+/* .navigation-sidebar label, .navigation-sidebar image { */
+/*     color: @outline; */
+/* } */
+/**/
+/* .navigation-sidebar row:selected { */
+/*     background-color: @primary; */
+/* } */
+/**/
+/* .navigation-sidebar row:selected label, */
+/* .navigation-sidebar row:selected image, */
+/* { */
+/*     color: @on_primary; */
+/*     background-color: transparent; */
+/* } */
+/**/
+/* .navigation-sidebar row:active { */
+/*     background-color: @primary_container; */
+/* } */
+/**/
+/* .navigation-sidebar row:active label, */
+/* .navigation-sidebar row:active image */
+/* { */
+/*     color: @on_primary_container; */
+/*     background-color: transparent; */
+/* } */
+/**/
+/* tooltip { */
+/*     background-color: @surface_container_low; */
+/*     color: @foreground; */
+/*     border-radius: 100px; */
+/*     border: 0px solid; */
+/* } */
