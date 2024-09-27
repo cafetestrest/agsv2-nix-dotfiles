@@ -15,7 +15,6 @@ export default (app: AstalApps.Application) => {
 		label: app.description || "",
 		wrap: true,
 		xalign: 0,
-		// justify: "left",
 		truncate: true,
 	});
 
@@ -31,14 +30,17 @@ export default (app: AstalApps.Application) => {
 
 	const AppItem = Widget.Button({
 		className: "app-launcher__item",
-		// attribute: app,
-		child: Widget.Box({
-			spacing: 8,
-			children: [icon, textBox],
-		}),
 		on_clicked: () => {
 			App.toggle_window("app-launcher");
 			app.launch();
+		},
+		setup: (self) => {
+			self.add(
+				Widget.Box({
+					spacing: 8,
+					children: [icon, textBox],
+				}),
+			);
 		},
 	});
 

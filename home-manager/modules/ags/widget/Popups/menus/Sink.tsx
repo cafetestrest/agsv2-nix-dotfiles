@@ -7,12 +7,13 @@ import { lookUpIcon } from "../../../lib/utils";
 export default () => {
 	const audio = AstalWp.get_default()?.audio!;
 
-	const SinkItem = (device: AstalWp.Endpoint) =>
-		Widget.Button({
-			className: "popup-menu__item",
-			hexpand: true,
-			on_clicked: () => device.set_is_default(true),
-			child: Widget.Box({
+	const SinkItem = (device: AstalWp.Endpoint) => (
+		<button
+			className="popup-menu__item"
+			hexpand={true}
+			on_clicked={() => device.set_is_default(true)}
+		>
+			{Widget.Box({
 				children: [
 					Widget.Icon({
 						icon: lookUpIcon(device.icon)
@@ -33,8 +34,9 @@ export default () => {
 						visible: bind(device, "isDefault"),
 					}),
 				],
-			}),
-		});
+			})}
+		</button>
+	);
 
 	return (
 		<PopupMenu label="Sink">
@@ -44,10 +46,3 @@ export default () => {
 		</PopupMenu>
 	);
 };
-// PopupMenu({
-// 	label: "Sink",
-// 	content: Widget.Box({
-// 		vertical: true,
-// 		children: audio.bind("speakers").transform((a) => a.map(SinkItem)),
-// 	}),
-// });

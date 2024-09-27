@@ -13,41 +13,36 @@ export default ({ label, child, refresh = undefined }: PageProps) => {
 		<box
 			name={label.toLowerCase()}
 			className={`control-center__page ${label.toLowerCase()}`}
-			// css={pageHeight}
 			vertical={true}
 		>
-			<centerbox
-				className="control-center__page_header"
-				spacing={12}
-				startWidget={Widget.Button({
-					hexpand: false,
-					halign: Gtk.Align.START,
-					className: "control-center__page_header_button",
-					child: Widget.Icon({
-						icon: icons.ui.arrow.left,
-					}),
-					onClicked: () => currentPage.set("main"),
-				})}
-				centerWidget={Widget.Label({
-					className: "control-center__page_header_title",
-					halign: Gtk.Align.CENTER,
-					hexpand: true,
-					label: label,
-				})}
-				setup={(self) => {
-					if (refresh)
-						self.end_widget = Widget.Button({
-							halign: Gtk.Align.END,
-							hexpand: false,
-							className: "control-center__page_header_button",
-							child: Widget.Icon({
-								hexpand: false,
-								icon: icons.ui.refresh,
-							}),
-							onClicked: () => refresh(),
-						});
-				}}
-			/>
+			<centerbox className="control-center__page_header" spacing={12}>
+				<button
+					hexpand={false}
+					halign={Gtk.Align.START}
+					className="control-center__page_header_button"
+					onClicked={() => currentPage.set("main")}
+				>
+					<icon icon={icons.ui.arrow.left} />
+				</button>
+				<label
+					className="control-center__page_header_title"
+					halign={Gtk.Align.CENTER}
+					hexpand={true}
+					label={label}
+				/>
+				{refresh ? (
+					<button
+						halign={Gtk.Align.END}
+						hexpand={false}
+						className="control-center__page_header_button"
+						onClicked={refresh}
+					>
+						<icon hexpand={false} icon={icons.ui.refresh} />
+					</button>
+				) : (
+					<box />
+				)}
+			</centerbox>
 			<scrollable vexpand={true} className="control-center__page_content">
 				{child}
 			</scrollable>

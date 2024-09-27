@@ -1,4 +1,4 @@
-import { bind, Variable } from "../../../../../.local/share/ags";
+import { bind, Variable } from "astal";
 import icons from "../../../lib/icons";
 import ControlCenterButton from "../ControlCenterButton";
 import { currentPage } from "../index";

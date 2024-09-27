@@ -1,4 +1,4 @@
-import { Astal, bind, Gdk, Gtk, timeout, Widget } from "astal";
+import { App, Astal, bind, Gdk, Gtk, timeout, Widget } from "astal";
 import Progress from "./Progress";
 import AstalWp from "gi://AstalWp?version=0.1";
 import icons from "../../lib/icons";
@@ -41,7 +41,7 @@ function OnScreenProgress(window: Astal.Window, vertical: boolean) {
 		valign: Gtk.Align.END,
 		css: "min-height: 2px;",
 		child: progress,
-		setup: (self) => {
+		setup: () => {
 			progress.setMute(speaker.mute);
 			progress.hook(speaker, "notify::volume", () =>
 				show(speaker.volume, icons.audio.type.speaker),
@@ -64,10 +64,10 @@ export default (gdkmonitor: Gdk.Monitor) => (
 		layer={Astal.Layer.OVERLAY}
 		anchor={Astal.WindowAnchor.BOTTOM}
 		setup={(self) => {
-			self.child = (
+			self.add(
 				<box className="osd" vertical={true}>
 					{OnScreenProgress(self, false)}
-				</box>
+				</box>,
 			);
 		}}
 	></window>
