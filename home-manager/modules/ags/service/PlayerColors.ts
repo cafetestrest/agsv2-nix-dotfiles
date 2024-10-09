@@ -3,56 +3,25 @@ import { execAsync } from "astal";
 import GObject from "gi://GObject?version=2.0";
 import { Colors } from "../lib/variables";
 
-const mpris = AstalMpris.get_default();
-
 const PlayerColorsService = GObject.registerClass(
 	{
-		GTypeName: "PlayerColorsService",
-		Properties: {},
-		Signals: {
-			"colors-changed": {
-				param_types: [GObject.TYPE_OBJECT, GObject.TYPE_JSOBJECT],
-			},
+		Properties: {
+			colors: GObject.ParamSpec.jsobject(
+				"colors",
+				"Colors",
+				"A property containing player colors",
+				GObject.ParamFlags.READABLE,
+			),
 		},
 	},
 	class PlayerColorsService extends GObject.Object {
-		constructor() {
+		constructor({ player }: { player: AstalMpris.Player }) {
 			super();
-
-			mpris.get_players().forEach((player) => {
-				if (this.#connections.has(player)) return;
-				const id = player.connect(
-					"notify::cover-art",
-					this.#onCoverChange.bind(this),
-				);
-				this.#connections.set(player, id);
-				this.#onCoverChange(player);
-			});
-
-			mpris.connect("player-added", (_, player: AstalMpris.Player) => {
-				if (this.#connections.has(player)) return;
-				if (player) {
-					const id = player.connect(
-						"notify::cover-art",
-						this.#onCoverChange.bind(this),
-					);
-					this.#connections.set(player, id);
-				}
-			});
-
-			mpris.connect("player-closed", (_, player: AstalMpris.Player) => {
-				if (!this.#connections.has(player)) return;
-				if (player) {
-					const id = this.#connections.get(player);
-					player.disconnect(id);
-					this.#connections.delete(player);
-				}
-			});
+			player.connect("notify::cover-art", () => this.#setColors(player));
+			this.#setColors(player);
 		}
 
-		#colors = new Map();
-		#previousCoverPaths = new Map();
-		#connections = new Map();
+		#colors: Colors | null = null;
 
 		get colors() {
 			return this.#colors;
@@ -67,30 +36,15 @@ const PlayerColorsService = GObject.registerClass(
 						light: Colors;
 						dark: Colors;
 					};
-					this.#colors.set(player.coverArt, colors.light);
-					try {
-						this.emit(`colors-changed`, player, colors.light);
-					} catch (e) {
-						print(e);
-					}
+					this.#colors = colors.light;
+					this.notify(`colors`);
 				});
-			}
-		}
-
-		#onCoverChange(player: AstalMpris.Player) {
-			const previousCoverPath = this.#previousCoverPaths.get(
-				player.busName,
-			);
-			if (
-				previousCoverPath == undefined ||
-				previousCoverPath != player.coverArt
-			) {
-				this.#previousCoverPaths.set(player.busName, player.coverArt);
-				this.#setColors(player);
 			}
 		}
 	},
 );
 
-const service = new PlayerColorsService();
-export default service;
+export default (player: AstalMpris.Player) =>
+	new PlayerColorsService({
+		player: player,
+	});

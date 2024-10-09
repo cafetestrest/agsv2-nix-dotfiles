@@ -45,6 +45,16 @@ export const substitutions: substitutions = {
 };
 
 export default {
+	colorscheme: {
+		dark: "night-light-symbolic",
+		light: "night-light-symbolic",
+	},
+	record: "media-record-symbolic",
+	powerprofile: {
+		0: "power-profile-balanced-symbolic",
+		1: "power-profile-power-saver-symbolic",
+		2: "power-profile-performance-symbolic",
+	},
 	bluetooth: {
 		enabled: "bluetooth-active-symbolic",
 		disabled: "bluetooth-disabled-symbolic",

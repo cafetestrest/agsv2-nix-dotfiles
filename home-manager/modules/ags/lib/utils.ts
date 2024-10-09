@@ -1,6 +1,10 @@
 import { type Subscribable } from "astal/binding";
 import { Gtk, App, GLib, monitorFile, writeFile, exec } from "astal";
 import { transparentScrimWindowNames, scrimWindowNames } from "./variables";
+import AstalNotifd from "gi://AstalNotifd?version=0.1";
+import { currentPage } from "../widget/ControlCenter";
+
+export type Ref<T> = { ref?: T };
 
 export function range(length: number, start = 1) {
 	return Array.from({ length }, (_, i) => i + start);
@@ -27,8 +31,14 @@ export function toggleWindow(windowName: string) {
 	if (w) {
 		if (w.visible) {
 			w.visible = false;
+			if (windowName == "control-center") currentPage.set("main");
 		} else {
 			if (transparentScrimWindowNames.get().includes(windowName)) {
+				if (windowName == "notifications") {
+					const notifications =
+						AstalNotifd.get_default().get_notifications();
+					if (notifications.length == 0) return;
+				}
 				App.get_window("transparent-scrim")?.set_visible(true);
 			} else {
 				activePopupWindows("opaque").forEach((window) => {

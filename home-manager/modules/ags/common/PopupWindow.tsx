@@ -1,4 +1,4 @@
-import { App, Widget } from "astal";
+import { App, Astal, Widget } from "astal";
 import {
 	scrimWindowNames,
 	transparentScrimWindowNames,
@@ -9,8 +9,21 @@ type PopupWindowProps = {
 	scrimType: "transparent" | "opaque";
 } & Widget.WindowProps;
 
-export default ({ child, scrimType, setup, ...props }: PopupWindowProps) => (
+export default ({
+	application = App,
+	layer = Astal.Layer.OVERLAY,
+	keymode = Astal.Keymode.EXCLUSIVE,
+	visible = false,
+	child,
+	scrimType,
+	setup,
+	...props
+}: PopupWindowProps) => (
 	<window
+		application={application}
+		layer={layer}
+		keymode={keymode}
+		visible={visible}
 		{...props}
 		setup={(self) => {
 			scrimType == "transparent"

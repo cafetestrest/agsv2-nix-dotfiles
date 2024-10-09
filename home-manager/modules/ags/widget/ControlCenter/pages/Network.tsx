@@ -9,7 +9,11 @@ export default () => {
 
 	return (
 		<Page label={"Network"}>
-			<box vertical spacing={8}>
+			<box
+				vertical
+				spacing={8}
+				className={"control-center__page_scrollable-content"}
+			>
 				<eventbox
 					onClickRelease={(_, event) => {
 						if (event.button !== 1) return;

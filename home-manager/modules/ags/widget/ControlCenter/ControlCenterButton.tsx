@@ -5,8 +5,8 @@ import { currentPage } from ".";
 
 type ControlCenterButtonProps = {
 	icon: Widget.IconProps["icon"];
-	label: Widget.LabelProps["label"];
-	onPrimaryClick: () => void;
+	label?: Widget.LabelProps["label"];
+	onPrimaryClick?: () => void;
 	menuName?: string;
 	connection?: [Subscribable<unknown>, () => boolean];
 } & Widget.ButtonProps;
@@ -20,7 +20,7 @@ export default ({
 	...props
 }: ControlCenterButtonProps) => (
 	<button
-		className="control-center__button"
+		className={`control-center__button ${!label && "no-label"}`}
 		setup={(self) => {
 			if (connection) {
 				let [service, condition] = connection;
@@ -33,21 +33,32 @@ export default ({
 			}
 		}}
 		onClickRelease={(_, event: Astal.ClickEvent) => {
-			if (event.button == 1) {
+			if (event.button == 1 && onPrimaryClick) {
 				onPrimaryClick();
 			}
-			if (event.button == 3) {
-				if (menuName) currentPage.set(menuName);
+			if (event.button == 3 && menuName) {
+				currentPage.set(menuName);
 			}
 		}}
 		{...props}
 	>
-		<box hexpand spacing={12}>
+		<box
+			hexpand
+			spacing={12}
+			halign={!label ? Gtk.Align.CENTER : Gtk.Align.FILL}
+		>
 			<icon icon={icon} />
-			<label label={label} halign={Gtk.Align.START} hexpand truncate />
+			{label && (
+				<label
+					label={label}
+					halign={Gtk.Align.START}
+					hexpand
+					truncate
+				/>
+			)}
 			{menuName && (
-				<box>
-					<icon icon={icons.ui.arrow.right} />
+				<box hexpand={false} halign={Gtk.Align.END}>
+					<icon halign={Gtk.Align.END} icon={icons.ui.arrow.right} />
 				</box>
 			)}
 		</box>

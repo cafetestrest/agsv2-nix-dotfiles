@@ -2,9 +2,15 @@
   inputs,
   pkgs,
   ...
-}: let
-  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in {
+}:
+/*
+: let
+*/
+# pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+/*
+in
+*/
+{
   xdg = {
     autostart.enable = true;
     portal = {
@@ -17,9 +23,9 @@ in {
   hardware = {
     enableRedistributableFirmware = true;
     opengl = {
-      package = pkgs-unstable.mesa.drivers;
-      package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
-      driSupport = true;
+      # package = pkgs-unstable.mesa.drivers;
+      # package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+      # driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
@@ -62,6 +68,10 @@ in {
             }
             {
               command = "/run/current-system/sw/bin/ec_probe";
+              options = ["NOPASSWD"];
+            }
+            {
+              command = "${pkgs.nekoray}/bin/nekoray";
               options = ["NOPASSWD"];
             }
           ];

@@ -1,6 +1,7 @@
 import { Gtk } from "astal";
 import BarButton from "../BarButton";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
+import BarItem from "../BarItem";
 
 function getLayout(layoutName: string) {
 	if (layoutName.includes("English")) {
@@ -16,7 +17,7 @@ export default () => {
 	const hyprland = AstalHyprland.get_default();
 
 	return (
-		<BarButton className="bar__keyboard-layout">
+		<BarItem className="bar__keyboard-layout">
 			<stack
 				transitionType={Gtk.StackTransitionType.SLIDE_UP_DOWN}
 				halign={Gtk.Align.CENTER}
@@ -38,6 +39,6 @@ export default () => {
 				<label name={"ru"} label="ru" />
 				<label name={"?"} label="?" />
 			</stack>
-		</BarButton>
+		</BarItem>
 	);
 };

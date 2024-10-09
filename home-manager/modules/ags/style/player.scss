@@ -55,6 +55,37 @@
 	}
 }
 
+.player__position-slider {
+	trough {
+		transition:
+			background-color 0.3s ease-in-out,
+			color 0.3s ease-in-out;
+		border-radius: 100px;
+
+		highlight {
+			border-radius: 100px;
+			background-color: $on_surface;
+			border-radius: 100px;
+			transition:
+				background-color 0.3s ease-in-out,
+				color 0.3s ease-in-out;
+		}
+
+		slider {
+			margin: -10px;
+			padding: 2px 0;
+			border-radius: 7px;
+			border-radius: 10px;
+			box-shadow: none;
+			background-color: $on_surface;
+
+			transition:
+				background-color 0.3s ease-in-out,
+				color 0.3s ease-in-out;
+		}
+	}
+}
+
 @keyframes slide {
 	from {
 		margin-left: 0;

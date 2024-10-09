@@ -29,6 +29,7 @@
     colorschemes.one.enable = true;
 
     plugins = {
+      direnv.enable = true;
       gitsigns.enable = true;
       emmet.enable = true;
       surround.enable = true;

@@ -4,6 +4,7 @@ import { Widget, timeout, idle, Gtk, Gdk } from "astal";
 import Astal from "gi://Astal?version=0.1";
 
 const notifications = Notifd.get_default();
+const notificationTimeout = 3000;
 
 const transitionDuration = 300;
 
@@ -35,7 +36,7 @@ function Animated(id: number) {
 	});
 
 	return Object.assign(box, {
-		dismiss() {
+		closeNotification() {
 			inner.reveal_child = false;
 			timeout(transitionDuration, () => {
 				outer.reveal_child = false;
@@ -51,13 +52,8 @@ function PopupList() {
 	const map: Map<number, ReturnType<typeof Animated>> = new Map();
 
 	function remove(_: unknown, id: number, reason: Notifd.ClosedReason) {
-		if (
-			reason == Notifd.ClosedReason.EXPIRED ||
-			reason == Notifd.ClosedReason.DISMISSED_BY_USER
-		) {
-			map.get(id)?.dismiss();
-			map.delete(id);
-		}
+		map.get(id)?.closeNotification();
+		map.delete(id);
 	}
 
 	return (
@@ -66,7 +62,6 @@ function PopupList() {
 			spacing={8}
 			vertical={true}
 			setup={(self) => {
-				self.hook(notifications, "resolved", remove);
 				self.hook(notifications, "notified", (_, id: number) => {
 					if (id !== undefined) {
 						if (!map.has(id)) {
@@ -75,6 +70,10 @@ function PopupList() {
 							const w = Animated(id);
 							map.set(id, w);
 							self.children = [w, ...self.children];
+
+							timeout(notificationTimeout, () => {
+								remove(_, id, Notifd.ClosedReason.EXPIRED);
+							});
 						}
 					}
 				});

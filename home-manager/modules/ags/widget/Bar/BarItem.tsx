@@ -8,15 +8,16 @@ export enum BarItemStyle {
 }
 
 type Props = BoxProps & {
-	buttonStyle?: BarItemStyle;
+	itemStyle?: BarItemStyle;
 	child?: JSX.Element; // when only one child is passed
 };
 
-export default ({ child, buttonStyle, className, onClicked }: Props) => {
+export default ({ child, itemStyle, className, ...props }: Props) => {
 	return (
 		<box
-			className={`bar__button ${buttonStyle}  ${className}`}
+			className={`bar__item ${itemStyle || ""} ${className}`}
 			valign={Gtk.Align.CENTER}
+			{...props}
 		>
 			{child}
 		</box>

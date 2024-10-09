@@ -26,7 +26,7 @@ export default ({ label, child }: PopupMenuProps) => {
 				}
 			}}
 		>
-			<box className="popup-menu" spacing={12} vertical>
+			<box className={`popup-menu ${label.toLowerCase()}`} spacing={12} vertical>
 				<box className="popup-menu__header">
 					<label label={label} />
 				</box>

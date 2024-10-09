@@ -33,11 +33,13 @@ export default ({
 	});
 
 	return Object.assign(container, {
-		setMute(mute: boolean) {
-			fill.toggleClassName("muted", mute);
+		setMute(muted: boolean) {
+			fill.toggleClassName("muted", muted);
 		},
-		setValue(value: number) {
+
+		setValue(value: number, muted: boolean) {
 			if (value < 0) return;
+			fill.toggleClassName("muted", muted);
 
 			const axis = vertical ? "height" : "width";
 			const axisv = vertical ? height : width;

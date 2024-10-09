@@ -9,6 +9,7 @@
     inputs.ags.packages.${pkgs.system}.astal
     inputs.ags.packages.${pkgs.system}.notifd
     inputs.ags.packages.${pkgs.system}.mpris
+    inputs.ags.packages.${pkgs.system}.auth
     inputs.matugen.packages.${pkgs.system}.default
     material-symbols
   ];
@@ -28,6 +29,7 @@
       inputs.ags.packages.${pkgs.system}.notifd
       inputs.ags.packages.${pkgs.system}.mpris
       inputs.ags.packages.${pkgs.system}.bluetooth
+      inputs.ags.packages.${pkgs.system}.auth
     ];
   };
 }

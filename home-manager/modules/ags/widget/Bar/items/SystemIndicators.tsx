@@ -81,16 +81,26 @@ const AudioIndicator = () => {
 export default () => {
 	return (
 		<BarButton
-			clickable={true}
 			className="bar__system-indicators"
 			onClicked={() => toggleWindow("control-center")}
+			setup={(self) => {
+				const controlCenterWindow = App.get_window("control-center");
+				if (controlCenterWindow) {
+					self.hook(controlCenterWindow, "notify::visible", () => {
+						self.toggleClassName(
+							"active",
+							controlCenterWindow.visible,
+						);
+					});
+				}
+			}}
 		>
 			<box spacing={10}>
-				<AudioIndicator />
 				<NetworkIndicator />
 				<BluetoothIndicator />
 				<DNDIndicator />
 				<MicMuteIndicator />
+				<AudioIndicator />
 			</box>
 		</BarButton>
 	);

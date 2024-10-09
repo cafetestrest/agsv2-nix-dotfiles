@@ -1,24 +1,24 @@
 import { bind } from "astal";
 import Battery from "gi://AstalBattery";
-import BarButton, { BarButtonStyle } from "../BarButton";
+import BarItem, { BarItemStyle } from "../BarItem";
 
 export default () => {
 	const bat = Battery.get_default();
 
 	return (
-		<BarButton
+		<BarItem
 			className="bar__battery"
-			buttonStyle={BarButtonStyle.primaryContainer}
+			itemStyle={BarItemStyle.primaryContainer}
 			visible={bind(bat, "isPresent")}
 		>
 			<box spacing={4}>
-				<icon icon={bind(bat, "iconName")} />
+				<icon icon={bind(bat, "battery_icon_name").as(String)} />
 				<label
 					label={bind(bat, "percentage").as(
 						(p) => `${Math.floor(p * 100)} %`,
 					)}
 				/>
 			</box>
-		</BarButton>
+		</BarItem>
 	);
 };

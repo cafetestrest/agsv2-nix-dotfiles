@@ -1,7 +1,6 @@
 import Tray from "gi://AstalTray";
-import BarButton from "../BarButton";
+import BarItem from "../BarItem";
 import { App, Gtk, bind, Gdk } from "astal";
-import { Revealer } from "../../../../../.local/share/ags/src/widgets";
 
 type BarTrayItemProps = {
 	item: Tray.TrayItem;
@@ -17,7 +16,7 @@ const BarTrayItem = ({ item }: BarTrayItemProps) => {
 			className="bar__tray-item"
 			tooltipMarkup={bind(item, "tooltipMarkup")}
 			onDestroy={() => menu?.destroy()}
-			onClickRelease={(self) => {
+			onClicked={(self) => {
 				menu?.popup_at_widget(
 					self,
 					Gdk.Gravity.SOUTH,
@@ -54,7 +53,7 @@ export default () => {
 				});
 			}}
 		>
-			<BarButton className="bar__tray">
+			<BarItem className="bar__tray">
 				<box spacing={4} hexpand={false} valign={Gtk.Align.CENTER}>
 					{bind(tray, "items").as((items) =>
 						items
@@ -66,7 +65,7 @@ export default () => {
 							}),
 					)}
 				</box>
-			</BarButton>
+			</BarItem>
 		</revealer>
 	);
 };

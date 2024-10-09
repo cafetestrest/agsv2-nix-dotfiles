@@ -1,4 +1,4 @@
-import { App, bind, exec, execAsync, Gtk, Widget } from "astal";
+import { App, bind, exec, execAsync, Gtk, Variable, Widget } from "astal";
 import { spacing, uptime } from "../../../lib/variables";
 import ControlCenterButton from "../ControlCenterButton";
 import Bluetooth from "../items/Bluetooth";
@@ -8,8 +8,14 @@ import DND from "../items/DND";
 import Microphone from "../items/Microphone";
 import icons from "../../../lib/icons";
 import Brightness from "../items/Brightness";
+import FanProfile from "../items/FanProfile";
+import ScreenRecord from "../items/ScreenRecord";
+import ColorScheme from "../items/ColorScheme";
+import ScreenRecordMenu from "../items/ScreenRecordMenu";
 
 export default () => {
+	const revealScreenRecord = Variable(false);
+
 	return (
 		<box
 			name="main"
@@ -22,9 +28,26 @@ export default () => {
 				<Bluetooth />
 			</box>
 			<box spacing={spacing} homogeneous>
-				<DND />
+				<FanProfile />
 				<Microphone />
 			</box>
+			<box spacing={spacing} homogeneous>
+				<DND />
+				<box spacing={spacing} homogeneous>
+					<ScreenRecord
+						onClicked={() => {
+							revealScreenRecord.set(!revealScreenRecord.get());
+						}}
+					/>
+					<ColorScheme />
+				</box>
+			</box>
+			<ScreenRecordMenu
+				revealMenu={bind(revealScreenRecord)}
+				closeMenu={() =>
+					revealScreenRecord.set(!revealScreenRecord.get())
+				}
+			/>
 			<Volume />
 			<Brightness />
 			<box spacing={16} className="control-center__footer">

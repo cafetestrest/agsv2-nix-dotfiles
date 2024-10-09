@@ -8,7 +8,6 @@ export default () => {
 
 	return (
 		<ControlCenterButton
-			name="bluetooth"
 			label={bind(mic, "mute").as((muted) =>
 				muted ? "Muted" : "Unmuted",
 			)}

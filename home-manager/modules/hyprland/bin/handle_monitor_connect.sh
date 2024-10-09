@@ -6,7 +6,7 @@ handle() {
     hyprctl dispatch moveworkspacetomonitor "2 1"
     hyprctl dispatch moveworkspacetomonitor "4 0"
     hyprctl dispatch moveworkspacetomonitor "6 0"
-    matugen image "$HOME/.cache/current_wallpaper";
+    matugen image "$HOME/.local/share/hyprsettings/current_wallpaper";
     gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark';
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark';
   esac

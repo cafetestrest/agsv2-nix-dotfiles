@@ -1,4 +1,4 @@
-import { bind, Widget } from "astal";
+import { bind, Gtk, Widget } from "astal";
 import PopupMenu from "../PopupMenu";
 import AstalWp from "gi://AstalWp?version=0.1";
 import icons from "../../../lib/icons";
@@ -53,13 +53,33 @@ export default () => {
 		});
 	};
 
+	const Placeholder = () => (
+		<box
+			name="placeholder"
+			className="mixer-placeholder"
+			spacing={16}
+			vexpand
+			valign={Gtk.Align.CENTER}
+			halign={Gtk.Align.CENTER}
+		>
+			<label label="No audio streams available" />
+		</box>
+	);
+
 	return (
 		<PopupMenu label="Mixer">
-			<box vertical>
-				{bind(audio, "streams").as((streams) => {
-					if (streams) return streams.map(MixerItem);
-				})}
-			</box>
+			{bind(audio, "streams").as((streams) => (
+				<stack
+					transitionType={Gtk.StackTransitionType.CROSSFADE}
+					transitionDuration={500}
+					shown={streams.length > 0 ? "streams" : "placeholder"}
+				>
+					<box vertical name={"streams"}>
+						{streams.map(MixerItem)}
+					</box>
+					<Placeholder />
+				</stack>
+			))}
 		</PopupMenu>
 	);
 };

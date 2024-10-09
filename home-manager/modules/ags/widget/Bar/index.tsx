@@ -9,16 +9,14 @@ import SystemIndicators from "./items/SystemIndicators";
 import Notifications from "./items/Notifications";
 import AppLauncher from "./items/AppLauncher";
 import KeyboardLayout from "./items/KeyboardLayout";
-import WpActive from "./items/WpActive";
+import Weather from "./items/Weather";
 
 const Start = () => {
 	return (
 		<box halign={Gtk.Align.START} spacing={spacing}>
 			<AppLauncher />
 			<Workspaces />
-			{
-				// <ActiveApp />
-			}
+			<ActiveApp />
 		</box>
 	);
 };
@@ -34,9 +32,7 @@ const Center = () => {
 const End = () => {
 	return (
 		<box halign={Gtk.Align.END} spacing={spacing}>
-			{
-				// <WpActive />
-			}
+			<Weather />
 			<KeyboardLayout />
 			<box className="bar__rounded-box" spacing={spacing / 2}>
 				<Notifications />

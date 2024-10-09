@@ -4,7 +4,7 @@
 	background: $surface_transparent;
 }
 
-.bar__button {
+.bar__item {
 	padding: 0px;
 	font-size: 14px;
 	font-weight: 500;
@@ -13,9 +13,10 @@
 	min-height: 42px;
 	border-radius: 24px;
 	background: $inverse_surface_transparent;
+    color: $on_surface;
 	border: none;
 	outline: none;
-	&.clickable {
+	&.bar__button {
 		&:hover {
 			background: $inverse_surface_transparent,
 				$inverse_surface_transparent_overlay;
@@ -24,20 +25,37 @@
 			background: $inverse_surface_transparent_variant,
 				$inverse_surface_transparent_overlay;
 		}
+		&.active {
+			background: $primary;
+			color: $on_primary;
+		}
 	}
 }
 
-.bar__button.primary_container {
+.bar__item.transparent {
+	background: transparent;
+	color: $on_surface;
+}
+
+.bar__item.primary_container {
 	background: $primary_container;
 	color: $on_primary_container;
 }
 
-.bar__app-launcher {
+.bar__app-launcher.bar__button {
 	padding: 0px;
 	transition: all 0.3s;
 	background-color: $primary;
 	min-height: 42px;
 	min-width: 42px;
+
+	.bar__app-launcher_icon {
+		background-color: $on_primary;
+		min-width: 14px;
+		min-height: 14px;
+		border-radius: 100%;
+		transition: all 0.3s;
+	}
 
 	&:hover {
 		background-color: $on_primary;
@@ -45,14 +63,14 @@
 			background-color: $primary;
 		}
 	}
-}
 
-.bar__app-launcher_icon {
-	background-color: $on_primary;
-	min-width: 14px;
-	min-height: 14px;
-	border-radius: 100%;
-	transition: all 0.3s;
+	&.active,
+	&:active {
+		background-color: $primary_container;
+		.bar__app-launcher_icon {
+			background-color: $on_primary_container;
+		}
+	}
 }
 
 .bar__workspaces-indicator {
@@ -60,7 +78,7 @@
 	min-width: 8px;
 	min-height: 8px;
 	transition: all 0.3s;
-	background-color: transparentize(#fff, 0.83);
+	background-color: $inverse_surface_transparent_variant;
 	border-radius: 100px;
 
 	&:hover {
@@ -135,7 +153,7 @@
 }
 
 .bar__rounded-box {
-	.bar__button {
+	.bar__item {
 		border-radius: 4px;
 	}
 }

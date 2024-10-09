@@ -16,7 +16,7 @@ const NotificationIcon = ({ notification }: NotificationIconProps) => {
 	if (image) {
 		if (image.includes("file://")) image = image.replace("file://", "");
 
-		if (appName == "Telegram Desktop") {
+		if (appName == "Telegram Desktop" || appName == "") {
 			return (
 				<box
 					valign={Gtk.Align.START}
@@ -91,16 +91,20 @@ export default function Notification(notification: Notifd.Notification) {
 							label={notification.summary.trim()}
 						/>
 						<label className="notification__dot" label={"•"} />
-						<label
-							className="notification__app-name"
-							justify={Gtk.Justification.LEFT}
-							truncate={true}
-							wrap={true}
-							maxWidthChars={8}
-							useMarkup={true}
-							label={notification.app_name.trim()}
-						/>
-						<label className="notification__dot" label={"•"} />
+						{notification.appName != "" && (
+							<label
+								className="notification__app-name"
+								justify={Gtk.Justification.LEFT}
+								truncate={true}
+								wrap={true}
+								maxWidthChars={8}
+								useMarkup={true}
+								label={notification.app_name.trim()}
+							/>
+						)}
+						{notification.appName != "" && (
+							<label className="notification__dot" label={"•"} />
+						)}
 						<label
 							className="notification__time"
 							label={time(notification.time)?.toString()}
@@ -138,20 +142,20 @@ export default function Notification(notification: Notifd.Notification) {
 		</box>
 	);
 
-	const ActionsBox = () => (
-		<box className="notification__actions">
-			{notification.get_actions().map((action) => {
-				Widget.Button({
-					className: "notification__action",
-					on_clicked: () => notification.invoke(action.id),
-					hexpand: true,
-					child: Widget.Label({
-						label: action.label,
-					}),
-				});
-			})}
-		</box>
-	);
+	const ActionsBox = () =>
+		notification.get_actions() && (
+			<box className="notification__actions">
+				{notification.get_actions().map((action) => (
+					<button
+						className="notification__action"
+						on_clicked={() => notification.invoke(action.id)}
+						hexpand={true}
+					>
+						<label label={action.label} />
+					</button>
+				))}
+			</box>
+		);
 
 	const Eventbox = () => (
 		<eventbox
@@ -164,6 +168,7 @@ export default function Notification(notification: Notifd.Notification) {
 		>
 			<box vertical={true}>
 				<Content />
+				<ActionsBox />
 			</box>
 		</eventbox>
 	);
@@ -174,7 +179,6 @@ export default function Notification(notification: Notifd.Notification) {
 			className={`notification ${notification.urgency}`}
 		>
 			<Eventbox />
-			{notification.get_actions() && <ActionsBox />}
 		</box>
 	);
 }

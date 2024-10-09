@@ -1,15 +1,18 @@
+import { bind, execAsync, Gtk, Variable, Widget } from "astal";
 import AstalMpris from "gi://AstalMpris?version=0.1";
-import { bind, Gtk, Widget } from "astal";
+import Gdk from "gi://Gdk?version=3.0";
 import icons from "../../../lib/icons";
-import { spacing } from "../../../lib/variables";
+import { hexToRgb, lookUpIcon } from "../../../lib/utils";
+import PlayerColorsService from "../../../service/PlayerColors";
 import PlayerColors from "../../../service/PlayerColors";
-import { hexToRgb } from "../../../lib/utils";
 
 type PlayerProps = {
 	player: AstalMpris.Player;
 };
 
 const Player = ({ player }: PlayerProps) => {
+	const PlayerColors = PlayerColorsService(player);
+
 	const Title = Widget.Label({
 		label: player.get_title(),
 		truncate: true,
@@ -26,7 +29,13 @@ const Player = ({ player }: PlayerProps) => {
 
 	const PlayerIcon = () => (
 		<icon
-			icon={bind(player, "entry").as((i) => `${i}-symbolic`)}
+			icon={bind(player, "entry").as((i) =>
+				lookUpIcon(`${i}-symbolic`)
+					? `${i}-symbolic`
+					: lookUpIcon(i)
+						? i
+						: icons.fallback.audio,
+			)}
 			className="player__icon"
 		/>
 	);
@@ -36,13 +45,13 @@ const Player = ({ player }: PlayerProps) => {
 			className={`player__playpause ${className}`}
 			{...props}
 			setup={(self) => {
-				const colors = PlayerColors.colors.get(player.coverArt);
-				if (colors) {
-					self.css = `
-						background: ${colors.primary_container}; \
-						color: ${colors.on_primary_container};
-					`;
-				}
+				// const colors = PlayerColors.colors.get(player.coverArt);
+				// if (colors) {
+				// 	self.css = `
+				// 		background: ${colors.primary_container}; \
+				// 		color: ${colors.on_primary_container};
+				// 	`;
+				// }
 				self.toggleClassName(
 					"active",
 					player.playbackStatus === AstalMpris.PlaybackStatus.PLAYING,
@@ -54,18 +63,13 @@ const Player = ({ player }: PlayerProps) => {
 							AstalMpris.PlaybackStatus.PLAYING,
 					);
 				});
-				self.hook(
-					PlayerColors,
-					"colors-changed",
-					(self, changedPlayer, colors) => {
-						if (player == changedPlayer) {
-							self.css = `
-								background: ${colors.primary_container}; \
-								color: ${colors.on_primary_container};
+				self.hook(PlayerColors, "notify::colors", (self) => {
+					if (PlayerColors.colors)
+						self.css = `
+								background: ${PlayerColors.colors.primary_container}; \
+								color: ${PlayerColors.colors.on_primary_container};
 							`;
-						}
-					},
-				);
+				});
 			}}
 		>
 			<icon
@@ -94,6 +98,7 @@ const Player = ({ player }: PlayerProps) => {
 			<icon icon={icons.media.prev} />
 		</button>
 	);
+
 	// const PositionSlider = () => (
 	// 	<slider
 	// 		className={"player__position-slider"}
@@ -101,47 +106,29 @@ const Player = ({ player }: PlayerProps) => {
 	// 		hexpand
 	// 		onDragged={({ value }) => (player.position = value * player.length)}
 	// 		setup={(self) => {
-	// 			// const update = () => {
-	// 			// 	const { length, position } = player;
-	// 			// 	print(length, position);
-	// 			// 	self.visible = length > 0;
-	// 			// 	self.value = length > 0 ? position / length : 0;
-	// 			// };
-	// 			// self.hook(player, "notify::position", update);
-	// 			// self.hook(player, "position", update);
-	// 			// self.poll(1000, update);
+	// 			const update = () => {
+	// 				const { length, position } = player;
+	// 				self.visible = length > 0;
+	// 				self.value = length > 0 ? position / length : 0;
+	// 			};
+	// 			self.hook(player, "notify::position", update);
 	// 		}}
-	// 	></slider>
+	// 	/>
 	// );
 
 	return (
 		<centerbox
+			name={player.busName}
 			vertical
-			className="player"
+			className={`player player-${player.busName}`}
 			vexpand
 			setup={(self) => {
-				const colors = PlayerColors.colors.get(player.coverArt);
-				if (colors) {
-					const primary_rgb = hexToRgb(colors.primary)!;
-					self.css = `
-						background-image:
-							radial-gradient(circle,\
-								rgba(${primary_rgb.r}, ${primary_rgb.g}, ${primary_rgb.b}, 0.05) 10%,\
-								rgba(${primary_rgb.r}, ${primary_rgb.g}, ${primary_rgb.b}, 0.6)),\
-							radial-gradient(circle,\
-								rgba(0,0,0, 0.25) 10%,\
-								rgba(0,0,0, 0.25)),\
-								url("${player.coverArt}");\
-						color: ${colors.on_primary};
-					`;
-				}
-				self.hook(
-					PlayerColors,
-					"colors-changed",
-					(self, changedPlayer, colors) => {
-						if (player == changedPlayer) {
-							const colors_rgb = hexToRgb(colors.primary)!;
-							self.css = `
+				self.hook(PlayerColors, "notify::colors", (self) => {
+					if (PlayerColors.colors) {
+						const colors_rgb = hexToRgb(
+							PlayerColors.colors.primary,
+						)!;
+						self.css = `
 								background-image:
 									radial-gradient(circle,\
 										rgba(${colors_rgb.r}, ${colors_rgb.g}, ${colors_rgb.b}, 0.05) 10%,\
@@ -150,11 +137,10 @@ const Player = ({ player }: PlayerProps) => {
 										rgba(0,0,0, 0.25) 10%,\
 										rgba(0,0,0, 0.25)),\
 										url("${player.coverArt}");\
-								color: ${colors.on_primary};
+								color: ${PlayerColors.colors.on_primary};
 							`;
-						}
-					},
-				);
+					}
+				});
 			}}
 		>
 			<box vexpand valign={Gtk.Align.START}>
@@ -184,9 +170,11 @@ const Player = ({ player }: PlayerProps) => {
 				<box hexpand />
 				<PlayPause halign={Gtk.Align.END} />
 			</box>
-			<box vexpand valign={Gtk.Align.END}>
+			<box vexpand valign={Gtk.Align.END} spacing={24}>
 				<Previous />
-				<box hexpand />
+				{
+					// <PositionSlider />
+				}
 				<Next />
 			</box>
 		</centerbox>
@@ -195,11 +183,81 @@ const Player = ({ player }: PlayerProps) => {
 
 export default () => {
 	const mpris = AstalMpris.get_default();
+	const selectedPlayer = Variable<string>("");
+
+	const nextPlayer = () => {
+		const players = mpris.get_players();
+		const index = players.findIndex(
+			(p) => p.busName == selectedPlayer.get(),
+		);
+		selectedPlayer.set(players[(index + 1) % players.length].busName);
+	};
+
+	const previousPlayer = () => {
+		const players = mpris.get_players();
+		const index = players.findIndex(
+			(p) => p.busName == selectedPlayer.get(),
+		);
+		selectedPlayer.set(
+			players[(index - 1 + players.length) % players.length].busName,
+		);
+	};
+
 	return (
-		<box vertical spacing={spacing}>
-			{bind(mpris, "players").as((players) =>
-				players.map((player) => <Player player={player} />),
-			)}
-		</box>
+		<revealer
+			revealChild={bind(mpris, "players").as((p) => p.length > 0)}
+			// onDestroy={() => {
+			// 	PlayerColors.;
+			// }}
+		>
+			<overlay>
+				<eventbox
+					onScroll={(self, event) => {
+						if (event.direction == Gdk.ScrollDirection.UP) {
+							nextPlayer();
+						} else {
+							previousPlayer();
+						}
+					}}
+				>
+					<stack
+						transitionType={
+							Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
+						}
+						shown={bind(selectedPlayer)}
+					>
+						{bind(mpris, "players").as((players) =>
+							players.map((player) => <Player player={player} />),
+						)}
+					</stack>
+				</eventbox>
+				<revealer
+					valign={Gtk.Align.END}
+					halign={Gtk.Align.CENTER}
+					revealChild={bind(mpris, "players").as((p) => p.length > 1)}
+				>
+					<box valign={Gtk.Align.END} halign={Gtk.Align.CENTER}>
+						{bind(mpris, "players").as((players) =>
+							players.map((p) => (
+								<box
+									className={"player__indicator"}
+									setup={(self) => {
+										self.hook(
+											selectedPlayer,
+											(_, selected) => {
+												self.toggleClassName(
+													"selected",
+													selected == p.busName,
+												);
+											},
+										);
+									}}
+								></box>
+							)),
+						)}
+					</box>
+				</revealer>
+			</overlay>
+		</revealer>
 	);
 };

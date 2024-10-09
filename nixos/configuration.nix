@@ -58,6 +58,7 @@
     binsh = "${pkgs.zsh}/bin/zsh";
   };
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
+  security.pam.services.astal-auth = {};
 
   fonts.packages = with pkgs; [
     (nerdfonts.override {fonts = ["JetBrainsMono"];})
@@ -137,6 +138,7 @@
   };
 
   networking = {
+    nameservers = ["8.8.8.8" "8.8.4.4"];
     extraHosts = ''
       89.223.71.16   srv
     '';

@@ -1,4 +1,4 @@
-import { Astal, App, Gdk, Gtk, bind } from "astal";
+import { Astal, App, Gdk, Gtk, bind, timeout } from "astal";
 import AstalNotifd from "gi://AstalNotifd?version=0.1";
 import Notification from "./Notification";
 import { spacing } from "../../lib/variables";
@@ -6,6 +6,7 @@ import PopupWindow from "../../common/PopupWindow";
 
 export default () => {
 	const notifications = AstalNotifd.get_default();
+	notifications.set_ignore_timeout(true);
 
 	return (
 		<PopupWindow
@@ -27,6 +28,15 @@ export default () => {
 					App.toggle_window(self.name);
 				}
 			}}
+			setup={(self) => {
+				self.hook(notifications, "notify::notifications", () => {
+					if (notifications.get_notifications().length == 0) {
+						timeout(500, () => {
+							self.visible = false;
+						});
+					}
+				});
+			}}
 		>
 			<box vertical className="notifications-window" spacing={spacing}>
 				<button
@@ -34,7 +44,9 @@ export default () => {
 					hexpand={false}
 					className="notifications-window__clear"
 					onClicked={() => {
-						// notifications.clear()
+						notifications.get_notifications().forEach((n) => {
+							timeout(50, () => n.dismiss());
+						});
 					}}
 				>
 					<label

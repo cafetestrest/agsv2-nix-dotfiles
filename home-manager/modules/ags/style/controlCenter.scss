@@ -1,18 +1,24 @@
 .control-center__container {
 	border-radius: 40px;
 	min-width: 450px;
+	min-height: 650px;
 	background: $surface_transparent;
 }
 
 .control-center__page {
-	padding: 20px;
+	padding: 20px 20px 0px 20px;
 }
 
 .control-center__page.main {
 	padding: 10px;
 }
 
+.control-center__page_scrollable-content {
+	margin-bottom: 20px;
+}
+
 .control-center__page_header {
+	color: $on_surface;
 	margin-top: 8px;
 	margin-bottom: 24px;
 	label {
@@ -101,6 +107,34 @@
 	}
 	font-size: 14px;
 	font-weight: 600;
+	&.no-label {
+		padding: 0;
+	}
+}
+
+.control-center__dropdown-menu {
+	background: $inverse_surface_transparent;
+	border-radius: 32px;
+	padding: 24px;
+}
+
+.control-center__dropdown-menu_icon {
+	font-size: 20px;
+	color: red;
+}
+
+.control-center__dropdown-menu_title {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.control-center__dropdown-menu_item {
+	icon {
+		font-size: 16px;
+	}
+	label {
+		font-size: 16px;
+	}
 }
 
 .control-center__brightness-slider,

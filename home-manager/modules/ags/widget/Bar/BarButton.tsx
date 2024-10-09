@@ -9,22 +9,22 @@ export enum BarButtonStyle {
 
 type Props = ButtonProps & {
 	buttonStyle?: BarButtonStyle;
-	clickable?: boolean;
 	child?: JSX.Element; // when only one child is passed
 };
 
 export default ({
 	child,
 	buttonStyle,
-	clickable = false,
 	className,
 	onClicked,
+	...props
 }: Props) => {
 	return (
 		<button
-			className={`bar__button ${buttonStyle} ${clickable && "clickable"} ${className}`}
+			className={`bar__item bar__button ${buttonStyle || ""} ${className}`}
 			onClicked={onClicked}
 			valign={Gtk.Align.CENTER}
+			{...props}
 		>
 			{child}
 		</button>

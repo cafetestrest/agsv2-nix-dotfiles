@@ -8,6 +8,14 @@ export default () => (
 		onClicked={() => {
 			toggleWindow("app-launcher");
 		}}
+		setup={(self) => {
+			const applauncherWindow = App.get_window("app-launcher");
+			if (applauncherWindow) {
+				self.hook(applauncherWindow, "notify::visible", () => {
+					self.toggleClassName("active", applauncherWindow.visible);
+				});
+			}
+		}}
 	>
 		<box
 			className="bar__app-launcher_icon"

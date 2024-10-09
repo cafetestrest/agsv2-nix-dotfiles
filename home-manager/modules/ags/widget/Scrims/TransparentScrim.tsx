@@ -1,6 +1,6 @@
 import { App, Astal, Widget } from "astal";
 import { transparentScrimWindowNames } from "../../lib/variables";
-import { activePopupWindows } from "../../lib/utils";
+import { activePopupWindows, toggleWindow } from "../../lib/utils";
 
 export default () => (
 	<window
@@ -23,7 +23,7 @@ export default () => (
 				if (!self.visible) {
 					const visiblePopups = activePopupWindows("transparent");
 					visiblePopups.forEach((popup) => {
-						popup.visible = false;
+						toggleWindow(popup.name);
 					});
 				}
 			});

@@ -54,7 +54,11 @@ const DeviceItem = ({ device }: DeviceItemProps) => {
 export default () => {
 	return (
 		<Page label={"Bluetooth"}>
-			<box vertical spacing={8}>
+			<box
+				vertical
+				spacing={8}
+				className={"control-center__page_scrollable-content"}
+			>
 				<eventbox
 					onClickRelease={(_, event) => {
 						if (event.button !== 1) return;

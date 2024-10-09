@@ -5,7 +5,7 @@ const screen = await execAsync(
 	'bash -c "ls -w1 /sys/class/backlight | head -1"',
 );
 
-type BrightnessType = {
+type BrightnessServiceType = {
 	screen: number;
 };
 
@@ -13,7 +13,7 @@ class BrightnessService {
 	#screen = Variable(get("get") / get("max"));
 	#screenMax = get("max");
 
-	get(): BrightnessType {
+	get(): BrightnessServiceType {
 		return {
 			screen: this.#screen.get(),
 		};
@@ -39,7 +39,7 @@ class BrightnessService {
 		);
 	}
 
-	subscribe(callback: (v: BrightnessType) => void) {
+	subscribe(callback: (v: BrightnessServiceType) => void) {
 		const unsubScreen = this.#screen.subscribe((value) => {
 			callback({ screen: this.#screen.get() });
 		});

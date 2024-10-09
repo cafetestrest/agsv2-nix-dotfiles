@@ -1,4 +1,4 @@
-import { App, Astal, bind, Gdk, Gtk, timeout, Widget } from "astal";
+import { Astal, bind, Gdk, Gtk, timeout, Widget } from "astal";
 import Progress from "./Progress";
 import AstalWp from "gi://AstalWp?version=0.1";
 import icons from "../../lib/icons";
@@ -24,10 +24,10 @@ function OnScreenProgress(window: Astal.Window, vertical: boolean) {
 
 	let count = 0;
 
-	function show(value: number, icon: string) {
+	function show(value: number, icon: string, muted: boolean) {
 		window.visible = true;
 		indicator.icon = icon;
-		progress.setValue(value);
+		progress.setValue(value, muted);
 		count++;
 		timeout(DELAY, () => {
 			count--;
@@ -42,15 +42,18 @@ function OnScreenProgress(window: Astal.Window, vertical: boolean) {
 		css: "min-height: 2px;",
 		child: progress,
 		setup: () => {
-			progress.setMute(speaker.mute);
-			progress.hook(speaker, "notify::volume", () =>
-				show(speaker.volume, icons.audio.type.speaker),
-			);
 			progress.hook(speaker, "notify::mute", () => {
 				progress.setMute(speaker.mute);
 			});
+			progress.hook(speaker, "notify::volume", () => {
+				return show(
+					speaker.volume,
+					icons.audio.type.speaker,
+					speaker.mute,
+				);
+			});
 			progress.hook(Brightness, () =>
-				show(Brightness.screen, icons.brightness.screen),
+				show(Brightness.screen, icons.brightness.screen, false),
 			);
 		},
 	});
@@ -58,6 +61,7 @@ function OnScreenProgress(window: Astal.Window, vertical: boolean) {
 
 export default (gdkmonitor: Gdk.Monitor) => (
 	<window
+		visible={false}
 		className="OSD"
 		namespace="osd"
 		gdkmonitor={gdkmonitor}

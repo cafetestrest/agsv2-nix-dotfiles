@@ -1,13 +1,6 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: let
-  nixpkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
-in {
+{pkgs, ...}: {
   programs.chromium = {
     enable = true;
-    package = nixpkgs-unstable.chromium;
     dictionaries = [
       pkgs.hunspellDictsChromium.en_US
     ];

@@ -2,13 +2,14 @@
   inputs,
   pkgs,
   ...
-}: let
-  nixpkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
-in {
+}:
+# : let
+#   nixpkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
+# in
+{
   home.packages = with pkgs;
   with nodePackages_latest;
   with gnome; [
-    (nixpkgs-unstable.callPackage ../pkgs/hyprsettings/derivation.nix {})
     #cli
     xclip
     btop
@@ -24,7 +25,6 @@ in {
     tesseract
 
     #tools
-    # (callPackage ./modules/hyprsettings/derivation.nix {})
     rustdesk-flutter
     ripdrag
     nekoray
@@ -39,22 +39,24 @@ in {
     wpsoffice
     figma-linux
     zoom-us
-    nixpkgs-unstable.kitty
+    kitty
     foot
     yazi
     mpv
     vesktop
     gimp
     zathura
-    nixpkgs-unstable.telegram-desktop
     mission-center
     loupe
     simple-scan
     fragments
     ghex
-    yandex-music
+    (pkgs.callPackage ../pkgs/hiddify/derivation.nix {})
+    # yandex-music
 
     #hypr
+
+    inputs.hyprsettings.packages.${pkgs.system}.default
     socat # for monitor connect script
     hyprpicker
     hypridle
@@ -74,8 +76,8 @@ in {
 
     #development
     bruno
-    nixpkgs-unstable.zed-editor
-    nixpkgs-unstable.cassette
+    zed-editor
+    cassette
     gnome-builder
     flatpak-builder
     docker-compose
@@ -85,7 +87,6 @@ in {
     nodejs
     bun
     sassc
-    # typescript
     meson
     yarn
   ];
