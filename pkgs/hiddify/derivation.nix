@@ -3,12 +3,13 @@
   appimageTools,
   fetchurl,
 }: let
-  version = "2.5.7";
+  version = "1.5.2";
   pname = "hiddify-next";
+  name = pname;
 
   src = fetchurl {
     url = "https://github.com/hiddify/hiddify-next/releases/download/v${version}/Hiddify-Linux-x64.AppImage";
-    hash = "sha256-EsTF7W1np5qbQQh3pdqsFe32olvGK3AowGWjqHPEfoM=";
+    hash = "sha256-5RqZ6eyurRtoOVTBLZqoC+ANi4vMODjlBWf3V4GXtMg=";
   };
 
   appimageContents = appimageTools.extractType2 {inherit pname version src;};
