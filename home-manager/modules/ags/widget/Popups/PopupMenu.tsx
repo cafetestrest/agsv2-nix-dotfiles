@@ -1,4 +1,4 @@
-import { App, Astal } from "astal";
+import { App, Astal } from "astal/gtk3";
 import PopupWindow from "../../common/PopupWindow";
 
 type PopupMenuProps = {
@@ -26,7 +26,11 @@ export default ({ label, child }: PopupMenuProps) => {
 				}
 			}}
 		>
-			<box className={`popup-menu ${label.toLowerCase()}`} spacing={12} vertical>
+			<box
+				className={`popup-menu ${label.toLowerCase()}`}
+				spacing={12}
+				vertical
+			>
 				<box className="popup-menu__header">
 					<label label={label} />
 				</box>
@@ -37,7 +41,7 @@ export default ({ label, child }: PopupMenuProps) => {
 		</PopupWindow>
 	);
 
-	// return Widget.Window({
+	// return new Widget.Window({
 	// 	name,
 	// 	layer: "overlay",
 	// 	keymode: "exclusive",

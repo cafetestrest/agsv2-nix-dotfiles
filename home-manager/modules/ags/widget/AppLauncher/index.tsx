@@ -1,4 +1,5 @@
-import { App, Astal, bind, Widget, Variable } from "astal";
+import { App, Astal, Widget } from "astal/gtk3";
+import { bind, Variable } from "astal";
 import AstalApps from "gi://AstalApps?version=0.1";
 import AppItem from "./AppItem";
 import PopupWindow from "../../common/PopupWindow";
@@ -17,7 +18,7 @@ export default () => {
 			.map((app: AstalApps.Application) => AppItem(app)),
 	);
 
-	const Entry = Widget.Entry({
+	const Entry = new Widget.Entry({
 		text: bind(query),
 		canFocus: true,
 		className: "app-launcher__input",

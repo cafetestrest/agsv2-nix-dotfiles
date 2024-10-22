@@ -3,26 +3,12 @@
   pkgs,
   inputs,
   ...
-}: let
-  moreWaita = pkgs.stdenv.mkDerivation {
-    name = "MoreWaita";
-    src = inputs.more-waita;
-    installPhase = ''
-      mkdir -p $out/share/icons
-      mv * $out/share/icons
-    '';
-  };
-in {
+}: {
   home = {
     packages = with pkgs; [
       adw-gtk3
-      moreWaita
+      morewaita-icon-theme
     ];
-    file = {
-      ".local/share/icons/MoreWaita" = {
-        source = "${moreWaita}/share/icons";
-      };
-    };
     pointerCursor = {
       gtk.enable = true;
       package = pkgs.gnome.adwaita-icon-theme;

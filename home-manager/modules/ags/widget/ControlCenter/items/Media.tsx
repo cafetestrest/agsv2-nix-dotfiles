@@ -1,6 +1,7 @@
-import { bind, execAsync, Gtk, Variable, Widget } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, Variable } from "astal";
 import AstalMpris from "gi://AstalMpris?version=0.1";
-import Gdk from "gi://Gdk?version=3.0";
+
 import icons from "../../../lib/icons";
 import { hexToRgb, lookUpIcon } from "../../../lib/utils";
 import PlayerColorsService from "../../../service/PlayerColors";
@@ -13,14 +14,14 @@ type PlayerProps = {
 const Player = ({ player }: PlayerProps) => {
 	const PlayerColors = PlayerColorsService(player);
 
-	const Title = Widget.Label({
+	const Title = new Widget.Label({
 		label: player.get_title(),
 		truncate: true,
 		className: `player__title`,
 		halign: Gtk.Align.START,
 	});
 
-	const Artist = Widget.Label({
+	const Artist = new Widget.Label({
 		label: player.get_artist(),
 		truncate: true,
 		className: `player__artist`,

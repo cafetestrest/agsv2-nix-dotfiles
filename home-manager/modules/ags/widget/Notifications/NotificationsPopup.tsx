@@ -1,7 +1,7 @@
 import Notification from "./Notification";
 import Notifd from "gi://AstalNotifd";
-import { Widget, timeout, idle, Gtk, Gdk } from "astal";
-import Astal from "gi://Astal?version=0.1";
+import { App, Gtk, Gdk, Widget, Astal } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable, GLib, idle } from "astal";
 
 const notifications = Notifd.get_default();
 const notificationTimeout = 3000;
@@ -12,19 +12,19 @@ function Animated(id: number) {
 	const n = notifications.get_notification(id)!;
 	const widget = Notification(n);
 
-	const inner = Widget.Revealer({
+	const inner = new Widget.Revealer({
 		transitionType: Gtk.RevealerTransitionType.SLIDE_DOWN,
 		transition_duration: transitionDuration,
 		child: widget,
 	});
 
-	const outer = Widget.Revealer({
+	const outer = new Widget.Revealer({
 		transitionType: Gtk.RevealerTransitionType.SLIDE_UP,
 		transition_duration: transitionDuration,
 		child: inner,
 	});
 
-	const box = Widget.Box({
+	const box = new Widget.Box({
 		child: outer,
 	});
 

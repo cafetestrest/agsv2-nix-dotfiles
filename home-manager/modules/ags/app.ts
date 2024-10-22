@@ -1,4 +1,4 @@
-import { App, Gdk, Gtk } from "astal";
+import { App, Gdk, Gtk } from "astal/gtk3";
 import style from "./style/main.scss";
 import Bar from "./widget/Bar";
 import ControlCenter from "./widget/ControlCenter";

@@ -1,7 +1,7 @@
 import AstalWp from "gi://AstalWp?version=0.1";
-import { bind, Widget } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, Variable } from "astal";
 import icons from "../../../lib/icons";
-import Gtk from "gi://Gtk?version=3.0";
 
 export default () => {
 	const speaker = AstalWp.get_default()?.audio.defaultSpeaker!;

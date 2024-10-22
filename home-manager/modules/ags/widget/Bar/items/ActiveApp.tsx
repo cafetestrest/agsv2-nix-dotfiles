@@ -1,5 +1,6 @@
 import Hyprland from "gi://AstalHyprland";
-import { bind, Gtk } from "astal";
+import { Gtk } from "astal/gtk3";
+import { bind } from "astal";
 import BarButton from "../BarButton";
 import icons, { substitutions } from "../../../lib/icons";
 import { lookUpIcon } from "../../../lib/utils";

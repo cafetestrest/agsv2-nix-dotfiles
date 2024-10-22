@@ -3,7 +3,7 @@
   appimageTools,
   fetchurl,
 }: let
-  version = "1.5.2";
+  version = "2.5.7";
   pname = "hiddify-next";
   name = pname;
 

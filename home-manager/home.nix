@@ -7,7 +7,6 @@
 in {
   imports = [
     ./packages.nix
-    # ./modules/astal
     ./modules/ags
     ./modules/zsh.nix
     ./modules/tmux.nix

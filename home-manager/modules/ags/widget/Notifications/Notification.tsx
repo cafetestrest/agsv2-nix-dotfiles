@@ -1,5 +1,5 @@
-import GLib from "gi://GLib";
-import { Astal, Gtk, idle, timeout, Widget } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable, GLib } from "astal";
 import Notifd from "gi://AstalNotifd";
 import icons from "../../lib/icons";
 import ActiveApp from "../Bar/items/ActiveApp";
@@ -56,11 +56,11 @@ const NotificationIcon = ({ notification }: NotificationIconProps) => {
 
 	// if (Utils.lookUpIcon(appName || "")) icon = appName || "";
 
-	return Widget.Box({
+	return new Widget.Box({
 		valign: Gtk.Align.START,
 		hexpand: false,
 		className: "notification__icon",
-		child: Widget.Icon({
+		child: new Widget.Icon({
 			icon,
 			iconSize: 18,
 			halign: Gtk.Align.CENTER,

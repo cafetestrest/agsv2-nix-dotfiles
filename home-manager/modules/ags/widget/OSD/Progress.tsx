@@ -1,4 +1,5 @@
-import { Widget, Gtk, timeout, GLib } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable, GLib } from "astal";
 import { range } from "../../lib/utils";
 
 type ProgressProps = {
@@ -14,7 +15,7 @@ export default ({
 	vertical = false,
 	child,
 }: ProgressProps) => {
-	const fill = Widget.Box({
+	const fill = new Widget.Box({
 		className: "fill",
 		hexpand: vertical,
 		vexpand: !vertical,
@@ -23,7 +24,7 @@ export default ({
 		child,
 	});
 
-	const container = Widget.Box({
+	const container = new Widget.Box({
 		className: "progress",
 		child: fill,
 		css: `

@@ -1,4 +1,5 @@
-import { bind, Gtk, Widget } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable } from "astal";
 import PopupMenu from "../PopupMenu";
 import AstalWp from "gi://AstalWp?version=0.1";
 import icons from "../../../lib/icons";
@@ -7,12 +8,12 @@ export default () => {
 	const audio = AstalWp.get_default()?.audio!;
 
 	const MixerItem = (stream: AstalWp.Endpoint) => {
-		return Widget.Box({
+		return new Widget.Box({
 			hexpand: true,
 			className: "popup-menu__item mixer__item",
 			spacing: 16,
 			children: [
-				Widget.Icon({
+				new Widget.Icon({
 					className: "mixer__tooltip",
 					tooltipText: bind(stream, "name").as((name) => name || ""),
 					pixelSize: 32,
@@ -20,17 +21,17 @@ export default () => {
 						(icon) => icon || icons.fallback.audio,
 					),
 				}),
-				Widget.Box({
+				new Widget.Box({
 					vertical: true,
 					children: [
-						Widget.Label({
+						new Widget.Label({
 							xalign: 0,
 							truncate: true,
 							label: bind(stream, "name").as(
 								(name) => name || "",
 							),
 						}),
-						Widget.Slider({
+						new Widget.Slider({
 							className: "mixer__slider",
 							hexpand: true,
 							drawValue: false,
@@ -39,7 +40,7 @@ export default () => {
 						}),
 					],
 				}),
-				Widget.Label({
+				new Widget.Label({
 					className: "mixer__value",
 					// xalign: 0.5,
 					label: bind(stream, "volume").as(

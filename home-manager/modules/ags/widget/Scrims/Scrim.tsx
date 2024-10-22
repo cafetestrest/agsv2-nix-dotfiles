@@ -1,4 +1,4 @@
-import { App, Astal, Widget } from "astal";
+import { App, Astal, Widget } from "astal/gtk3";
 import { scrimWindowNames } from "../../lib/variables";
 import { activePopupWindows, toggleWindow } from "../../lib/utils";
 

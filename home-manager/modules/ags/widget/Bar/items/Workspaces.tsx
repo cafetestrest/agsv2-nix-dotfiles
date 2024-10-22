@@ -1,4 +1,5 @@
-import { Gtk, bind } from "astal";
+import { bind } from "astal";
+import { App, Gtk, Gdk } from "astal/gtk3";
 import Hyprland from "gi://AstalHyprland";
 import BarButton from "../BarButton";
 import { range } from "../../../lib/utils";

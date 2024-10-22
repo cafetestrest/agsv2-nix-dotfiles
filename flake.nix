@@ -13,6 +13,27 @@
     username = "posaydone";
     system = "x86_64-linux";
   in {
+    # nixosConfigurations."posaydone-work" = nixpkgs.lib.nixosSystem {
+    #   inherit system;
+    #   specialArgs = {inherit inputs username system;};
+    #   modules = [
+    #     {
+    #       nix.settings.trusted-users = ["posaydone"];
+    #     }
+    #     ./hosts/laptop.nix
+    #     home-manager.nixosModules.home-manager
+    #     auto-cpufreq.nixosModules.default
+    #     {
+    #       home-manager.backupFileExtension = "old";
+    #       home-manager = {
+    #         useGlobalPkgs = true;
+    #         useUserPackages = true;
+    #         users.posaydone = import ./home-manager/home.nix;
+    #         extraSpecialArgs = {inherit inputs username system;};
+    #       };
+    #     }
+    #   ];
+    # };
     nixosConfigurations."posaydone-laptop" = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs username system;};
@@ -20,7 +41,7 @@
         {
           nix.settings.trusted-users = ["posaydone"];
         }
-        ./nixos/configuration.nix
+        ./hosts/laptop.nix
         home-manager.nixosModules.home-manager
         auto-cpufreq.nixosModules.default
         {
@@ -74,10 +95,6 @@
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    more-waita = {
-      url = "https://github.com/somepaulo/MoreWaita/archive/refs/heads/main.zip";
-      flake = false;
     };
     transparent-nvim = {
       url = "github:xiyaowong/transparent.nvim";

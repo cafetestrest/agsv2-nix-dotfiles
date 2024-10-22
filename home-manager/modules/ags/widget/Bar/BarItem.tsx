@@ -1,5 +1,5 @@
-import { Gtk } from "astal";
-import { BoxProps } from "astal/widgets";
+import { App, Gtk, Gdk } from "astal/gtk3";
+import { BoxProps } from "astal/gtk3/widget";
 
 export enum BarItemStyle {
 	transparent = "transparent",

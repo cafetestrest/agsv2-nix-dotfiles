@@ -1,7 +1,7 @@
 import AstalWp from "gi://AstalWp?version=0.1";
-import { bind, Widget } from "astal";
+import { Widget, Gtk } from "astal/gtk3";
+import { bind } from "astal";
 import icons from "../../../lib/icons";
-import Gtk from "gi://Gtk?version=3.0";
 import Brightness from "../../../service/Brightness";
 
 export default () => {

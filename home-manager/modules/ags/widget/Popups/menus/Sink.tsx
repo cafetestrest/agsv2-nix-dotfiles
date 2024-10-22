@@ -1,4 +1,5 @@
-import { bind, Gtk, Widget } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable } from "astal";
 import PopupMenu from "../PopupMenu";
 import AstalWp from "gi://AstalWp?version=0.1";
 import icons from "../../../lib/icons";
@@ -13,28 +14,30 @@ export default () => {
 			hexpand={true}
 			on_clicked={() => device.set_is_default(true)}
 		>
-			{Widget.Box({
-				children: [
-					Widget.Icon({
-						icon: lookUpIcon(device.icon)
-							? device.icon
-							: icons.fallback.audio,
-						tooltipText: device.icon,
-					}),
-					Widget.Label({
-						label: (device.description || "")
-							.split(" ")
-							.slice(0, 4)
-							.join(" "),
-					}),
-					Widget.Icon({
-						icon: icons.ui.tick,
-						hexpand: true,
-						halign: Gtk.Align.END,
-						visible: bind(device, "isDefault"),
-					}),
-				],
-			})}
+			{
+				new Widget.Box({
+					children: [
+						new Widget.Icon({
+							icon: lookUpIcon(device.icon)
+								? device.icon
+								: icons.fallback.audio,
+							tooltipText: device.icon,
+						}),
+						new Widget.Label({
+							label: (device.description || "")
+								.split(" ")
+								.slice(0, 4)
+								.join(" "),
+						}),
+						new Widget.Icon({
+							icon: icons.ui.tick,
+							hexpand: true,
+							halign: Gtk.Align.END,
+							visible: bind(device, "isDefault"),
+						}),
+					],
+				})
+			}
 		</button>
 	);
 

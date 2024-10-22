@@ -1,4 +1,5 @@
-import { Astal, bind, Gdk, Gtk, timeout, Widget } from "astal";
+import { App, Gtk, Gdk, Widget, Astal } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable, GLib } from "astal";
 import Progress from "./Progress";
 import AstalWp from "gi://AstalWp?version=0.1";
 import icons from "../../lib/icons";
@@ -9,7 +10,7 @@ const DELAY = 2500;
 function OnScreenProgress(window: Astal.Window, vertical: boolean) {
 	const speaker = AstalWp.get_default()?.audio.defaultSpeaker!;
 
-	const indicator = Widget.Icon({
+	const indicator = new Widget.Icon({
 		pixelSize: 20,
 		valign: Gtk.Align.CENTER,
 		icon: bind(speaker, "volumeIcon"),
@@ -35,7 +36,7 @@ function OnScreenProgress(window: Astal.Window, vertical: boolean) {
 		});
 	}
 
-	return Widget.Box({
+	return new Widget.Box({
 		className: "indicator",
 		halign: Gtk.Align.CENTER,
 		valign: Gtk.Align.END,

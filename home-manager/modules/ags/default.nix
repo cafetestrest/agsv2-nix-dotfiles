@@ -6,7 +6,6 @@
   imports = [inputs.ags.homeManagerModules.default];
 
   home.packages = with pkgs; [
-    inputs.ags.packages.${pkgs.system}.astal
     inputs.ags.packages.${pkgs.system}.notifd
     inputs.ags.packages.${pkgs.system}.mpris
     inputs.ags.packages.${pkgs.system}.auth

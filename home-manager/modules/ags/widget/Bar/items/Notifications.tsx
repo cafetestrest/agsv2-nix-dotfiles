@@ -1,4 +1,5 @@
-import { App, Astal, bind, Gtk, timeout } from "astal";
+import { bind, timeout } from "astal";
+import { App, Astal, Gtk } from "astal/gtk3";
 import BarButton from "../BarButton";
 import Notifications from "gi://AstalNotifd";
 import { toggleWindow } from "../../../lib/utils";

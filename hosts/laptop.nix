@@ -1,4 +1,9 @@
 {pkgs, ...}: {
+  imports = [
+    ./shared.nix
+    ./modules/hyprland.nix
+    ./hardware/laptop.nix
+  ];
   systemd = {
     services.fix-hyprland-stutters = {
       description = "Sets intel gpu min frequency";
@@ -24,5 +29,18 @@
 
   services = {
     thermald.enable = true;
+  };
+
+  hardware = {
+    enableRedistributableFirmware = true;
+    opengl = {
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        intel-compute-runtime
+        intel-media-driver
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+    };
   };
 }

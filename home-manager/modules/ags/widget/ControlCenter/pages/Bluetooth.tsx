@@ -1,6 +1,7 @@
 import AstalBluetooth from "gi://AstalBluetooth?version=0.1";
 import Page from "../Page";
-import { bind, Gtk, timeout } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable } from "astal";
 import icons from "../../../lib/icons";
 
 const bluetooth = AstalBluetooth.get_default();

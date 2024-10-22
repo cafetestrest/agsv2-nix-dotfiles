@@ -1,4 +1,5 @@
-import { bind, Gtk } from "astal";
+import { bind } from "astal";
+import { App, Gtk, Gdk } from "astal/gtk3";
 import { spacing } from "../../../lib/variables";
 import { weather } from "../../../service/Weather";
 import { BarButtonStyle } from "../BarButton";

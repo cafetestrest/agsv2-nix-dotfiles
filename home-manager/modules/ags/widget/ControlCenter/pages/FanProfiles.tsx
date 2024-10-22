@@ -1,4 +1,5 @@
-import { bind, Gtk } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable } from "astal";
 import icons from "../../../lib/icons";
 import { FanProfile, profileName } from "../../../service/FanProfiles";
 import FanProfileSerivce from "../../../service/FanProfiles";

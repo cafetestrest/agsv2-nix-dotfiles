@@ -1,4 +1,5 @@
-import { App, bind, exec, execAsync, Gtk, Variable, Widget } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable } from "astal";
 import { spacing, uptime } from "../../../lib/variables";
 import ControlCenterButton from "../ControlCenterButton";
 import Bluetooth from "../items/Bluetooth";

@@ -2,37 +2,13 @@
   inputs,
   pkgs,
   ...
-}:
-/*
-: let
-*/
-# pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-/*
-in
-*/
-{
+}: {
   xdg = {
     autostart.enable = true;
     portal = {
       enable = true;
       wlr.enable = true;
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    };
-  };
-
-  hardware = {
-    enableRedistributableFirmware = true;
-    opengl = {
-      # package = pkgs-unstable.mesa.drivers;
-      # package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
-      # driSupport = true;
-      driSupport32Bit = true;
-      extraPackages = with pkgs; [
-        intel-compute-runtime
-        intel-media-driver
-        vaapiVdpau
-        libvdpau-va-gl
-      ];
     };
   };
 
@@ -50,11 +26,24 @@ in
   };
 
   security = {
-    # pam.services.hyprlock = {
-    #   enable = true;
-    # };
     polkit = {
       enable = true;
+      extraConfig = ''
+        polkit.addRule(function(action, subject) {
+            if (action.id == "org.freedesktop.policykit.exec" &&
+                action.lookup("command_line") == "/run/current-system/sw/bin/bash /home/posaydone/.config/nekoray/config/vpn-run-root.sh" &&
+                subject.isInGroup("wheel")) {
+                return polkit.Result.YES;
+            }
+        });
+        polkit.addRule(function(action, subject) {
+            if (action.id == "org.freedesktop.policykit.exec" &&
+                RegExp('/run/current-system/sw/bin/pkill -2 -P .*').test(action.lookup("command_line")) &&
+                subject.isInGroup("wheel")) {
+                return polkit.Result.YES;
+            }
+        });
+      '';
     };
     sudo = {
       enable = true;
@@ -62,10 +51,6 @@ in
         {
           groups = ["wheel"];
           commands = [
-            {
-              command = "/run/current-system/sw/bin/system76-power";
-              options = ["NOPASSWD"];
-            }
             {
               command = "/run/current-system/sw/bin/ec_probe";
               options = ["NOPASSWD"];
@@ -81,9 +66,6 @@ in
   };
 
   environment = {
-    variables = {
-      S76_POWER_PCI_RUNTIME_PM = 1;
-    };
     systemPackages = with pkgs;
     with gnome; [
       inputs.nbfc-linux.packages.${pkgs.system}.default

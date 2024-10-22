@@ -1,6 +1,7 @@
 import Tray from "gi://AstalTray";
 import BarItem from "../BarItem";
-import { App, Gtk, bind, Gdk } from "astal";
+import { bind } from "astal";
+import { App, Gtk, Gdk } from "astal/gtk3";
 
 type BarTrayItemProps = {
 	item: Tray.TrayItem;

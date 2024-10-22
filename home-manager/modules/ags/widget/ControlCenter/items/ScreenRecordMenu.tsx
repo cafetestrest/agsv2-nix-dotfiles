@@ -1,7 +1,13 @@
-import { Binding, Gtk, timeout } from "astal";
+import { Gtk } from "astal/gtk3";
+import { Binding, Variable, bind, exec, execAsync, timeout } from "astal";
 import icons from "../../../lib/icons";
 import { spacing } from "../../../lib/variables";
 import Button from "../../../common/Button";
+import GLib from "gi://GLib?version=2.0";
+
+const recordingStartedTime: Variable<number | null> = Variable(null);
+const recordMicrophone = Variable(false);
+const recordInternalAudio = Variable(false);
 
 export default ({
 	revealMenu,
@@ -47,7 +53,22 @@ export default ({
 				<Button buttonType="outlined" onClicked={closeMenu}>
 					Cancel
 				</Button>
-				<Button>Start</Button>
+				<Button
+					onClicked={() => {
+						const currentTime = GLib.get_real_time();
+						recordingStartedTime.set(currentTime);
+						execAsync(
+							`bash -c
+							"wf-recorder
+							-c h264_vaapi
+							-d /dev/dri/renderD128
+							-f ${GLib.getenv("XDG_VIDEOS_DIR")}/screenrecords/${currentTime}.mp4"`,
+						);
+						closeMenu();
+					}}
+				>
+					Start
+				</Button>
 			</box>
 		</box>
 	);

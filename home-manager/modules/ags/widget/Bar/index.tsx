@@ -1,4 +1,4 @@
-import { App, Astal, Gtk, Gdk } from "astal";
+import { App, Astal, Gtk, Gdk } from "astal/gtk3";
 import Workspaces from "./items/Workspaces";
 import { spacing } from "../../lib/variables";
 import ActiveApp from "./items/ActiveApp";

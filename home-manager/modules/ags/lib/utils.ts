@@ -1,5 +1,6 @@
 import { type Subscribable } from "astal/binding";
-import { Gtk, App, GLib, monitorFile, writeFile, exec } from "astal";
+import { Gtk, App } from "astal/gtk3";
+import { GLib, monitorFile, writeFile, exec } from "astal";
 import { transparentScrimWindowNames, scrimWindowNames } from "./variables";
 import AstalNotifd from "gi://AstalNotifd?version=0.1";
 import { currentPage } from "../widget/ControlCenter";

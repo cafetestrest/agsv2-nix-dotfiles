@@ -1,6 +1,7 @@
 import AstalNetwork from "gi://AstalNetwork?version=0.1";
 import Page from "../Page";
-import { bind, Gtk } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable } from "astal";
 import icons from "../../../lib/icons";
 
 export default () => {
@@ -8,7 +9,11 @@ export default () => {
 	const { wifi } = AstalNetwork.get_default();
 
 	return (
-		<Page label={"Network"}>
+		<Page
+			label={"Network"}
+			refresh={() => wifi.scan()}
+			scanning={bind(wifi, "scanning")}
+		>
 			<box
 				vertical
 				spacing={8}
@@ -56,9 +61,7 @@ export default () => {
 						points.map((ap) => (
 							<button
 								className="control-center__page_item"
-								on_clicked={() => {
-									wifi.connect(ap.ssid, () => {});
-								}}
+								onClicked={() => {}}
 							>
 								<box>
 									<icon icon={ap.iconName} iconSize={20} />

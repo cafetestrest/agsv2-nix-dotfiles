@@ -5,11 +5,8 @@
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
-    ./locale.nix
-    ./laptop.nix
-    ./hyprland.nix
-    ./substituters.nix
+    ./modules/locale.nix
+    ./modules/substituters.nix
   ];
 
   # nix
@@ -183,6 +180,10 @@
   # bootloader
   boot = {
     supportedFilesystems = ["btrfs" "ext4" "exfat" "fat32" "ntfs"];
+    kernel.sysctl = {
+      "vm.dirty_background_bytes" = 33554432;
+      "vm.dirty_bytes" = 134217728;
+    };
     kernelPackages = pkgs.linuxPackages_zen;
     kernelParams = [
       "quiet"

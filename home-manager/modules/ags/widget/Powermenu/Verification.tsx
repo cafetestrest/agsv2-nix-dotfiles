@@ -1,7 +1,8 @@
 import PopupWindow from "../../common/PopupWindow";
 import PowermenuService from "../../service/Powermenu";
 import { spacing } from "../../lib/variables";
-import { bind, exec, Gtk, Widget } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, exec, execAsync, timeout, Variable } from "astal";
 import { Ref, toggleWindow } from "../../lib/utils";
 import Button from "../../common/Button";
 

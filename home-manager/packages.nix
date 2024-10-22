@@ -2,11 +2,7 @@
   inputs,
   pkgs,
   ...
-}:
-# : let
-#   nixpkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
-# in
-{
+}: {
   home.packages = with pkgs;
   with nodePackages_latest;
   with gnome; [
@@ -50,6 +46,7 @@
     loupe
     simple-scan
     fragments
+    transmission_4-gtk
     ghex
     (pkgs.callPackage ../pkgs/hiddify/derivation.nix {})
     # yandex-music
@@ -84,6 +81,7 @@
     android-studio
 
     # langs
+    black
     nodejs
     bun
     sassc

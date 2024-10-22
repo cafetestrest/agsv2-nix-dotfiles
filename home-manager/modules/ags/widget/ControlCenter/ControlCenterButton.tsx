@@ -1,6 +1,7 @@
-import { GObject, Gtk, Widget, Astal } from "astal";
+import { App, Gtk, Gdk, Widget, Astal } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable } from "astal";
 import icons from "../../lib/icons";
-import { Subscribable } from "../../../../.local/share/ags/src/binding";
+import { Subscribable } from "astal/binding";
 import { currentPage } from ".";
 
 type ControlCenterButtonProps = {

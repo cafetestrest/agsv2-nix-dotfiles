@@ -1,7 +1,7 @@
 import PopupWindow from "../../common/PopupWindow";
-import { App } from "astal";
+import { App } from "astal/gtk3";
 import PowermenuService, { PowerMenuAction } from "../../service/Powermenu";
-import { ButtonProps } from "astal/widgets";
+import { ButtonProps } from "astal/gtk3/widget";
 import icons from "../../lib/icons";
 import { toggleWindow } from "../../lib/utils";
 import Button from "../../common/Button";

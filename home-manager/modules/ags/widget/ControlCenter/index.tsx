@@ -1,4 +1,5 @@
-import { App, Astal, bind, Gdk, Gtk, Variable } from "astal";
+import { App, Gtk, Gdk, Widget, Astal } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable } from "astal";
 import Main from "./pages/Main";
 import Network from "./pages/Network";
 import Bluetooth from "./pages/Bluetooth";

@@ -1,4 +1,4 @@
-import { App, Gtk } from "astal";
+import { App, Gtk, Widget } from "astal/gtk3";
 import BarButton from "../BarButton";
 import { toggleWindow } from "../../../lib/utils";
 

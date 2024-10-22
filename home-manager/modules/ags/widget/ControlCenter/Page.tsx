@@ -1,14 +1,16 @@
 import icons from "../../lib/icons";
 import { currentPage } from "./index";
-import { Widget, Gtk, bind } from "astal";
+import { App, Gtk, Gdk, Widget } from "astal/gtk3";
+import { bind, execAsync, timeout, Variable, GLib, Binding } from "astal";
 
 type PageProps = {
 	label: string;
 	child?: JSX.Element;
+	scanning?: Binding<boolean>;
 	refresh?: () => void;
 };
 
-export default ({ label, child, refresh = undefined }: PageProps) => {
+export default ({ label, child, scanning, refresh = undefined }: PageProps) => {
 	return (
 		<box
 			name={label.toLowerCase()}
