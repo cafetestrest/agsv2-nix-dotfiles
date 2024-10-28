@@ -3,6 +3,7 @@ import { bind, execAsync, timeout, Variable } from "astal";
 import icons from "../../lib/icons";
 import { Subscribable } from "astal/binding";
 import { currentPage } from ".";
+import Network from "gi://AstalNetwork?version=0.1";
 
 type ControlCenterButtonProps = {
 	icon: Widget.IconProps["icon"];
@@ -38,6 +39,11 @@ export default ({
 				onPrimaryClick();
 			}
 			if (event.button == 3 && menuName) {
+				if (menuName == "network") {
+					const network = Network.get_default();
+					const { wifi } = Network.get_default();
+					if (wifi == null) return;
+				}
 				currentPage.set(menuName);
 			}
 		}}

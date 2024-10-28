@@ -1,12 +1,12 @@
 import { App, Gtk, Gdk, Widget, Astal } from "astal/gtk3";
 import { bind, execAsync, timeout, Variable } from "astal";
 import Main from "./pages/Main";
-import Network from "./pages/Network";
+// import Network from "./pages/Network";
 import Bluetooth from "./pages/Bluetooth";
 import Media from "./items/Media";
 import { spacing } from "../../lib/variables";
 import PopupWindow from "../../common/PopupWindow";
-import FanProfiles from "./pages/FanProfiles";
+// import FanProfiles from "./pages/FanProfiles";
 import { toggleWindow } from "../../lib/utils";
 export const currentPage = Variable("main");
 
@@ -66,9 +66,9 @@ export default () => {
 						transitionDuration={200}
 					>
 						<Main />
-						<Network />
+						{/* <Network /> */}
 						<Bluetooth />
-						<FanProfiles />
+						{/* <FanProfiles /> */}
 					</stack>
 				</box>
 				<Media />

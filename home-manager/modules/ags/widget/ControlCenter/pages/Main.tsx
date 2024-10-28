@@ -1,7 +1,6 @@
-import { App, Gtk, Gdk, Widget } from "astal/gtk3";
-import { bind, execAsync, timeout, Variable } from "astal";
+import { App, Gtk, Widget, astalify, ConstructProps } from "astal/gtk3";
+import { bind, execAsync, GObject, Variable } from "astal";
 import { spacing, uptime } from "../../../lib/variables";
-import ControlCenterButton from "../ControlCenterButton";
 import Bluetooth from "../items/Bluetooth";
 import Network from "../items/Network";
 import Volume from "../items/Volume";
@@ -9,13 +8,52 @@ import DND from "../items/DND";
 import Microphone from "../items/Microphone";
 import icons from "../../../lib/icons";
 import Brightness from "../items/Brightness";
-import FanProfile from "../items/FanProfile";
+import FanProfileWidget from "../items/FanProfile";
 import ScreenRecord from "../items/ScreenRecord";
 import ColorScheme from "../items/ColorScheme";
 import ScreenRecordMenu from "../items/ScreenRecordMenu";
 
+class FlowBox extends astalify(Gtk.FlowBox) {
+	static {
+		GObject.registerClass(this);
+	}
+
+	constructor(
+		props: ConstructProps<Gtk.FlowBox, Gtk.FlowBox.ConstructorProps>,
+	) {
+		super(props as any);
+	}
+}
+
 export default () => {
 	const revealScreenRecord = Variable(false);
+
+	const fb = new FlowBox({
+        homogeneous: true,
+		selectionMode: Gtk.SelectionMode.NONE,
+		maxChildrenPerLine: 2,
+		minChildrenPerLine: 2,
+		rowSpacing: spacing,
+		columnSpacing: spacing,
+	});
+
+	const FanProfile = FanProfileWidget();
+
+	fb.add(Network());
+	fb.add(Bluetooth());
+	if (FanProfile != undefined) {
+		fb.add(FanProfile);
+	}
+	fb.add(Microphone());
+	fb.add(DND());
+    fb.add(new Widget.Box({
+        spacing,
+        homogeneous: true,
+        children: [
+            ColorScheme(),
+            ScreenRecord({ onClicked: () => {} })
+        ]
+    }))
 
 	return (
 		<box
@@ -24,25 +62,7 @@ export default () => {
 			vertical
 			spacing={spacing}
 		>
-			<box spacing={spacing} homogeneous>
-				<Network />
-				<Bluetooth />
-			</box>
-			<box spacing={spacing} homogeneous>
-				<FanProfile />
-				<Microphone />
-			</box>
-			<box spacing={spacing} homogeneous>
-				<DND />
-				<box spacing={spacing} homogeneous>
-					<ScreenRecord
-						onClicked={() => {
-							revealScreenRecord.set(!revealScreenRecord.get());
-						}}
-					/>
-					<ColorScheme />
-				</box>
-			</box>
+			{fb}
 			<ScreenRecordMenu
 				revealMenu={bind(revealScreenRecord)}
 				closeMenu={() =>

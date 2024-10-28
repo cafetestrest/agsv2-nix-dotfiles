@@ -8,12 +8,25 @@ export default () => {
 	const network = Network.get_default();
 	const { wifi, wired } = Network.get_default();
 
+	var icon;
+
+	if (wifi == null) {
+		return (
+			<ControlCenterButton
+				name="network"
+				icon={bind(wired, "iconName")}
+				label={"Ethernet"}
+				connection={[Variable(true), () => {}]}
+			/>
+		);
+	}
+
 	const primary = bind(network, "primary");
 	const wifiIcon = bind(wifi, "iconName");
 	const wiredIcon = bind(wired, "iconName");
 
 	// TODO: This is a hack to make sure the icon is updated when the primary network changes
-	const icon = Variable.derive([primary, wifiIcon], (primary, iconWifi) => {
+	icon = Variable.derive([primary, wifiIcon], (primary, iconWifi) => {
 		if (primary == Network.Primary.WIFI) {
 			return iconWifi;
 		} else {
@@ -32,12 +45,14 @@ export default () => {
 		},
 	);
 
+	const connection = [bind(wifi, "enabled"), () => wifi.enabled];
+
 	return (
 		<ControlCenterButton
-			name="bluetooth"
+			name="network"
 			icon={bind(icon)}
 			label={bind(label)}
-			connection={[bind(wifi, "enabled"), () => wifi.enabled]}
+			connection={connection}
 			onPrimaryClick={() => {
 				if (wifi.enabled) {
 					wifi.enabled = false;

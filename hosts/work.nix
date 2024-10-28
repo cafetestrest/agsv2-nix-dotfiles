@@ -7,6 +7,7 @@
   imports = [
     ./shared.nix
     ./modules/hyprland.nix
+    ./hardware/work.nix
   ];
 
   hardware.opengl = {

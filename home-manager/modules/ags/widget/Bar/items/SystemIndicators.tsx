@@ -48,18 +48,25 @@ const NetworkIndicator = () => {
 	const { wifi, wired } = Network.get_default();
 	const network = Network.get_default();
 
+	if (wifi == null) {
+		return <icon icon={bind(wired, "iconName")} />;
+	}
+
 	const primary = bind(network, "primary");
 	const wifiIcon = bind(wifi, "iconName");
 	const wiredIcon = bind(wired, "iconName");
 
 	// TODO: This is a hack to make sure the icon is updated when the primary network changes
-	const icon = Variable.derive([primary, wifiIcon], (primary, iconWifi) => {
-		if (primary == Network.Primary.WIFI) {
-			return iconWifi;
-		} else {
-			return icons.network.wired;
-		}
-	});
+	const icon = Variable.derive(
+		[primary, wifiIcon, wiredIcon],
+		(primary, iconWifi, iconWired) => {
+			if (primary == Network.Primary.WIFI) {
+				return iconWifi;
+			} else {
+				return iconWired;
+			}
+		},
+	);
 
 	return (
 		<icon tooltipText={bind(wifi, "ssid").as(String)} icon={bind(icon)} />

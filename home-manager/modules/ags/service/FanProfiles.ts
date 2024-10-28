@@ -14,6 +14,14 @@ const profileBinding = {
 	2: "performance",
 };
 
+const available = () => {
+	const hostName = exec("cat /sys/devices/virtual/dmi/id/product_name");
+	if (hostName == "B450M H") {
+		return false;
+	}
+	return true;
+};
+
 export const profileName = (profile: FanProfile) => {
 	const profileName = profileBinding[profile];
 	return profileName.charAt(0).toUpperCase() + profileName.slice(1);
@@ -28,7 +36,39 @@ type FanProfileServiceType = {
 	profile: number;
 };
 
-const FanProfileService = GObject.registerClass(
+class FanProfileService extends GObject.Object {
+	#profile: FanProfile = getProfile();
+
+	get profile() {
+		return this.#profile;
+	}
+
+	get profiles(): FanProfile[] {
+		return [1, 0, 2];
+	}
+
+	async nextProfile() {
+		this.#profile++;
+		if (this.#profile > 2) this.#profile = 0;
+		exec(`sudo ec_probe write ${FAN_REGISTER} ${this.#profile}`);
+		this.notify("profile");
+	}
+
+	async prevProfile() {
+		this.#profile--;
+		if (this.#profile < 0) this.#profile = 2;
+		exec(`sudo ec_probe write ${FAN_REGISTER} ${this.#profile}`);
+		this.notify("profile");
+	}
+
+	async setProfile(profile: FanProfile) {
+		exec(`sudo ec_probe write ${FAN_REGISTER} ${profile}`);
+		this.#profile = profile;
+		this.notify("profile");
+	}
+}
+
+const FanProfileServiceRegister = GObject.registerClass(
 	{
 		GTypeName: "FanProffileService",
 		Properties: {
@@ -44,38 +84,11 @@ const FanProfileService = GObject.registerClass(
 		},
 		Signals: {},
 	},
-	class FanProfileService extends GObject.Object {
-		#profile: FanProfile = getProfile();
-
-		get profile() {
-			return this.#profile;
-		}
-
-		get profiles(): FanProfile[] {
-			return [1, 0, 2];
-		}
-
-		async nextProfile() {
-			this.#profile++;
-			if (this.#profile > 2) this.#profile = 0;
-			exec(`sudo ec_probe write ${FAN_REGISTER} ${this.#profile}`);
-			this.notify("profile");
-		}
-
-		async prevProfile() {
-			this.#profile--;
-			if (this.#profile < 0) this.#profile = 2;
-			exec(`sudo ec_probe write ${FAN_REGISTER} ${this.#profile}`);
-			this.notify("profile");
-		}
-
-		async setProfile(profile: FanProfile) {
-			exec(`sudo ec_probe write ${FAN_REGISTER} ${profile}`);
-			this.#profile = profile;
-			this.notify("profile");
-		}
-	},
+	FanProfileService,
 );
 
-const service = new FanProfileService();
+var service: FanProfileService | null = null;
+if (available()) {
+	service = new FanProfileServiceRegister();
+}
 export default service;

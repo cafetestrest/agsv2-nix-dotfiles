@@ -7,7 +7,9 @@ import icons from "../../../lib/icons";
 export default () => {
 	const network = AstalNetwork.get_default();
 	const { wifi } = AstalNetwork.get_default();
-
+	if (wifi == null) {
+		return;
+	}
 	return (
 		<Page
 			label={"Network"}
