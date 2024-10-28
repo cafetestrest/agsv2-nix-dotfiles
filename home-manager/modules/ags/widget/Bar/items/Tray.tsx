@@ -1,6 +1,6 @@
 import Tray from "gi://AstalTray";
 import BarItem from "../BarItem";
-import { bind } from "astal";
+import { bind, timeout } from "astal";
 import { App, Gtk, Gdk } from "astal/gtk3";
 
 type BarTrayItemProps = {
@@ -17,7 +17,8 @@ const BarTrayItem = ({ item }: BarTrayItemProps) => {
 			className="bar__tray-item"
 			tooltipMarkup={bind(item, "tooltipMarkup")}
 			onDestroy={() => menu?.destroy()}
-			onClicked={(self) => {
+			onClickRelease={(self, event) => {
+				if (event.button !== 3) return;
 				menu?.popup_at_widget(
 					self,
 					Gdk.Gravity.SOUTH,

@@ -77,6 +77,7 @@ function PopupList() {
 						}
 					}
 				});
+				self.hook(notifications, "resolved", remove);
 			}}
 		/>
 	);
