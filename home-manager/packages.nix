@@ -72,6 +72,7 @@
     (prismlauncher.override {jdks = [jdk8 jdk17 jdk21];})
 
     #development
+    jetbrains.rider
     bruno
     zed-editor
     cassette

@@ -12,6 +12,7 @@ import FanProfileWidget from "../items/FanProfile";
 import ScreenRecord from "../items/ScreenRecord";
 import ColorScheme from "../items/ColorScheme";
 import ScreenRecordMenu from "../items/ScreenRecordMenu";
+import ScreenRecordService from "../../../service/ScreenRecord";
 
 class FlowBox extends astalify(Gtk.FlowBox) {
 	static {
@@ -29,7 +30,7 @@ export default () => {
 	const revealScreenRecord = Variable(false);
 
 	const fb = new FlowBox({
-        homogeneous: true,
+		homogeneous: true,
 		selectionMode: Gtk.SelectionMode.NONE,
 		maxChildrenPerLine: 2,
 		minChildrenPerLine: 2,
@@ -46,14 +47,24 @@ export default () => {
 	}
 	fb.add(Microphone());
 	fb.add(DND());
-    fb.add(new Widget.Box({
-        spacing,
-        homogeneous: true,
-        children: [
-            ColorScheme(),
-            ScreenRecord({ onClicked: () => {} })
-        ]
-    }))
+	fb.add(
+		new Widget.Box({
+			spacing,
+			homogeneous: true,
+			children: [
+				ColorScheme(),
+				ScreenRecord({
+					onClicked: () => {
+						if (ScreenRecordService.recording) {
+							ScreenRecordService.stop();
+						} else {
+							revealScreenRecord.set(!revealScreenRecord.get());
+						}
+					},
+				}),
+			],
+		}),
+	);
 
 	return (
 		<box

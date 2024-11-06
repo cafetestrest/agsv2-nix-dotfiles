@@ -5,8 +5,8 @@ import AppItem from "./AppItem";
 import PopupWindow from "../../common/PopupWindow";
 
 const apps = new AstalApps.Apps({
-	includeEntry: true,
-	includeExecutable: true,
+	// includeEntry: true,
+	// includeExecutable: true,
 });
 
 const query = Variable<string>("");

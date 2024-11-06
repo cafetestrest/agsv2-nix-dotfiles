@@ -110,6 +110,20 @@
 	&.no-label {
 		padding: 0;
 	}
+	&.recorder-indicator {
+		&.active {
+			background: $error_container;
+			color: $on_error_container;
+			&:hover {
+				background: $error_container,
+					$inverse_surface_transparent_variant_overlay;
+			}
+			&:active {
+				background: $error_container,
+					$inverse_surface_transparent_overlay;
+			}
+		}
+	}
 }
 
 .control-center__dropdown-menu {

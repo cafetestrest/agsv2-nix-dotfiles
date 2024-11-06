@@ -13,6 +13,7 @@ import SinkMenu from "./widget/Popups/menus/Sink";
 import MixerMenu from "./widget/Popups/menus/Mixer";
 import Verification from "./widget/Powermenu/Verification";
 import Powermenu from "./widget/Powermenu";
+import ScreenRecordService from "./service/ScreenRecord";
 
 function main() {
 	const bars = new Map<Gdk.Monitor, Gtk.Widget>();
@@ -61,6 +62,15 @@ App.start({
 		if (args[0] == "toggle") {
 			toggleWindow(args[1]);
 			res("ok");
+		} else if (args[0] == "record") {
+			if (args[1] == "start") {
+				ScreenRecordService.start();
+				res("Record started");
+			} else if (args[1] == "stop") {
+				ScreenRecordService.stop();
+				res("Record stopped");
+			}
+			return res("unknown command");
 		} else {
 			res("unknown command");
 		}

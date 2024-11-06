@@ -35,7 +35,6 @@
   virtualisation = {
     docker = {
       enable = true;
-      extraOptions = "--mtu=1400 --dns 8.8.8.8";
     };
   };
 
@@ -51,7 +50,7 @@
       usbutils
       gtklock
     ];
-    sessionVariables.NIXOS_OZONE_WL = "1";
+    # sessionVariables.NIXOS_OZONE_WL = "1";
     binsh = "${pkgs.zsh}/bin/zsh";
   };
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";

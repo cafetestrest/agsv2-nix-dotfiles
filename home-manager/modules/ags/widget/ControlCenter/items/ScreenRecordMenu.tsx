@@ -4,8 +4,8 @@ import icons from "../../../lib/icons";
 import { spacing } from "../../../lib/variables";
 import Button from "../../../common/Button";
 import GLib from "gi://GLib?version=2.0";
+import ScreenRecordService from "../../../service/ScreenRecord";
 
-const recordingStartedTime: Variable<number | null> = Variable(null);
 const recordMicrophone = Variable(false);
 const recordInternalAudio = Variable(false);
 
@@ -55,15 +55,7 @@ export default ({
 				</Button>
 				<Button
 					onClicked={() => {
-						const currentTime = GLib.get_real_time();
-						recordingStartedTime.set(currentTime);
-						execAsync(
-							`bash -c
-							"wf-recorder
-							-c h264_vaapi
-							-d /dev/dri/renderD128
-							-f ${GLib.getenv("XDG_VIDEOS_DIR")}/screenrecords/${currentTime}.mp4"`,
-						);
+						ScreenRecordService.start();
 						closeMenu();
 					}}
 				>
