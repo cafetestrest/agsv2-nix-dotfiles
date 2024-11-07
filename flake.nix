@@ -5,23 +5,17 @@
     home-manager,
     nixvim,
     nixpkgs,
-    nixpkgs-rider,
     transparent-nvim,
-    # auto-cpufreq,
     hyprsettings,
     ...
   }: let
-    pkgs-rider = import nixpkgs-rider {
-      inherit system;
-      config.allowUnfree = true;
-    };
     username = "posaydone";
     system = "x86_64-linux";
   in {
     nixosConfigurations."posaydone-work" = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
-        inherit inputs username system pkgs-rider;
+        inherit inputs username system;
       };
       modules = [
         {
@@ -30,14 +24,13 @@
         # ./overlays/rider.nix
         ./hosts/work.nix
         home-manager.nixosModules.home-manager
-        # auto-cpufreq.nixosModules.default
         {
           home-manager.backupFileExtension = "old";
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
             users.posaydone = import ./home-manager/home.nix;
-            extraSpecialArgs = {inherit inputs username system pkgs-rider;};
+            extraSpecialArgs = {inherit inputs username system;};
           };
         }
       ];
@@ -67,10 +60,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # auto-cpufreq = {
-    #   url = "github:AdnanHodzic/auto-cpufreq";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     nbfc-linux = {
       url = "github:nbfc-linux/nbfc-linux";
       inputs.nixpkgs.follows = "nixpkgs";

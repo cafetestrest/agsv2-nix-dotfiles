@@ -12,6 +12,9 @@ type PlayerProps = {
 
 const Player = ({ player }: PlayerProps) => {
 	const PlayerColors = PlayerColorsService(player);
+	const position = bind(player, "position").as((p) =>
+		player.length > 0 ? p / player.length : p * 0.01,
+	);
 
 	const Title = new Widget.Label({
 		label: player.get_title(),
@@ -86,12 +89,19 @@ const Player = ({ player }: PlayerProps) => {
 		</button>
 	);
 	const Next = () => (
-		<button onClicked={() => player.next()} className={"player__next"}>
+		<button
+			hexpand={false}
+			valign={Gtk.Align.END}
+			onClicked={() => player.next()}
+			className={"player__next"}
+		>
 			<icon icon={icons.media.next} />
 		</button>
 	);
 	const Previous = () => (
 		<button
+			hexpand={false}
+			valign={Gtk.Align.START}
 			onClicked={() => player.previous()}
 			className={"player__previous"}
 		>
@@ -99,22 +109,15 @@ const Player = ({ player }: PlayerProps) => {
 		</button>
 	);
 
-	// const PositionSlider = () => (
-	// 	<slider
-	// 		className={"player__position-slider"}
-	// 		drawValue={false}
-	// 		hexpand
-	// 		onDragged={({ value }) => (player.position = value * player.length)}
-	// 		setup={(self) => {
-	// 			const update = () => {
-	// 				const { length, position } = player;
-	// 				self.visible = length > 0;
-	// 				self.value = length > 0 ? position / length : 0;
-	// 			};
-	// 			self.hook(player, "notify::position", update);
-	// 		}}
-	// 	/>
-	// );
+	const PositionSlider = () => (
+		<slider
+			className={"player__position-slider"}
+			drawValue={false}
+			hexpand
+			onDragged={({ value }) => (player.position = value * 100)}
+			value={position}
+		/>
+	);
 
 	return (
 		<centerbox
@@ -172,9 +175,7 @@ const Player = ({ player }: PlayerProps) => {
 			</box>
 			<box vexpand valign={Gtk.Align.END} spacing={24}>
 				<Previous />
-				{
-					// <PositionSlider />
-				}
+				<PositionSlider />
 				<Next />
 			</box>
 		</centerbox>

@@ -39,6 +39,7 @@
             "icon.accent": "{{colors.primary.default.hex}}",
             "status_bar.background": "{{colors.surface_container_lowest.default.hex}}",
             "title_bar.background": "{{colors.surface_container_lowest.default.hex}}",
+            "title_bar.inactive_background": "{{colors.surface_container_low.default.hex}}",
             "toolbar.background": "{{colors.surface_container.default.hex}}",
             "tab_bar.background": "{{colors.surface_container_lowest.default.hex}}",
             "tab.inactive_background": "{{colors.surface.default.hex}}",

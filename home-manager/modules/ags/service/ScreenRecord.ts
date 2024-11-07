@@ -1,4 +1,4 @@
-import { AstalIO, exec, execAsync, GLib, GObject, interval } from "astal";
+import { AstalIO, exec, execAsync, Gio, GLib, GObject, interval } from "astal";
 
 const now = () => GLib.DateTime.new_now_local().format("%Y-%m-%d_%H-%M-%S");
 
@@ -47,7 +47,6 @@ const ScreenRecorderService = GObject.registerClass(
 			execAsync(
 				'bash -c "$XDG_CONFIG_HOME/ags/bin/screenrecord-start.sh" & disown',
 			);
-			// sh(`$HOME/scripts/screenrecord-start.sh`);
 
 			this.#recording = true;
 			this.notify("recording");
@@ -62,32 +61,57 @@ const ScreenRecorderService = GObject.registerClass(
 		async stop() {
 			if (!this.recording) return;
 
-			execAsync(
-				`bash -c "$XDG_CONFIG_HOME/ags/bin/screenrecord-end.sh" & disown`,
-			).then(() => {
+			try {
+				// Notify.init("Ags");
+
+				await execAsync(
+					`bash -c "$XDG_CONFIG_HOME/ags/bin/screenrecord-end.sh" & disown`,
+				);
+
 				this.#recording = false;
 				this.notify("recording");
+
 				if (this.#interval) this.#interval.cancel();
 				this.#timer = 0;
 				this.notify("timer");
-			});
 
-			// Utils.notify({
-			// 	iconName: icons.fallback.video,
-			// 	summary: "Screenrecord",
-			// 	body: this.#file,
-			// 	actions: {
-			// 		"Show in Files": () => sh(`xdg-open ${this.#recordings}`),
-			// 		View: () => sh(`xdg-open ${this.#file}`),
-			// 	},
-			// });
+				// try {
+				// 	const notification = new Notify.Notification({
+				// 		appName: "Ags",
+				// 		summary: "Screenrecord",
+				// 		body: this.#file,
+				// 		iconName: icons.fallback.video,
+				// 	});
+
+				// 	notification.add_action(
+				// 		"show_in_files",
+				// 		"Show in Files",
+				// 		() => exec(`bash -c xdg-open ${this.#recordings}`),
+				// 	);
+				// 	notification.add_action("view", "View", () =>
+				// 		exec(`bash -c xdg-open ${this.#file}`),
+				// 	);
+
+				// 	if (!notification.show()) {
+				// 		console.log("Error in notify");
+				// 	}
+				// } catch (e) {
+				// 	console.log(e);
+				// }
+			} catch (e) {
+				console.error("Error executing screenrecord-end script:", e);
+			}
+			// finally {
+			// 	// Ensure Notify is uninitialized when done with it
+			// 	Notify.uninit();
+			// }
 		}
 
 		// async screenshot(full = false) {
-		// 	if (!dependencies("slurp", "wayshot")) return;
+		// 	// if (!dependencies("slurp", "wayshot")) return;
 
 		// 	const file = `${this.#screenshots}/${now()}.png`;
-		// 	Utils.ensureDirectory(this.#screenshots);
+		// 	exec(`bash -c "mkdir -p ${this.#screenshots}"`);
 
 		// 	if (full) {
 		// 		await sh(`wayshot -f ${file}`);
@@ -100,8 +124,9 @@ const ScreenRecorderService = GObject.registerClass(
 
 		// 	bash(`wl-copy < ${file}`);
 
-		// 	Utils.notify({
-		// 		image: file,
+		// 	Notify.Notification.new(
+		// 		...{
+		// 		// image: file,
 		// 		summary: "Screenshot",
 		// 		body: file,
 		// 		actions: {
@@ -111,7 +136,8 @@ const ScreenRecorderService = GObject.registerClass(
 		// 				if (dependencies("swappy")) sh(`swappy -f ${file}`);
 		// 			},
 		// 		},
-		// 	});
+		// 	}
+		// 	);
 		// }
 	},
 );

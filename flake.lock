@@ -746,22 +746,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-rider": {
-      "locked": {
-        "lastModified": 1727635825,
-        "narHash": "sha256-vYUn3MUbhcYvsPWuUwc7hCMxEjM+xEeE6M1KaqZbCaE=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "73c16dcee745c143be088bc37609b4822c37b92a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "73c16dcee745c143be088bc37609b4822c37b92a",
-        "type": "github"
-      }
-    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1720386169,
@@ -897,7 +881,6 @@
         "matugen": "matugen",
         "nbfc-linux": "nbfc-linux",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-rider": "nixpkgs-rider",
         "nixvim": "nixvim",
         "transparent-nvim": "transparent-nvim"
       }
