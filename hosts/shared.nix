@@ -35,7 +35,6 @@
   virtualisation = {
     docker = {
       enable = true;
-      extraOptions = "--mtu=1400 --dns 8.8.8.8";
     };
   };
 
@@ -88,6 +87,16 @@
   hardware.pulseaudio.enable = false;
   # services
   services = {
+    postgresql = {
+      enable = true;
+      ensureDatabases = ["postgres"];
+      authentication = pkgs.lib.mkOverride 10 ''
+        #type database  DBuser  auth-method
+        local all       all     trust
+        host  all       all     127.0.0.1/32   trust
+        host  all       all     ::1/128        trust
+      '';
+    };
     pipewire = {
       enable = true;
       audio.enable = true;

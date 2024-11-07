@@ -1,7 +1,9 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    thefuck
-  ];
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.direnv = {
     enable = true;
     enableZshIntegration = true; # see note on other shells below
@@ -11,39 +13,118 @@
 
   programs.zsh = {
     enable = true;
+    history.size = 10000;
+    history.path = "${config.xdg.dataHome}/zsh/history";
+    shellAliases = {
+      vim = "nvim";
+      ls = "ls --color";
+      ctrl-l = "clear";
+      C-l = "ctrl-l";
+      control-l = "clear";
+      clean = "clear";
+      rw = "sudo nixos-rebuild switch --flake $HOME/.nixdots#posaydone-work";
+      rl = "sudo nixos-rebuild switch --flake $HOME/.nixdots#posaydone-laptop";
+    };
+    initExtra = ''
+      zmodload zsh/zprof
+      ZSH_DISABLE_COMPFIX=true
+      export EDITOR=nvim
+      if [ -n "$TTY" ]; then
+        export GPG_TTY=$(tty)
+      else
+        export GPG_TTY="$TTY"
+      fi
+
+      export BUN_INSTALL=$HOME/.bun
+      export PATH="$HOME/go/bin:$BUN_INSTALL/bin:$PATH"
+
+      # SSH_AUTH_SOCK set to GPG to enable using gpgagent as the ssh agent.
+      export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+      gpgconf --launch gpg-agent
+
+      bindkey -e
+
+      [[ ! -f ${./p10k.zsh} ]] || source ${./p10k.zsh}
+
+      # disable sort when completing `git checkout`
+      zstyle ':completion:*:git-checkout:*' sort false
+
+      # set descriptions format to enable group support
+      # NOTE: don't use escape sequences here, fzf-tab will ignore them
+      zstyle ':completion:*:descriptions' format '[%d]'
+
+      # set list-colors to enable filename colorizing
+      zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+
+      # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+      zstyle ':completion:*' menu no
+
+      # preview directory's content with eza when completing cd
+      zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always $realpath'
+      zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+      zstyle ':fzf-tab:complete:ls:*' fzf-preview 'cat $realpath'
+
+      # switch group using `<` and `>`
+      zstyle ':fzf-tab:*' switch-group '<' '>'
+
+      # Keybindings
+      bindkey -e
+      bindkey '^p' history-search-backward
+      bindkey '^n' history-search-forward
+      bindkey '^[w' kill-region
+
+      zle_highlight+=(paste:none)
+
+      setopt appendhistory
+      setopt sharehistory
+      setopt hist_ignore_space
+      setopt hist_ignore_all_dups
+      setopt hist_save_no_dups
+      setopt hist_ignore_dups
+      setopt hist_find_no_dups
+      zprof
+    '';
     oh-my-zsh = {
-      theme = "awesomepanda";
       enable = true;
       plugins = [
-        "fzf" # fuzzy auto-completion and key bindings https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
-        "python" # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/python
-        "systemd" # useful aliases for systemd. https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/systemd
-        "thefuck" # corrects your previous console command. https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/thefuck
-        "tmux" # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
-        "z" # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/z
+        "git"
+        "sudo"
+        # "command-not-found"
+        "pass"
       ];
     };
-
-    history = {
-      share = true; # false -> every terminal has it's own history
-      size = 9999999; # Number of history lines to keep.
-      save = 9999999; # Number of history lines to save.
-      ignoreDups = true; # Do not enter command lines into the history list if they are duplicates of the previous event.
-      extended = true; # Save timestamp into the history file.
-    };
-
-    dirHashes = {
-    };
-
-    shellAliases = {
-      "dl" = "ls -lhtr --color=always ~/Downloads | tail -n 10"; # Show the 10 newest Downloads
-      "o" = "less";
-      "gg" = "git grep";
-      "m" = "mpv";
-      "s" = "tmux a"; # reminiscence to good old GNU screen ;-)
-      "open" = "xdg-open";
-      "rb" = "sudo nixos-rebuild switch --flake .#posaydone-laptop";
-      "rh" = "home-manager switch --flake .#posaydone";
-    };
+    plugins = [
+      {
+        # will source zsh-autosuggestions.plugin.zsh
+        name = "zsh-autosuggestions";
+        src = pkgs.zsh-autosuggestions;
+        file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+      }
+      {
+        name = "zsh-completions";
+        src = pkgs.zsh-completions;
+        file = "share/zsh-completions/zsh-completions.zsh";
+      }
+      {
+        name = "zsh-syntax-highlighting";
+        src = pkgs.zsh-syntax-highlighting;
+        file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
+      }
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+        name = "powerlevel10k-config";
+        src = lib.cleanSource ./p10k.zsh;
+        file = "p10k.zsh";
+      }
+      {
+        name = "fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+      }
+    ];
   };
 }

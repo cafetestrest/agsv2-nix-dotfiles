@@ -4,7 +4,8 @@ handle() {
   case $1 in monitoradded*)
     hyprctl dispatch moveworkspacetomonitor "1 1"
     hyprctl dispatch moveworkspacetomonitor "2 1"
-    hyprctl dispatch moveworkspacetomonitor "4 0"
+    hyprctl dispatch moveworkspacetomonitor "3 1"
+    hyprctl dispatch moveworkspacetomonitor "4 1"
     hyprctl dispatch moveworkspacetomonitor "6 0"
     matugen image "$HOME/.local/share/hyprsettings/current_wallpaper";
     gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark';

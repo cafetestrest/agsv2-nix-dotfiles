@@ -34,6 +34,16 @@
           nil_ls.enable = true;
           texlab.enable = true;
           pyright.enable = true;
+          omnisharp = {
+            enable = true;
+            extraOptions = {
+              enable_rosyln_analyzers = true;
+              enable_import_completion = true;
+              organize_imports_on_format = true;
+              enable_editorconfig_support = true;
+              analyze_open_documents_only = true;
+            };
+          };
           rust-analyzer = {
             installCargo = true;
             installRustc = true;
