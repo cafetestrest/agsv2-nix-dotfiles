@@ -25,6 +25,7 @@
         };
 
         servers = {
+          omnisharp.enable = true;
           svelte.enable = true;
           tsserver.enable = true;
           eslint.enable = true;

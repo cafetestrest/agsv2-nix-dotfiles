@@ -13,7 +13,8 @@
     };
   };
 
-  programs = {
+  services = {
+    thermald.enable = true;
     auto-cpufreq.enable = true;
     auto-cpufreq.settings = {
       battery = {
@@ -25,10 +26,6 @@
         turbo = "auto";
       };
     };
-  };
-
-  services = {
-    thermald.enable = true;
   };
 
   hardware = {

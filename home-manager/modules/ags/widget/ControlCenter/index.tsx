@@ -8,6 +8,8 @@ import { spacing } from "../../lib/variables";
 import PopupWindow from "../../common/PopupWindow";
 // import FanProfiles from "./pages/FanProfiles";
 import { toggleWindow } from "../../lib/utils";
+import Network from "./pages/Network";
+import FanProfiles from "./pages/FanProfiles";
 export const currentPage = Variable("main");
 
 export default () => {
@@ -64,11 +66,14 @@ export default () => {
 							Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
 						}
 						transitionDuration={200}
+						setup={(self) => {
+							const NetworkWdgt = Network();
+							if (NetworkWdgt) self.add(NetworkWdgt);
+						}}
 					>
 						<Main />
-						{/* <Network /> */}
+						<FanProfiles />
 						<Bluetooth />
-						{/* <FanProfiles /> */}
 					</stack>
 				</box>
 				<Media />

@@ -5,7 +5,6 @@ import AstalMpris from "gi://AstalMpris?version=0.1";
 import icons from "../../../lib/icons";
 import { hexToRgb, lookUpIcon } from "../../../lib/utils";
 import PlayerColorsService from "../../../service/PlayerColors";
-import PlayerColors from "../../../service/PlayerColors";
 
 type PlayerProps = {
 	player: AstalMpris.Player;

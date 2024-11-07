@@ -46,10 +46,11 @@ const MicMuteIndicator = () => {
 
 const NetworkIndicator = () => {
 	const { wifi, wired } = Network.get_default();
-	const network = Network.get_default();
 
 	if (wifi == null) {
 		return <icon icon={bind(wired, "iconName")} />;
+	} else if (wired == null) {
+		return <icon icon={bind(wifi, "iconName")} />;
 	}
 
 	const primary = bind(network, "primary");

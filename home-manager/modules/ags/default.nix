@@ -11,6 +11,7 @@
     inputs.ags.packages.${pkgs.system}.auth
     inputs.matugen.packages.${pkgs.system}.default
     material-symbols
+    (pkgs.callPackage ../../../pkgs/wl-screenrec {})
   ];
 
   programs.ags = {
@@ -18,6 +19,7 @@
     extraPackages = [
       pkgs.libsoup_3
       pkgs.gtksourceview
+      pkgs.libnotify
       inputs.ags.packages.${pkgs.system}.apps
       inputs.ags.packages.${pkgs.system}.battery
       inputs.ags.packages.${pkgs.system}.hyprland

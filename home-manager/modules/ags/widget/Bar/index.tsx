@@ -10,6 +10,7 @@ import Notifications from "./items/Notifications";
 import AppLauncher from "./items/AppLauncher";
 import KeyboardLayout from "./items/KeyboardLayout";
 import Weather from "./items/Weather";
+import RecordingIndicator from "./items/RecordingIndicator";
 
 const Start = () => {
 	return (
@@ -32,6 +33,7 @@ const Center = () => {
 const End = () => {
 	return (
 		<box halign={Gtk.Align.END} spacing={spacing}>
+			<RecordingIndicator />
 			<Weather />
 			<KeyboardLayout />
 			<box className="bar__rounded-box" spacing={spacing / 2}>

@@ -50,7 +50,7 @@
       usbutils
       gtklock
     ];
-    sessionVariables.NIXOS_OZONE_WL = "1";
+    # sessionVariables.NIXOS_OZONE_WL = "1";
     binsh = "${pkgs.zsh}/bin/zsh";
   };
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";

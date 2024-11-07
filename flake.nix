@@ -7,7 +7,7 @@
     nixpkgs,
     nixpkgs-rider,
     transparent-nvim,
-    auto-cpufreq,
+    # auto-cpufreq,
     hyprsettings,
     ...
   }: let
@@ -30,7 +30,7 @@
         # ./overlays/rider.nix
         ./hosts/work.nix
         home-manager.nixosModules.home-manager
-        auto-cpufreq.nixosModules.default
+        # auto-cpufreq.nixosModules.default
         {
           home-manager.backupFileExtension = "old";
           home-manager = {
@@ -51,7 +51,7 @@
         }
         ./hosts/laptop.nix
         home-manager.nixosModules.home-manager
-        auto-cpufreq.nixosModules.default
+        # auto-cpufreq.nixosModules.default
         {
           home-manager.backupFileExtension = "old";
           home-manager = {
@@ -67,11 +67,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-rider.url = "github:nixos/nixpkgs/73c16dcee745c143be088bc37609b4822c37b92a";
-    auto-cpufreq = {
-      url = "github:AdnanHodzic/auto-cpufreq";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # auto-cpufreq = {
+    #   url = "github:AdnanHodzic/auto-cpufreq";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     nbfc-linux = {
       url = "github:nbfc-linux/nbfc-linux";
       inputs.nixpkgs.follows = "nixpkgs";

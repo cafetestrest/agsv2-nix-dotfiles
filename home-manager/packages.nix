@@ -81,15 +81,22 @@
         docker-compose
         android-studio
 
-        # langs
-        black
-        nodejs
-        bun
-        sassc
-        meson
-        yarn
-      ])
-    ++ (with pkgs-rider; [
-      jetbrains.rider
-    ]);
+    #development
+    jetbrains.rider
+    bruno
+    zed-editor
+    cassette
+    gnome-builder
+    flatpak-builder
+    docker-compose
+    android-studio
+
+    # langs
+    black
+    nodejs
+    bun
+    sassc
+    meson
+    yarn
+  ];
 }
