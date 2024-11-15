@@ -228,7 +228,9 @@ export default () => {
 						shown={bind(selectedPlayer)}
 					>
 						{bind(mpris, "players").as((players) =>
-							players.map((player) => <Player player={player} />),
+							players.map((player) =>{
+                                return <Player player={player} />
+                            } ),
 						)}
 					</stack>
 				</eventbox>

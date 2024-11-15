@@ -82,7 +82,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ags = {
-      url = "github:Aylur/ags/v2";
+      url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.astal.follows = "astal";
     };
@@ -98,6 +98,9 @@
     hyprsettings = {
       url = "github:PoSayDone/hyprsettings";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dbvisualizer-nur = {
+      url = "github:jeremiehuchet/nur-packages";
     };
   };
 }

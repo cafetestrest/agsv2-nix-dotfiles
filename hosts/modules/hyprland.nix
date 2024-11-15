@@ -68,7 +68,6 @@
   environment = {
     systemPackages = with pkgs;
     with gnome; [
-      inputs.nbfc-linux.packages.${pkgs.system}.default
       adwaita-icon-theme
       nautilus
       gnome-calendar
