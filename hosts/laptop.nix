@@ -1,9 +1,20 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./shared.nix
     ./modules/hyprland.nix
     ./hardware/laptop.nix
   ];
+
+  environment = {
+    systemPackages = [
+      inputs.nbfc-linux.packages.${pkgs.system}.default
+    ];
+  };
+
   systemd = {
     services.fix-hyprland-stutters = {
       description = "Sets intel gpu min frequency";

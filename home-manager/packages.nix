@@ -49,7 +49,8 @@
     transmission_4-gtk
     ghex
     (pkgs.callPackage ../pkgs/hiddify/derivation.nix {})
-    # yandex-music
+    telegram-desktop
+    cassette
 
     #hypr
     inputs.hyprsettings.packages.${pkgs.system}.default
@@ -66,23 +67,25 @@
     gsettings-desktop-schemas
     material-icons
     corefonts
+    grim
+    slurp
 
     # games
     (prismlauncher.override {jdks = [jdk8 jdk17 jdk21];})
 
     bruno
     zed-editor
-    cassette
     gnome-builder
     flatpak-builder
     docker-compose
     android-studio
 
     #development
+    # inputs.dbvisualizer-nur.packages.${pkgs.system}.dbvisualizer
+    dbeaver-bin
     jetbrains.rider
     bruno
     zed-editor
-    cassette
     gnome-builder
     flatpak-builder
     docker-compose

@@ -16,7 +16,7 @@ export default () => {
 				name="network"
 				icon={bind(wired, "iconName")}
 				label={"Ethernet"}
-				connection={[Variable(true), () => {}]}
+				connection={[Variable(true), () => true]}
 			/>
 		);
 	}
