@@ -8,7 +8,7 @@ import { spacing } from "../../lib/variables";
 import PopupWindow from "../../common/PopupWindow";
 import { toggleWindow } from "../../lib/utils";
 import Network from "./pages/Network";
-// import FanProfiles from "./pages/FanProfiles";
+import FanProfiles from "./pages/FanProfiles";
 export const currentPage = Variable("main");
 
 export default () => {
@@ -71,6 +71,7 @@ export default () => {
 						}}
 					>
 						<Main />
+                        <FanProfiles />
 						<Bluetooth />
 					</stack>
 				</box>

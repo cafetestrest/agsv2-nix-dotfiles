@@ -2,8 +2,8 @@
 LOCKDIR=$HOME/.local/share/screenrecord
 LOCKFILE=$HOME/.local/share/screenrecord/record.lock
 PROCESS_LOCKFILE=$HOME/.local/share/screenrecord/process.lock
-DIR=$HOME/Videos/Screencast
-RAWDIR=$HOME/Videos/Screencast/raw
+DIR=$HOME/Videos/Screenrecords
+RAWDIR=$HOME/Videos/Screenrecords/raw
 
 mkdir -p $LOCKDIR/log
 mkdir -p $RAWDIR

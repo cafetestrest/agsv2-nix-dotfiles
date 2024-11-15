@@ -62,8 +62,6 @@ const ScreenRecorderService = GObject.registerClass(
 			if (!this.recording) return;
 
 			try {
-				// Notify.init("Ags");
-
 				await execAsync(
 					`bash -c "$XDG_CONFIG_HOME/ags/bin/screenrecord-end.sh" & disown`,
 				);
@@ -75,36 +73,38 @@ const ScreenRecorderService = GObject.registerClass(
 				this.#timer = 0;
 				this.notify("timer");
 
-				// try {
-				// 	const notification = new Notify.Notification({
-				// 		appName: "Ags",
-				// 		summary: "Screenrecord",
-				// 		body: this.#file,
-				// 		iconName: icons.fallback.video,
-				// 	});
+				const res = await execAsync([
+					"notify-send",
+					"Screenrecord",
+					this.#file,
+					"-a",
+					"Screenrecord",
+					"-i",
+					"video-x-generic-symbolic",
+					"--hint=string:image:video-x-generic-symbolic",
+					"-A",
+					"file=Show in Files",
+					"-A",
+					"view=View",
+				]);
 
-				// 	notification.add_action(
-				// 		"show_in_files",
-				// 		"Show in Files",
-				// 		() => exec(`bash -c xdg-open ${this.#recordings}`),
-				// 	);
-				// 	notification.add_action("view", "View", () =>
-				// 		exec(`bash -c xdg-open ${this.#file}`),
-				// 	);
+				console.log(this.#recordings + "/" + this.#file);
 
-				// 	if (!notification.show()) {
-				// 		console.log("Error in notify");
-				// 	}
-				// } catch (e) {
-				// 	console.log(e);
-				// }
+				switch (res) {
+					case "file":
+						return execAsync([
+							GLib.getenv("FILE_MANAGER") || "xdg-open",
+							this.#recordings,
+						]);
+					case "view":
+						return execAsync([
+							"xdg-open",
+							this.#recordings + "/" + this.#file,
+						]);
+				}
 			} catch (e) {
 				console.error("Error executing screenrecord-end script:", e);
 			}
-			// finally {
-			// 	// Ensure Notify is uninitialized when done with it
-			// 	Notify.uninit();
-			// }
 		}
 
 		// async screenshot(full = false) {

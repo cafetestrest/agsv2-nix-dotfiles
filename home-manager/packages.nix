@@ -89,6 +89,7 @@
     android-studio
 
     # langs
+    nixd
     black
     nodejs
     bun

@@ -21,7 +21,6 @@
         {
           nix.settings.trusted-users = ["posaydone"];
         }
-        # ./overlays/rider.nix
         ./hosts/work.nix
         home-manager.nixosModules.home-manager
         {
@@ -44,7 +43,6 @@
         }
         ./hosts/laptop.nix
         home-manager.nixosModules.home-manager
-        # auto-cpufreq.nixosModules.default
         {
           home-manager.backupFileExtension = "old";
           home-manager = {
