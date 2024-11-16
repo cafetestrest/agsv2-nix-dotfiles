@@ -17,9 +17,11 @@ export default ({
 	child,
 	scrimType,
 	setup,
+	className,
 	...props
 }: PopupWindowProps) => (
 	<window
+		className={`popup-window ${className}`}
 		application={application}
 		layer={layer}
 		keymode={keymode}

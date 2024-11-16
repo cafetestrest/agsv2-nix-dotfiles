@@ -13,6 +13,7 @@ import ColorScheme from "../items/ColorScheme";
 import ScreenRecordMenu from "../items/ScreenRecordMenu";
 import ScreenRecordService from "../../../service/ScreenRecord";
 import BluetoothButton from "../items/Bluetooth";
+import { toggleWindow } from "../../../lib/utils";
 
 class FlowBox extends astalify(Gtk.FlowBox) {
 	static {
@@ -91,7 +92,7 @@ export default () => {
 			<box spacing={16} className="control-center__footer">
 				<button
 					className="control-center__powermenu-button"
-					onClick={() => App.toggle_window("powermenu")}
+					onClick={() => toggleWindow("powermenu")}
 				>
 					<icon icon={icons.powermenu.shutdown} iconSize={16} />
 				</button>

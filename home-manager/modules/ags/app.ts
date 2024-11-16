@@ -14,6 +14,7 @@ import MixerMenu from "./widget/Popups/menus/Mixer";
 import Verification from "./widget/Powermenu/Verification";
 import Powermenu from "./widget/Powermenu";
 import ScreenRecordService from "./service/ScreenRecord";
+import Dashboard from "./widget/Dashboard";
 
 function main() {
 	const bars = new Map<Gdk.Monitor, Gtk.Widget>();
@@ -29,6 +30,7 @@ function main() {
 	MixerMenu();
 	Verification();
 	Powermenu();
+	Dashboard();
 
 	for (const gdkmonitor of App.get_monitors()) {
 		bars.set(gdkmonitor, Bar(gdkmonitor));

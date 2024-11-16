@@ -1,4 +1,5 @@
 import { exec, execAsync, GObject, Variable } from "astal";
+import { dependencies } from "../lib/utils";
 
 const FAN_REGISTER = 0x61;
 
@@ -14,7 +15,7 @@ const profileBinding = {
 	2: "performance",
 };
 
-const available = false;
+const available = dependencies(["ec_probe"]);
 
 export const profileName = (profile: FanProfile) => {
 	const profileName = profileBinding[profile];

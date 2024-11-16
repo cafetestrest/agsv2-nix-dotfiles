@@ -59,6 +59,11 @@ export default {
 		enabled: "bluetooth-active-symbolic",
 		disabled: "bluetooth-disabled-symbolic",
 	},
+	todo: {
+		checkedAlt: "selection-mode-symbolic",
+		checked: "radio-checked-symbolic",
+		unchecked: "radio-symbolic",
+	},
 	fallback: {
 		executable: "application-x-executable",
 		notification: "dialog-information-symbolic",

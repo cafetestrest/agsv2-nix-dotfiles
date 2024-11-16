@@ -49,6 +49,10 @@
       intel-gpu-tools
       usbutils
       gtklock
+      enchant
+      hunspell
+      hunspellDicts.ru_RU
+      hunspellDicts.en_US
     ];
     sessionVariables.NIXOS_OZONE_WL = "1";
     binsh = "${pkgs.zsh}/bin/zsh";

@@ -1,0 +1,121 @@
+.dashboard {
+	border-radius: 38px;
+	min-width: 420px;
+	transition:
+		background-color 1s ease-in-out,
+		color 1s ease-in-out;
+}
+
+.block {
+	background: $surface_transparent;
+	border-radius: 30px;
+	padding: 20px;
+	transition:
+		background-color 1s ease,
+		color 1s ease;
+}
+
+.placeholder {
+	color: $outline;
+	label {
+		font-size: 18px;
+	}
+}
+
+.calendar {
+	min-height: 200px;
+	border-radius: 30px;
+	padding: 10px;
+	background: $surface_transparent;
+	calendar {
+		padding: 0.8em;
+
+		&:selected {
+			border-radius: 100px;
+			background: $primary;
+			color: $on_primary;
+		}
+		.view {
+			background: transparent;
+			.grid {
+			}
+		}
+	}
+}
+
+.calendar__header > *,
+.todos__heading {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.calendar__header {
+	padding: 16px;
+}
+.calendar__weekday {
+	min-height: 40px;
+	min-width: 36px;
+	font-weight: 600;
+}
+
+.calendar__day {
+	border-radius: 100px;
+	min-height: 40px;
+	min-width: 40px;
+	&.active {
+		background: $primary;
+		color: $on_primary;
+	}
+	&.inactive {
+		color: $inverse_surface_transparent_variant;
+	}
+}
+
+.todos {
+	min-height: 0px;
+	padding: 20px 20px 0;
+}
+
+.todos__heading {
+	margin-bottom: 8px;
+}
+
+.todos__scrollable {
+	min-height: 260px;
+}
+
+.todo {
+	min-height: 48px;
+	padding: 0 10px;
+	font-weight: 400;
+	label {
+		font-size: 16px;
+	}
+	&:last-child {
+		margin-bottom: 8px;
+	}
+}
+
+.todo__check,
+.todo__delete {
+	font-size: 20px;
+	color: $on_surface_variant;
+}
+
+.todos__input_box {
+	padding: 0 10px;
+	icon {
+		font-size: 20px;
+		color: $primary;
+	}
+	min-height: 42px;
+}
+
+.todos__input {
+	padding: 0;
+	font-size: 16px;
+	background: none;
+	font-weight: 500;
+	color: $primary;
+	caret-color: $primary;
+}

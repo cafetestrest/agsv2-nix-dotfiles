@@ -82,3 +82,13 @@ export function monitorColorsChange() {
 		App.apply_css(target);
 	});
 }
+
+export function dependencies(packages: string[]) {
+	for (const pkg of packages) {
+		const result = GLib.find_program_in_path(pkg);
+		if (!result) {
+			return false;
+		}
+	}
+	return true;
+}

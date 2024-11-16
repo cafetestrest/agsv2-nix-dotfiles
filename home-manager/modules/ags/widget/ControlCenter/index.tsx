@@ -1,14 +1,14 @@
 import { App, Gtk, Gdk, Widget, Astal } from "astal/gtk3";
 import { bind, execAsync, timeout, Variable } from "astal";
 import Main from "./pages/Main";
-// import Network from "./pages/Network";
+import Network from "./pages/Network";
 import Bluetooth from "./pages/Bluetooth";
 import Media from "./items/Media";
 import { spacing } from "../../lib/variables";
 import PopupWindow from "../../common/PopupWindow";
 import { toggleWindow } from "../../lib/utils";
-import Network from "./pages/Network";
 import FanProfiles from "./pages/FanProfiles";
+
 export const currentPage = Variable("main");
 
 export default () => {
@@ -71,8 +71,9 @@ export default () => {
 						}}
 					>
 						<Main />
-                        <FanProfiles />
-						<Bluetooth />
+						{Network()}
+						{FanProfiles()}
+						{Bluetooth()}
 					</stack>
 				</box>
 				<Media />
