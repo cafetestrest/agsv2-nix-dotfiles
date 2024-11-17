@@ -10,7 +10,7 @@
     ./hardware/work.nix
   ];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
   };
 

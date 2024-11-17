@@ -26,11 +26,11 @@
 
         servers = {
           svelte.enable = true;
-          tsserver.enable = true;
+          ts_ls.enable = true;
           eslint.enable = true;
           emmet_ls.enable = true;
           bashls.enable = true;
-          lua-ls.enable = true;
+          lua_ls.enable = true;
           nil_ls.enable = true;
           texlab.enable = true;
           pyright.enable = true;
@@ -44,7 +44,7 @@
               analyze_open_documents_only = true;
             };
           };
-          rust-analyzer = {
+          rust_analyzer = {
             installCargo = true;
             installRustc = true;
             enable = true;

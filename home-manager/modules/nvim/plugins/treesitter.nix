@@ -6,7 +6,9 @@
       nixvimInjections = true;
 
       folding = true;
-      indent = true;
+      settings = {
+        indent.enable = true;
+      };
 
       grammarPackages = with config.programs.nixvim.plugins.treesitter.package.builtGrammars; [
         blueprint

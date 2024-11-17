@@ -21,7 +21,7 @@
     tesseract
 
     #tools
-    rustdesk-flutter
+    # rustdesk-flutter
     ripdrag
     nekoray
     wineWowPackages.waylandFull
@@ -42,13 +42,13 @@
     vesktop
     gimp
     zathura
-    mission-center
+    # mission-center
     loupe
     simple-scan
     fragments
     transmission_4-gtk
     ghex
-    (pkgs.callPackage ../pkgs/hiddify/derivation.nix {})
+    hiddify-app
     telegram-desktop
     cassette
 
@@ -73,21 +73,12 @@
     # games
     (prismlauncher.override {jdks = [jdk8 jdk17 jdk21];})
 
-    bruno
-    zed-editor
-    gnome-builder
-    flatpak-builder
-    docker-compose
-    android-studio
-
     #development
     # inputs.dbvisualizer-nur.packages.${pkgs.system}.dbvisualizer
     dbeaver-bin
     jetbrains.rider
     bruno
-    zed-editor
-    gnome-builder
-    flatpak-builder
+    # zed-editor
     docker-compose
     android-studio
 

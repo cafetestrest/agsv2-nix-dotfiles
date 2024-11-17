@@ -39,7 +39,7 @@ in {
   };
 
   home = {
-    stateVersion = "24.05";
+    stateVersion = "25.05";
     inherit username homeDirectory;
 
     sessionVariables = {

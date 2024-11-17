@@ -5,8 +5,8 @@
   ...
 }: {
   imports = [
-    ./modules/locale.nix
     ./modules/substituters.nix
+    ./modules/locale.nix
   ];
 
   # nix
@@ -212,5 +212,5 @@
     consoleLogLevel = 0;
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 }

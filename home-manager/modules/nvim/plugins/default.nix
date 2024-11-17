@@ -9,7 +9,6 @@
     ./efm.nix
     ./lsp.nix
     ./lualine.nix
-    ./markdown-preview.nix
     ./nvimtree.nix
     ./telescope.nix
     ./treesitter.nix
@@ -29,10 +28,11 @@
     colorschemes.one.enable = true;
 
     plugins = {
+      web-devicons.enable = true;
       direnv.enable = true;
       gitsigns.enable = true;
       emmet.enable = true;
-      surround.enable = true;
+      vim-surround.enable = true;
       tmux-navigator.enable = true;
       nvim-autopairs.enable = true;
       nvim-colorizer.enable = true;

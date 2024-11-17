@@ -2,57 +2,57 @@
   description = "NixOS configuration";
 
   outputs = inputs @ {
-    home-manager,
-    nixvim,
     nixpkgs,
-    transparent-nvim,
-    hyprsettings,
+    home-manager,
     ...
   }: let
     username = "posaydone";
     system = "x86_64-linux";
   in {
-    nixosConfigurations."posaydone-work" = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {
-        inherit inputs username system;
+    nixosConfigurations = {
+      "posaydone-work" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs username system;
+        };
+        modules = [
+          ./hosts/work.nix
+          {
+            nix.settings.trusted-users = ["posaydone"];
+          }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.backupFileExtension = "old";
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.posaydone = import ./home-manager/home.nix;
+              extraSpecialArgs = {inherit inputs username system;};
+            };
+          }
+        ];
       };
-      modules = [
-        {
-          nix.settings.trusted-users = ["posaydone"];
-        }
-        ./hosts/work.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.backupFileExtension = "old";
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.posaydone = import ./home-manager/home.nix;
-            extraSpecialArgs = {inherit inputs username system;};
-          };
-        }
-      ];
-    };
-    nixosConfigurations."posaydone-laptop" = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {inherit inputs username system;};
-      modules = [
-        {
-          nix.settings.trusted-users = ["posaydone"];
-        }
-        ./hosts/laptop.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.backupFileExtension = "old";
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.posaydone = import ./home-manager/home.nix;
-            extraSpecialArgs = {inherit inputs username system;};
-          };
-        }
-      ];
+
+      "posaydone-laptop" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs username system;};
+        modules = [
+          {
+            nix.settings.trusted-users = ["posaydone"];
+          }
+          ./hosts/laptop.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.backupFileExtension = "old";
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.posaydone = import ./home-manager/home.nix;
+              extraSpecialArgs = {inherit inputs username system;};
+            };
+          }
+        ];
+      };
     };
   };
 

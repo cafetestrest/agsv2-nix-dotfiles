@@ -1,6 +1,6 @@
 import { type Subscribable } from "astal/binding";
 import { Gtk, App } from "astal/gtk3";
-import { GLib, monitorFile, writeFile, exec } from "astal";
+import { GLib, monitorFile, writeFile, exec, Gio, execAsync } from "astal";
 import { transparentScrimWindowNames, scrimWindowNames } from "./variables";
 import AstalNotifd from "gi://AstalNotifd?version=0.1";
 import { currentPage } from "../widget/ControlCenter";
@@ -91,4 +91,31 @@ export function dependencies(packages: string[]) {
 		}
 	}
 	return true;
+}
+
+export function ensureDirectory(path: string) {
+	if (!GLib.file_test(path, GLib.FileTest.EXISTS))
+		Gio.File.new_for_path(path).make_directory_with_parents(null);
+}
+
+export async function sh(cmd: string | string[]) {
+	return execAsync(cmd).catch((err) => {
+		console.error(typeof cmd === "string" ? cmd : cmd.join(" "), err);
+		return "";
+	});
+}
+
+export async function bash(
+	strings: TemplateStringsArray | string,
+	...values: unknown[]
+) {
+	const cmd =
+		typeof strings === "string"
+			? strings
+			: strings.flatMap((str, i) => str + `${values[i] ?? ""}`).join("");
+
+	return execAsync(["bash", "-c", cmd]).catch((err) => {
+		console.error(cmd, err);
+		return "";
+	});
 }
