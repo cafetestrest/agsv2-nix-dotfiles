@@ -26,7 +26,7 @@ const FanProfileItem = (profile: FanProfile) => (
 );
 
 export default () => {
-	if (FanProfile)
+	if (FanProfileSerivce)
 		return (
 			<Page label={"Profiles"}>
 				<box vertical spacing={8}>
