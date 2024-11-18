@@ -1,6 +1,6 @@
-import { App, Gtk, Gdk, Widget } from "astal/gtk3";
-import { Revealer, type EventBox } from "astal/gtk3/widget";
-import { bind, execAsync, timeout, GLib, idle } from "astal";
+import { Gtk, Widget } from "astal/gtk3";
+import { type EventBox } from "astal/gtk3/widget";
+import { timeout, GLib, idle } from "astal";
 import Notifd from "gi://AstalNotifd";
 import icons from "../../lib/icons";
 
@@ -197,12 +197,10 @@ export default function Notification(props: NotificationsProps) {
 		close(remove: () => void) {
 			if (isClosing) return;
 			isClosing = true;
-			timeout(transitionDuration, () => {
-				box.revealChild = false;
-				timeout(transitionDuration, () => {
-					remove();
-				});
-			});
+            box.revealChild = false;
+            timeout(transitionDuration, () => {
+                remove();
+            });
 		},
 	});
 }

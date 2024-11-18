@@ -1,21 +1,34 @@
-import { bind, GLib, readFile, Variable, writeFile } from "astal";
-import { Gtk } from "astal/gtk3";
+import { bind, GObject, Variable } from "astal";
+import { astalify, ConstructProps, Gtk } from "astal/gtk3";
 import TodosService, { Todo } from "../../../service/LocalTodos";
 import icons from "../../../lib/icons";
-import { Label } from "../../../../../../../.local/share/ags/gtk3/widget";
+import GoogleTasksService, { Task } from "../../../service/GoogleTasks";
 
-const TodoItem = ({ todo, idx }: { todo: Todo; idx: number }) => {
+
+class ComboBox extends astalify(Gtk.ComboBox){
+	static {
+		GObject.registerClass(this);
+	}
+
+	constructor(
+		props: ConstructProps<Gtk.ComboBox, Gtk.ComboBox.ConstructorProps>,
+	) {
+		super(props as any);
+	}
+}
+
+const TodoItem = ({ todo }: { todo: Task }) => {
 	return (
 		<box spacing={24} hexpand={true} className="todo">
 			<button
 				onClick={() => {
-					TodosService.check(idx);
+                    GoogleTasksService.checkTask(todo)
 				}}
 			>
 				<icon
 					className="todo__check"
 					icon={
-						todo.done ? icons.todo.checkedAlt : icons.todo.unchecked
+						todo.status =="completed" ? icons.todo.checkedAlt : icons.todo.unchecked
 					}
 					pixelSize={24}
 				/>
@@ -24,9 +37,10 @@ const TodoItem = ({ todo, idx }: { todo: Todo; idx: number }) => {
 			<label
 				hexpand={true}
 				halign={Gtk.Align.START}
-				label={todo.content}
+				label={todo.title}
 			/>
 
+            {/*
 			<button
 				valign={Gtk.Align.CENTER}
 				onClicked={() => {
@@ -39,22 +53,20 @@ const TodoItem = ({ todo, idx }: { todo: Todo; idx: number }) => {
 					icon={icons.ui.close}
 				/>
 			</button>
+            */}
 		</box>
 	);
 };
 
-const addNewTodo = (text: string) => {
-	if (text.length >= 3) {
-		TodosService.add(text);
-	}
-};
 
 export default () => {
 	const newTodoText = Variable<string>("");
 
+
 	return (
-		<box vertical className={"todos block"}>
-			<Label
+		<box vertical className={"todos block"}
+        >
+			<label
 				label={"Todos"}
 				className={"todos__heading"}
 				halign={Gtk.Align.START}
@@ -66,28 +78,33 @@ export default () => {
 					placeholderText={"New todo..."}
 					onChanged={({ text }) => newTodoText.set(text)}
 					onActivate={(self) => {
-						addNewTodo(newTodoText.get());
+						GoogleTasksService.createTask(newTodoText.get());
 						self.text = "";
 					}}
 				/>
 			</box>
+            {/*
+
 			<stack
 				transitionType={Gtk.StackTransitionType.CROSSFADE}
 				shown={bind(TodosService, "todos").as((t) =>
 					t.length > 0 ? "todos" : "placeholder",
 				)}
 			>
+                */}
 				<scrollable className={"todos__scrollable"} name={"todos"}>
 					<box vertical className={"todos__container"}>
-						{bind(TodosService, "todos").as((t) =>
-							t.map((item, idx) => (
-								<TodoItem todo={item} idx={idx} />
+						{bind(GoogleTasksService, "todos").as((t) =>
+							t.map((item) => (
+								<TodoItem todo={item}/>
 							)),
 						)}
 					</box>
 				</scrollable>
+            {/*
 				<box name={"placeholder"}></box>
 			</stack>
+                */}
 		</box>
 	);
 };
