@@ -1,4 +1,5 @@
 import { exec, GLib, GObject, readFile, writeFileAsync } from "astal";
+import { ensureDirectory } from "../lib/utils";
 
 export type Todo = {
   content: string;
@@ -58,11 +59,11 @@ const LocalTodosService = GObject.registerClass(
       super();
       this._todoPath = `${GLib.get_user_state_dir()}/ags/user/todo.json`;
       try {
-        exec(`mkdir -p ${GLib.get_user_state_dir()}/ags/user/}`);
+        ensureDirectory(`${GLib.get_user_state_dir()}/ags/user/`);
         const fileContents = readFile(this._todoPath);
         this._todos = JSON.parse(fileContents);
       } catch {
-        exec(`bash -c 'mkdir -p ${GLib.get_user_cache_dir()}/ags/user'`);
+        ensureDirectory(`${GLib.get_user_state_dir()}/ags/user/`);
         exec(`touch ${this._todoPath}`);
         writeFileAsync(this._todoPath, "[]")
           .then(() => {

@@ -1,7 +1,7 @@
 import { bind, Variable } from "astal";
 import icons from "../../../lib/icons";
 import ControlCenterButton from "../ControlCenterButton";
-import { currentPage } from "../index";
+import { controlCenterPage } from "../index";
 import Network from "gi://AstalNetwork?version=0.1";
 
 export default () => {
