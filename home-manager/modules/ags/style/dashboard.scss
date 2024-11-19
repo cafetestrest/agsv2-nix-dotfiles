@@ -1,6 +1,6 @@
 .dashboard {
 	border-radius: 38px;
-	min-width: 420px;
+	min-width: 460px;
 	transition:
 		background-color 1s ease-in-out,
 		color 1s ease-in-out;
@@ -75,12 +75,22 @@
 	padding: 20px 20px 0;
 }
 
+.todos__combobox{
+  * {
+    font-size: 18px;
+  }
+  button {
+    margin: 0 10px;
+    padding: 10px 0;
+  }
+}
+
 .todos__heading {
 	margin-bottom: 8px;
 }
 
 .todos__scrollable {
-	min-height: 260px;
+	min-height: 280px;
 }
 
 .todo {

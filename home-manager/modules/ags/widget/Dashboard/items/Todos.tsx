@@ -1,54 +1,112 @@
-import { bind, GObject, Variable } from "astal";
-import { astalify, ConstructProps, Gtk } from "astal/gtk3";
-import TodosService, { Todo } from "../../../service/LocalTodos";
+import { bind, GObject, idle, timeout, Variable } from "astal";
+import { Gdk, Gtk, Widget } from "astal/gtk3";
 import icons from "../../../lib/icons";
 import GoogleTasksService, {
 	Task,
 	TaskListsItem,
 } from "../../../service/GoogleTasks";
+import { ComboBox, Spinner, Ref } from "../../../common/Types";
+import Pango from "gi://Pango?version=1.0";
+import { Subscribable } from "astal/binding";
 
-class ComboBox extends astalify(Gtk.ComboBox) {
-	static {
-		GObject.registerClass(this);
-	}
-
-	constructor(
-		props: ConstructProps<Gtk.ComboBox, Gtk.ComboBox.ConstructorProps>,
-	) {
-		super(props as any);
-	}
-}
+const TARGET = [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)]
 
 const TodoItem = ({ todo }: { todo: Task }) => {
+    const status = Variable(todo.status)
+      const revealer: Ref<Widget.Revealer> = {}
+
 	return (
+        <revealer
+        transitionDuration={300}
+        transitionType={Gtk.RevealerTransitionType.SLIDE_UP}
+        setup={(self) => {
+            idle(() => {self.revealChild =true})
+            revealer.ref=self;
+            self.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, TARGET, Gdk.DragAction.COPY)
+        }}
+        >
 		<box spacing={24} hexpand={true} className="todo">
 			<button
 				onClick={() => {
+                    status.set("completed")
+                    timeout(50, () => {
+                        if (revealer.ref) revealer.ref.revealChild=false
+                    })
 					GoogleTasksService.checkTask(todo);
 				}}
 			>
 				<icon
 					className="todo__check"
 					icon={
-						todo.status == "completed"
-							? icons.todo.checkedAlt
-							: icons.todo.unchecked
+                        bind(status).as(
+                            (s) => (s == "completed"
+                                ? icons.todo.checkedAlt
+                                : icons.todo.unchecked)
+                        )
 					}
 					pixelSize={24}
 				/>
 			</button>
 
-			<label hexpand={true} halign={Gtk.Align.START} label={todo.title} />
+			<label hexpand={true} halign={Gtk.Align.START} label={todo.title} wrap wrapMode={Pango.WrapMode.CHAR}/>
 		</box>
+        </revealer>
 	);
 };
 
+
+class TodosMap implements Subscribable {
+    taskService = GoogleTasksService
+
+	private map: Map<string, Gtk.Widget> = new Map();
+	private var: Variable<Array<Gtk.Widget>> = Variable([]);
+
+	private notify() {
+		this.var.set([...this.map.values()].reverse());
+	}
+
+	constructor() {
+		GoogleTasksService.connect("notify::todos", async () => {
+            this.updateMap(GoogleTasksService.todos)
+		});
+	}
+
+
+    private updateMap(tasks: Task[]) {
+        const newTasksIds = new Set(tasks.map(task => task.id));
+
+        for (const task of tasks) {
+            const existingTask = this.map.get(task.id)
+            if (!existingTask) this.map.set(task.id, TodoItem({todo: task}))
+        }
+
+        for (const id of this.map.keys()) {
+            if (!newTasksIds.has(id)) {
+                this.map.delete(id);
+            }
+        }
+
+        this.notify();
+    }
+
+	get() {
+		return this.var.get();
+	}
+
+	subscribe(callback: (list: Array<Gtk.Widget>) => void) {
+		return this.var.subscribe(callback);
+	}
+}
+
+
 export default () => {
+    const todos = new TodosMap()
 	const newTodoText = Variable<string>("");
 
 	return (
 		<box vertical className={"todos block"}>
 			<ComboBox
+                className={'todos__combobox'}
 				hexpand={true}
 				setup={(self) => {
 					const model = new Gtk.ListStore();
@@ -73,6 +131,21 @@ export default () => {
 							);
 							self.set_model(model);
 						},
+					);
+					GoogleTasksService.connect(
+                        "notify::selected-list-id", () => {
+                            let selectedId = GoogleTasksService.selectedListId;
+                            let [success, iter] = model.get_iter_first();
+
+                            while (success) {
+                                let id = model.get_value(iter, 0);
+                                if (id === selectedId) {
+                                    self.set_active_iter(iter);
+                                    break;
+                                }
+                                success = model.iter_next(iter);
+                            }
+                        }
 					);
 					self.connect("changed", function (entry) {
 						let [success, iter] = self.get_active_iter();
@@ -113,15 +186,24 @@ export default () => {
 						/>
 					</box>
 					<scrollable className={"todos__scrollable"} name={"todos"}>
-						<box vertical className={"todos__container"}>
+						<box vertical className={"todos__container"} setup={(self) => {
+                            self.drag_dest_set(Gtk.DestDefaults.ALL, TARGET, Gdk.DragAction.COPY)
+                            self.connect("drag-data-received", (_w, _c, _x, _y, data) => {
+                                // const address = new TextDecoder().decode(data.get_data())
+                                // dispatch(`movetoworkspacesilent ${id},address:${address}`)
+                            })
+                        }}>
+                        {bind(todos)}
+                        {/*
 							{bind(GoogleTasksService, "todos").as((t) =>
 								t.map((item) => <TodoItem todo={item} />),
 							)}
+                        */}
 						</box>
 					</scrollable>
 				</box>
-				<box name="loading">
-					<circularprogress />
+				<box hexpand vexpand halign={Gtk.Align.CENTER} name="loading">
+                    <Spinner halign={Gtk.Align.CENTER} widthRequest={32} setup={(self) => self.start()}/>
 				</box>
 			</stack>
 		</box>

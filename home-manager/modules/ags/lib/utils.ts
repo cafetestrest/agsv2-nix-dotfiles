@@ -4,8 +4,6 @@ import { transparentScrimWindowNames, scrimWindowNames } from "./variables";
 import AstalNotifd from "gi://AstalNotifd?version=0.1";
 import { controlCenterPage } from "../widget/ControlCenter";
 
-export type Ref<T> = { ref?: T };
-
 export function range(length: number, start = 1) {
   return Array.from({ length }, (_, i) => i + start);
 }
