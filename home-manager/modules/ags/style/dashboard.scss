@@ -73,6 +73,12 @@
 .todos {
 	min-height: 0px;
 	padding: 20px 20px 0;
+
+  revealer:last-child {
+	.todo {
+		margin-bottom: 12px;
+	}
+  }
 }
 
 .todos__combobox{
@@ -81,7 +87,7 @@
   }
   button {
     margin: 0 10px;
-    padding: 10px 0;
+    padding: 12px 0 18px 0;
   }
 }
 
@@ -99,9 +105,6 @@
 	font-weight: 400;
 	label {
 		font-size: 16px;
-	}
-	&:last-child {
-		margin-bottom: 8px;
 	}
 }
 

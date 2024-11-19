@@ -23,6 +23,9 @@ const TodoItem = ({ todo }: { todo: Task }) => {
             idle(() => {self.revealChild =true})
             revealer.ref=self;
             self.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, TARGET, Gdk.DragAction.COPY)
+            self.connect("drag-begin", (_source, context) => {
+                self.revealChild=false
+            });
         }}
         >
 		<box spacing={24} hexpand={true} className="todo">
@@ -62,7 +65,7 @@ class TodosMap implements Subscribable {
 	private var: Variable<Array<Gtk.Widget>> = Variable([]);
 
 	private notify() {
-		this.var.set([...this.map.values()].reverse());
+		this.var.set([...this.map.values()].toSorted((a,b) => a.position - b.position));
 	}
 
 	constructor() {
@@ -76,8 +79,10 @@ class TodosMap implements Subscribable {
         const newTasksIds = new Set(tasks.map(task => task.id));
 
         for (const task of tasks) {
+            console.log(task.title, parseInt(task.position))
             const existingTask = this.map.get(task.id)
-            if (!existingTask) this.map.set(task.id, TodoItem({todo: task}))
+            if (!existingTask) this.map.set(task.id, Object.assign(TodoItem({todo: task}), {position: parseInt(task.position)}))
+            else existingTask.position = task.position
         }
 
         for (const id of this.map.keys()) {
@@ -174,6 +179,7 @@ export default () => {
 					<box className={"todos__input_box"} spacing={24}>
 						<icon icon={icons.todo.checkedAlt} />
 						<entry
+                            hexpand
 							className={"todos__input"}
 							placeholderText={"New todo..."}
 							onChanged={({ text }) => newTodoText.set(text)}
@@ -189,16 +195,10 @@ export default () => {
 						<box vertical className={"todos__container"} setup={(self) => {
                             self.drag_dest_set(Gtk.DestDefaults.ALL, TARGET, Gdk.DragAction.COPY)
                             self.connect("drag-data-received", (_w, _c, _x, _y, data) => {
-                                // const address = new TextDecoder().decode(data.get_data())
-                                // dispatch(`movetoworkspacesilent ${id},address:${address}`)
+                                console.log('drag-data-received')
                             })
                         }}>
                         {bind(todos)}
-                        {/*
-							{bind(GoogleTasksService, "todos").as((t) =>
-								t.map((item) => <TodoItem todo={item} />),
-							)}
-                        */}
 						</box>
 					</scrollable>
 				</box>
