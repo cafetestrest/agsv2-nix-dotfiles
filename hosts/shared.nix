@@ -20,6 +20,12 @@
     };
     settings = {
       experimental-features = "nix-command flakes";
+
+      max-jobs = "auto";
+      use-xdg-base-directories = true;
+      http-connections = 128;
+      max-substitution-jobs = 128;
+      log-lines = 25;
       auto-optimise-store = true;
       builders-use-substitutes = true;
 

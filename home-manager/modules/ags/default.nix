@@ -11,7 +11,8 @@
     inputs.ags.packages.${pkgs.system}.auth
     inputs.matugen.packages.${pkgs.system}.default
     material-symbols
-    (pkgs.callPackage ../../../pkgs/wl-screenrec {})
+    wl-screenrec
+    # (pkgs.callPackage ../../../pkgs/wl-screenrec {})
   ];
 
   programs.ags = {
