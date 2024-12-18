@@ -108,7 +108,7 @@ export default () => {
 				>
 					<icon icon={icons.powermenu.shutdown} iconSize={16} />
 				</button>
-				<box hexpand />
+				{/* <box hexpand />
 				<label
 					className="control-center__time-to-empty"
 					label={bind(uptime)}
@@ -120,7 +120,7 @@ export default () => {
 					}}
 				>
 					<icon icon={icons.ui.settings} iconSize={16} />
-				</button>
+				</button> */}
 			</box>
 		</box>
 	);

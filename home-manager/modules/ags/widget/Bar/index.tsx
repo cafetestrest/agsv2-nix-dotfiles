@@ -14,7 +14,7 @@ import Weather from "./items/Weather";
 import RecordingIndicator from "./items/RecordingIndicator";
 import BarButton from "./BarButton";
 import icons from "../../lib/icons";
-import { bash } from "../../lib/utils";
+import { bash, toggleWindow } from "../../lib/utils";
 import Taskbar from "./items/Taskbar";
 import MediaIndicator from "./items/MediaIndicator";
 
@@ -152,6 +152,14 @@ const ColorPickerButton = () => {
 	</BarButton>)
 };
 
+const PowerMenuButton = () => (
+	<button
+		onClick={() => toggleWindow("powermenu")}
+	>
+		<icon icon={icons.powermenu.shutdown} iconSize={16} />
+	</button>
+);
+
 const End = () => {
 	return (
 		<box>
@@ -173,7 +181,8 @@ const End = () => {
 					<Tray />
 					<SystemIndicators />
 				</box>
-				<Battery />
+				{/* <Battery /> */}
+				<PowerMenuButton />
 			</box>
 		</box>
 	);
