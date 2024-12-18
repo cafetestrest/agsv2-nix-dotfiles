@@ -7,6 +7,34 @@ import { bind, Variable } from "astal";
 import icons from "../../../lib/icons";
 import AstalNotifd from "gi://AstalNotifd?version=0.1";
 import { toggleWindow } from "../../../lib/utils";
+import NightlightModeService from "../../../service/NightLight";
+import IdleModeService from "../../../service/Idle";
+
+const NightlightIndicator = () => {
+	if (NightlightModeService) {
+		const profile = bind(NightlightModeService, "profile");
+		return (
+			<icon
+				icon={profile.as((p) => icons.nightlight[p])}
+			/>
+		);	
+	} else {
+		return <icon />
+	}
+};
+
+const IdleIndicator = () => {
+	if (IdleModeService) {
+		const profile = bind(IdleModeService, "profile");
+		return (
+			<icon
+				icon={profile.as((p) => icons.idle[p])}
+			/>
+		);	
+	} else {
+		return <icon />
+	}
+};
 
 const BluetoothIndicator = () => {
 	const bluetooth = Bluetooth.get_default();
@@ -36,7 +64,7 @@ const MicMuteIndicator = () => {
 	const mic = Wp.get_default()?.audio.defaultMicrophone!;
 	return (
 		<icon
-			visible={bind(mic, "mute").as((muted) => muted)}
+			// visible={bind(mic, "mute").as((muted) => muted)}
 			icon={bind(mic, "mute").as(
 				(muted) => icons.audio.mic[muted ? "muted" : "high"],
 			)}
@@ -122,9 +150,11 @@ export default () => {
 			}}
 		>
 			<box spacing={10}>
-				<NetworkIndicator />
-				<BluetoothIndicator />
 				<DNDIndicator />
+				<IdleIndicator />
+				<NightlightIndicator />
+				<BluetoothIndicator />
+				<NetworkIndicator />
 				<MicMuteIndicator />
 				<AudioIndicator />
 			</box>

@@ -1,7 +1,7 @@
-import { GObject } from "astal";
+import { GObject, exec } from "astal";
 import { toggleWindow } from "../lib/utils";
 
-export type PowerMenuAction = "sleep" | "reboot" | "logout" | "shutdown";
+export type PowerMenuAction = "lock" | "sleep" | "logout" | "reboot" | "shutdown";
 
 const PowerMenuSerivce = GObject.registerClass(
 	{
@@ -35,16 +35,18 @@ const PowerMenuSerivce = GObject.registerClass(
 
 		action(action: PowerMenuAction) {
 			[this.#cmd, this.#title] = {
-				sleep: ["systemctl suspend", "Sleep"],
-				reboot: ["systemctl reboot", "Reboot"],
+				lock: ["idle l", "Lock"],
+				sleep: ["idle s", "Sleep"],
 				logout: ["hyprctl dispatch exit", "Log Out"],
+				reboot: ["systemctl reboot", "Reboot"],
 				shutdown: ["shutdown now", "Shutdown"],
 			}[action];
 
 			this.notify("cmd");
 			this.notify("title");
 			toggleWindow("powermenu");
-			toggleWindow("verification");
+			// toggleWindow("verification");
+			exec(this.#cmd);
 		}
 	},
 );

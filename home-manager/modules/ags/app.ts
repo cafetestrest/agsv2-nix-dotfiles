@@ -15,7 +15,7 @@ import {
 import Scrim from "./widget/Scrims/Scrim";
 import SinkMenu from "./widget/Popups/menus/Sink";
 import MixerMenu from "./widget/Popups/menus/Mixer";
-import Verification from "./widget/Powermenu/Verification";
+// import Verification from "./widget/Powermenu/Verification";
 import Powermenu from "./widget/Powermenu";
 import ScreenRecordService from "./service/ScreenRecord";
 // import GoogleOAuth2Service from "./service/GoogleOAuth2";
@@ -33,7 +33,7 @@ function main() {
 	Scrim({ scrimType: "transparent", className: "transparent-scrim" });
 	SinkMenu();
 	MixerMenu();
-	Verification();
+	// Verification();
 	Powermenu();
 	Dashboard();
 

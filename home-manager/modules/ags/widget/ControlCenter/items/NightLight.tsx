@@ -16,7 +16,7 @@ export default () => {
 					};
 				}}
 				menuName="profiles"
-				connection={[bind(NightlightModeService, "profile"), () => NightlightModeService?.profile !== 0]}
+				connection={[profile, () => NightlightModeService?.profile !== 0]}
 			/>
 		);
 	} else {

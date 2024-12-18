@@ -35,12 +35,8 @@ export default () => {
 		>
 			<box spacing={24} homogeneous className={"powermenu"}>
 				<PowermenuButton
-					action="shutdown"
-					iconName={icons.powermenu.shutdown}
-				/>
-				<PowermenuButton
-					action="reboot"
-					iconName={icons.powermenu.reboot}
+					action="lock"
+					iconName={icons.powermenu.lock}
 				/>
 				<PowermenuButton
 					action="sleep"
@@ -49,6 +45,14 @@ export default () => {
 				<PowermenuButton
 					action="logout"
 					iconName={icons.powermenu.logout}
+				/>
+				<PowermenuButton
+					action="reboot"
+					iconName={icons.powermenu.reboot}
+				/>
+				<PowermenuButton
+					action="shutdown"
+					iconName={icons.powermenu.shutdown}
 				/>
 			</box>
 		</PopupWindow>
