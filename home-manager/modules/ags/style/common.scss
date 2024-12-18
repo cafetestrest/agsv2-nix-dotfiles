@@ -1,5 +1,8 @@
+@use 'sass:color' as color;
+@use "./colors.scss" as *;
+
 * {
-	font-size: 14px;
+	font-size: 1rem;
 	outline: none;
 	border: none;
 	text-shadow: none;
@@ -44,20 +47,20 @@ window.popup {
 	}
 
 	menu {
-		margin-top: 12px;
-		border-radius: 26px;
+		margin-top: 0.857rem;
+		border-radius: 1.857rem;
 		background-color: $surface_transparent;
-		padding: 10px;
+		padding: 0.714rem;
 
 		// separator {
 		//     background-color: $border_color;
 		// }
 
 		menuitem {
-			min-width: 140px;
-			padding: 12px 6px;
+			min-width: 10rem;
+			padding: 0.857rem 0.429rem;
 			color: $on_surface;
-			border-radius: 100px;
+			border-radius: 7.143rem;
 			transition: background 0.1s ease;
 			&:hover {
 				background: $inverse_surface_transparent;
@@ -73,14 +76,14 @@ window.popup {
 }
 
 switch {
-	border: 2px solid $outline;
-	border-radius: 100px;
+	border: 0.143rem solid $outline;
+	border-radius: 7.143rem;
 	background-color: $surface_container_highest;
 }
 
 switch slider {
 	box-shadow: none;
-	border-radius: 100px;
+	border-radius: 7.143rem;
 	background-color: $outline;
 }
 
@@ -90,12 +93,12 @@ switch:active slider {
 }
 
 switch:active {
-	background-color: mix($surface_container_highest, $on_surface, 0.08 * 1%);
+	background-color: color.mix($surface_container_highest, $on_surface, 0.08 * 1%);
 }
 
 switch:checked {
 	background-color: $primary;
-	border: 2px solid $primary;
+	border: 0.143rem solid $primary;
 }
 
 switch:checked slider {

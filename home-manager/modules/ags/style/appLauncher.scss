@@ -1,37 +1,39 @@
+@use "./colors.scss" as *;
+
 .app-launcher {
-	min-width: 450px;
-	border-radius: 32px;
-	padding: 0px;
+	min-width: 32.143rem;
+	border-radius: 2.133rem;
+	padding: 0;
 	background: $surface_transparent;
-	min-height: 700px;
+	min-height: 50.1rem;
 }
 
 .app-launcher__input {
 	background: none;
 	border: none;
 	outline: none;
-	margin-top: 5px;
-	padding: 12px 22px;
-	border-radius: 0px;
-	border-bottom: 2px solid $inverse_surface_transparent;
+	margin-top: 0.333rem;
+	padding: 0.8rem 1.467rem;
+	border-radius: 0;
+	border-bottom: 0.133rem solid $inverse_surface_transparent;
 	box-shadow: none;
 
 	icon {
-		margin-right: 20px;
+		margin-right: 1.333rem;
 	}
 }
 
 .app-launcher__list {
-	margin: 0 10px;
-	margin-top: 8px;
-	margin-bottom: 10px;
+	margin: 0 0.667rem;
+	margin-top: 0.533rem;
+	margin-bottom: 0.667rem;
 }
 
 .app-launcher__item {
 	all: unset;
 	transition: all 0.2s ease;
-	padding: 12px 18px;
-	border-radius: 100px;
+	padding: 0.8rem 1.2rem;
+	border-radius: 6.667rem;
 
 	label {
 		transition: all 0.2s ease;
@@ -42,13 +44,13 @@
 		}
 
 		&.description {
-			color: transparentize($on_surface, 0.3);
+			color: $on_surface_transparent;
 		}
 	}
 
 	icon {
-		font-size: 32px;
-		margin-right: 10px;
+		font-size: 2.133rem;
+		margin-right: 0.667rem;
 	}
 
 	&:hover {
@@ -70,9 +72,9 @@
 
 	&:active {
 		background: yellow;
-		background-color: transparentize($primary, 0.2);
-		border-radius: 100px;
-		box-shadow: inset 0 0 0 1px $primary;
+		background-color: $primary_transparent_less;
+		border-radius: 6.667rem;
+		box-shadow: inset 0 0 0 0.067rem $primary;
 
 		.title {
 			color: $on_primary;

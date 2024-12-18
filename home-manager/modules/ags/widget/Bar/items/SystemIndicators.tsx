@@ -48,7 +48,7 @@ const NetworkIndicator = () => {
 	const network = Network.get_default();
 
 	if (network == null) {
-		return;
+		return <icon icon={icons.network.wired.disconnected} />
 	}
 	if (network.wifi == null) {
 		return <icon icon={bind(network.wired, "iconName")} />;
@@ -83,12 +83,17 @@ const AudioIndicator = () => {
 	const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 
 	return (
-		<icon
-			tooltipText={bind(speaker, "volume").as(
-				(v) => Math.round(v * 100).toString() + "%",
-			)}
-			icon={bind(speaker, "volumeIcon")}
-		/>
+		<box>
+			<icon
+				tooltipText={bind(speaker, "volume").as(
+					(v) => Math.round(v * 100).toString() + "%",
+				)}
+				icon={bind(speaker, "volumeIcon")}
+			/>
+			<label label={bind(speaker, "volume").as(
+					(v) => Math.round(v * 100).toString() + "%",
+				)} />
+		</box>
 	);
 };
 
@@ -97,6 +102,13 @@ export default () => {
 		<BarButton
 			className="bar__system-indicators"
 			onClicked={() => toggleWindow("control-center")}
+			onScroll={(self, event) => {
+				const defaultSpeaker = Wp.get_default()?.audio.defaultSpeaker;
+				if (defaultSpeaker) {
+					if (event.delta_y < 0) defaultSpeaker.volume += 0.02;
+					else defaultSpeaker.volume -= 0.02;	
+				}
+			}}
 			setup={(self) => {
 				const controlCenterWindow = App.get_window("control-center");
 				if (controlCenterWindow) {

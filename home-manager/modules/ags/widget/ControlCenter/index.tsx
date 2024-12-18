@@ -1,5 +1,5 @@
-import { App, Gtk, Gdk, Widget, Astal } from "astal/gtk3";
-import { bind, execAsync, timeout, Variable } from "astal";
+import { App, Gtk, Astal } from "astal/gtk3";
+import { bind, Variable } from "astal";
 import Main from "./pages/Main";
 import Network from "./pages/Network";
 import Bluetooth from "./pages/Bluetooth";
@@ -7,7 +7,7 @@ import Media from "./items/Media";
 import { spacing } from "../../lib/variables";
 import PopupWindow from "../../common/PopupWindow";
 import { toggleWindow } from "../../lib/utils";
-import FanProfiles from "./pages/FanProfiles";
+// import FanProfiles from "./pages/FanProfiles";
 
 export const controlCenterPage = Variable("main");
 
@@ -15,11 +15,11 @@ export default () => {
 	const pageHeight = bind(controlCenterPage).as((v) => {
 		if (v != "main") {
 			return `
-			min-height: 500px;
+			min-height: 35.714rem;
 			`;
 		} else {
 			return `
-			min-height: 0px;`;
+			min-height: 0;`;
 		}
 	});
 
@@ -72,7 +72,7 @@ export default () => {
 					>
 						<Main />
 						{Network()}
-						{FanProfiles()}
+						{/* {FanProfiles()} */}
 						{Bluetooth()}
 					</stack>
 				</box>

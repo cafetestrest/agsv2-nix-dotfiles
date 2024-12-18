@@ -1,5 +1,5 @@
-import { App, Gtk, Gdk, Widget, Astal } from "astal/gtk3";
-import { bind, execAsync, timeout, Variable, GLib } from "astal";
+import { Gtk, Gdk, Widget, Astal } from "astal/gtk3";
+import { bind, timeout } from "astal";
 import Progress from "./Progress";
 import AstalWp from "gi://AstalWp?version=0.1";
 import icons from "../../lib/icons";
@@ -18,12 +18,13 @@ function OnScreenProgress(window: Astal.Window, vertical: boolean) {
 
 	const progress = Progress({
 		vertical,
-		width: vertical ? 48 : 400,
-		height: vertical ? 400 : 48,
+		width: vertical ? 3.429 : 28.571,
+		height: vertical ? 28.571 : 3.429,
 		child: indicator,
 	});
 
 	let count = 0;
+	let firstStart = true;
 
 	function show(value: number, icon: string, muted: boolean) {
 		window.visible = true;
@@ -40,13 +41,18 @@ function OnScreenProgress(window: Astal.Window, vertical: boolean) {
 		className: "indicator",
 		halign: Gtk.Align.CENTER,
 		valign: Gtk.Align.END,
-		css: "min-height: 2px;",
+		css: "min-height: 0.143rem;",
 		child: progress,
 		setup: () => {
 			progress.hook(speaker, "notify::mute", () => {
 				progress.setMute(speaker.mute);
 			});
 			progress.hook(speaker, "notify::volume", () => {
+				if (firstStart) {
+					firstStart = false;
+					return;
+				}
+
 				return show(
 					speaker.volume,
 					icons.audio.type.speaker,
@@ -69,7 +75,7 @@ export default (gdkmonitor: Gdk.Monitor) => (
 		namespace="osd"
 		gdkmonitor={gdkmonitor}
 		layer={Astal.Layer.OVERLAY}
-		anchor={Astal.WindowAnchor.BOTTOM}
+		// anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
 		setup={(self) => {
 			self.add(
 				<box className="osd" vertical={true}>

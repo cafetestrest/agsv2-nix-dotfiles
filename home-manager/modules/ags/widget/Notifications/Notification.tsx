@@ -29,8 +29,8 @@ const NotificationIcon = ({ notification }: NotificationIconProps) => {
 						background-size: cover;
 						background-repeat: no-repeat;
 						background-position: center;
-						min-width: 48px;
-						min-height: 48px;
+						min-width: 3.429rem;
+						min-height: 3.429rem;
 					`}
 				/>
 			);
@@ -45,8 +45,8 @@ const NotificationIcon = ({ notification }: NotificationIconProps) => {
 						background-size: cover;
 						background-repeat: no-repeat;
 						background-position: center;
-						min-width: 18px;
-						min-height: 18px;
+						min-width: 1.286rem;
+						min-height: 1.286rem;
 					`}
 				/>
 			);

@@ -1,4 +1,4 @@
-import { exec, execAsync, GObject, Variable } from "astal";
+import { exec, GObject } from "astal";
 import { dependencies } from "../lib/utils";
 
 const FAN_REGISTER = 0x61;

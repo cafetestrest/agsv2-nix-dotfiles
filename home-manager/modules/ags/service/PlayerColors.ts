@@ -28,7 +28,7 @@ const PlayerColorsService = GObject.registerClass(
 		}
 
 		#setColors(player: AstalMpris.Player) {
-			if (player.coverArt) {
+			if (false && player.coverArt) { //TODO add matugen
 				execAsync(
 					`matugen image ${player.coverArt} --dry-run -j hex`,
 				).then((str) => {
@@ -38,6 +38,8 @@ const PlayerColorsService = GObject.registerClass(
 					};
 					this.#colors = colors.light;
 					this.notify(`colors`);
+				}).catch((err) => {
+					console.error(err);
 				});
 			}
 		}

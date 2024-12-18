@@ -1,3 +1,4 @@
+@use 'sass:color' as color;
 
 $background: #1a1110;
 
@@ -135,7 +136,8 @@ $shadow: #000000;
 
 $source_color: #f95445;
 
-$surface: #1a1110;
+// $surface: #1a1110;
+$surface: #141414;
 
 $surface_bright: #423735;
 
@@ -174,8 +176,13 @@ $yellow_value: #f9e2af;
 
 
 $theme: 'dark';
-$surface_transparent: transparentize($surface, 0.2);
-$inverse_surface_transparent: transparentize($inverse_surface, 0.92);
-$inverse_surface_transparent_variant: transparentize($inverse_surface, 0.82);
+$primary_transparent: color.adjust($primary, $alpha: -0.4);
+$primary_transparent_less: color.adjust($primary, $alpha: -0.2);
+$scrim_transparent: color.adjust($scrim, $alpha: -0.68);
+// $surface_transparent: color.adjust($surface, $alpha: -0.2);
+$surface_transparent: color.adjust($surface, $alpha: 0);
+$on_surface_transparent: color.adjust($on_surface, $alpha: -0.3);
+$inverse_surface_transparent: color.adjust($inverse_surface, $alpha: -0.92);
+$inverse_surface_transparent_variant: color.adjust($inverse_surface, $alpha: -0.82);
 $inverse_surface_transparent_overlay: linear-gradient(0deg, $inverse_surface_transparent, $inverse_surface_transparent);
 $inverse_surface_transparent_variant_overlay: linear-gradient(0deg, $inverse_surface_transparent_variant, $inverse_surface_transparent_variant);

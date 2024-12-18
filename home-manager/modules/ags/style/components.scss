@@ -1,8 +1,10 @@
+@use "./colors.scss" as *;
+
 .material-button {
-	border-radius: 24px;
-	padding: 8px 22px;
+	border-radius: 1.714rem;
+	padding: 0.571rem 1.571rem;
 	&:focus {
-		box-shadow: 0 0 0 1px $inverse_surface;
+		box-shadow: 0 0 0 0.071rem $inverse_surface;
 	}
 	&.filled {
 		background: $primary;
@@ -20,7 +22,7 @@
 	&.outlined {
 		background: none;
 		color: $on_surface;
-		border: 1px solid $outline;
+		border: 0.071rem solid $outline;
 		&:hover,
 		&:focus {
 			background: $inverse_surface_transparent;

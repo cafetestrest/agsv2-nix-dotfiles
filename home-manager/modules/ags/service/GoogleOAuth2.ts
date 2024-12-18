@@ -1,4 +1,4 @@
-import { exec, GLib, GObject, readFile, register, writeFileAsync } from "astal";
+import { GLib, GObject, readFile, register, writeFileAsync } from "astal";
 import { Gtk } from "astal/gtk3";
 import { fetch, paramsToString, parseQueryParams } from "../lib/fetch";
 import WebKit2 from "gi://WebKit2?version=4.1";

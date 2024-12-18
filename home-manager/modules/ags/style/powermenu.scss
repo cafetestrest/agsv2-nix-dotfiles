@@ -1,6 +1,8 @@
+@use "./colors.scss" as *;
+
 .powermenu {
-	padding: 24px;
-	border-radius: 30px;
+	padding: 1.714rem;
+	border-radius: 2.143rem;
 	background: $surface_transparent;
 }
 
@@ -8,16 +10,16 @@
 	padding: 0;
 	background: $inverse_surface_transparent;
 	color: $on_surface;
-	min-width: 100px;
-	min-height: 100px;
-	border-radius: 100px;
+	min-width: 7.143rem;
+	min-height: 7.143rem;
+	border-radius: 7.143rem;
 	&:hover,
 	&:focus {
 		color: $on_primary;
 		background: $primary, $inverse_surface_transparent_variant_overlay;
 	}
 	&:focus {
-		box-shadow: 0 0 0 1px $inverse_surface;
+		box-shadow: 0 0 0 0.071rem $inverse_surface;
 	}
 	&:active {
 		background: $on_primary_container, $inverse_surface_transparent_overlay;
@@ -25,24 +27,24 @@
 }
 
 .verification {
-	min-width: 300px;
-	padding: 24px;
-	border-radius: 30px;
+	min-width: 21.429rem;
+	padding: 1.714rem;
+	border-radius: 2.143rem;
 	background: $surface_transparent;
 }
 
 .verification__title {
-	font-size: 20px;
+	font-size: 1.429rem;
 	font-weight: 500;
 }
 .verification__description {
-	font-size: 16px;
+	font-size: 1.143rem;
 	font-weight: 400;
 }
 /* .verification__button {
 	background: $inverse_surface_transparent;
-	border-radius: 100px;
-	padding: 8px 22px;
+	border-radius: 7.143rem;
+	padding: 0.571rem 1.571rem;
 	&:hover,
 	&:focus {
 		background: $secondary;

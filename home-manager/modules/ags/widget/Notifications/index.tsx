@@ -1,5 +1,5 @@
-import { App, Gtk, Gdk, Widget, Astal } from "astal/gtk3";
-import { bind, execAsync, timeout, Variable, GLib } from "astal";
+import { App, Gtk, Astal } from "astal/gtk3";
+import { bind, timeout, Variable } from "astal";
 import Notifd from "gi://AstalNotifd?version=0.1";
 import Notification from "./Notification";
 import { spacing } from "../../lib/variables";

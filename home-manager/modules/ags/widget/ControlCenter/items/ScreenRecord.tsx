@@ -1,5 +1,4 @@
 import { bind } from "astal";
-import { Gtk } from "astal/gtk3";
 import icons from "../../../lib/icons";
 import ScreenRecordService from "../../../service/ScreenRecord";
 import ControlCenterButton from "../ControlCenterButton";

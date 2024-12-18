@@ -4,7 +4,6 @@ import PowermenuService, { PowerMenuAction } from "../../service/Powermenu";
 import { ButtonProps } from "astal/gtk3/widget";
 import icons from "../../lib/icons";
 import { toggleWindow } from "../../lib/utils";
-import Button from "../../common/Button";
 
 type PowermenuButtonProps = {
 	action: PowerMenuAction;

@@ -1,5 +1,4 @@
 import { Gtk } from "astal/gtk3";
-import BarButton from "../BarButton";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 import BarItem from "../BarItem";
 

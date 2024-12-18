@@ -1,123 +1,127 @@
-.player {
-	min-height: 155px;
-	background: $surface_transparent;
-	padding: 20px;
-	border-radius: 30px;
-	background-size: cover;
-	background-position: center;
-	transition: 0.5s background ease-in-out;
-}
+@use "./colors.scss" as *;
 
-.player__icon {
-	font-size: 20px;
-}
-
-.player__title {
-	font-weight: 600;
-	font-size: 19px;
-	padding-right: 18px;
-}
-
-.player__artist {
-	padding-right: 18px;
-	font-weight: 400;
-	font-size: 17px;
-}
-
-.player__playpause {
-	min-width: 60px;
-	min-height: 60px;
-	padding: 0;
-	background: $primary;
-	color: $on_primary;
-	border-radius: 0px;
-	transition:
-		background 0.3s ease-in-out,
-		border-radius 0.3s ease-in-out,
-		color 0.3s ease-in-out;
-	border-radius: 30px;
-
-	&.active {
-		border-radius: 20px;
+.ControlCenter {
+	.player {
+		min-height: 11.071rem;
+		background: $surface_transparent;
+		padding: 1.429rem;
+		border-radius: 2.143rem;
+		background-size: cover;
+		background-position: center;
+		transition: 0.5s background ease-in-out;
 	}
-}
 
-.player__next,
-.player__previous {
-	background: none;
-}
-
-.player__title-box {
-	animation: slide-back 0.3s cubic-bezier(0.05, 0.7, 0.1, 1);
-
-	&.dissappear {
-		animation: slide 0.3s cubic-bezier(0.3, 0, 0.8, 0.15);
+	.player__icon {
+		font-size: 1.429rem;
 	}
-}
 
-.player__position-slider {
-	trough {
+	.player__title {
+		font-weight: 600;
+		font-size: 1.357rem;
+		padding-right: 1.286rem;
+	}
+
+	.player__artist {
+		padding-right: 1.286rem;
+		font-weight: 400;
+		font-size: 1.214rem;
+	}
+
+	.player__playpause {
+		min-width: 4.286rem;
+		min-height: 4.286rem;
+		padding: 0;
+		background: $primary;
+		color: $on_primary;
+		border-radius: 0;
 		transition:
-			background-color 0.3s ease-in-out,
+			background 0.3s ease-in-out,
+			border-radius 0.3s ease-in-out,
 			color 0.3s ease-in-out;
-		border-radius: 100px;
+		border-radius: 2.143rem;
 
-		highlight {
-			border-radius: 100px;
-			background-color: $on_surface;
-			border-radius: 100px;
+		&.active {
+			border-radius: 1.429rem;
+		}
+	}
+
+	.player__next,
+	.player__previous {
+		background: none;
+	}
+
+	.player__title-box {
+		animation: slide-back 0.3s cubic-bezier(0.05, 0.7, 0.1, 1);
+
+		&.dissappear {
+			animation: slide 0.3s cubic-bezier(0.3, 0, 0.8, 0.15);
+		}
+	}
+
+	.player__position-slider {
+		trough {
 			transition:
 				background-color 0.3s ease-in-out,
 				color 0.3s ease-in-out;
+			border-radius: 7.143rem;
+
+			highlight {
+				border-radius: 7.143rem;
+				background-color: $on_surface;
+				border-radius: 7.143rem;
+				transition:
+					background-color 0.3s ease-in-out,
+					color 0.3s ease-in-out;
+			}
+
+			slider {
+				margin: -0.714rem;
+				padding: 0.143rem 0;
+				border-radius: 0.5rem;
+				border-radius: 0.714rem;
+				box-shadow: none;
+				background-color: $on_surface;
+
+				transition:
+					background-color 0.3s ease-in-out,
+					color 0.3s ease-in-out;
+			}
 		}
+	}
 
-		slider {
-			margin: -10px;
-			padding: 2px 0;
-			border-radius: 7px;
-			border-radius: 10px;
-			box-shadow: none;
-			background-color: $on_surface;
 
-			transition:
-				background-color 0.3s ease-in-out,
-				color 0.3s ease-in-out;
+	.player__indicator {
+		min-width: 0.571rem;
+		min-height: 0.571rem;
+		background: $inverse_surface_transparent_variant;
+		border-radius: 7.143rem;
+		margin-bottom: 0.571rem;
+		transition: 0.3s all ease-in-out;
+		&.selected {
+			background: $inverse_surface;
 		}
 	}
-}
 
 
-.player__indicator {
-	min-width: 8px;
-	min-height: 8px;
-	background: $inverse_surface_transparent_variant;
-	border-radius: 100px;
-	margin-bottom: 8px;
-	transition: 0.3s all ease-in-out;
-	&.selected {
-		background: $inverse_surface;
+	@keyframes slide {
+		from {
+			margin-left: 0;
+			opacity: 1;
+		}
+		to {
+			margin-left: -7.143rem;
+			opacity: 0;
+		}
 	}
-}
 
-
-@keyframes slide {
-	from {
-		margin-left: 0;
-		opacity: 1;
-	}
-	to {
-		margin-left: -100px;
-		opacity: 0;
-	}
-}
-
-@keyframes slide-back {
-	from {
-		margin-left: 100px;
-		opacity: 0;
-	}
-	to {
-		margin-left: 0;
-		opacity: 1;
+	@keyframes slide-back {
+		from {
+			margin-left: 7.143rem;
+			opacity: 0;
+		}
+		to {
+			margin-left: 0;
+			opacity: 1;
+		}
 	}
 }

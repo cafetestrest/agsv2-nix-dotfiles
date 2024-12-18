@@ -8,6 +8,7 @@ import Notifications from "./widget/Notifications";
 import OSD from "./widget/OSD";
 import {
 	monitorColorsChange,
+	reloadScss,
 	monitorDashboard,
 	toggleWindow,
 } from "./lib/utils";
@@ -17,7 +18,7 @@ import MixerMenu from "./widget/Popups/menus/Mixer";
 import Verification from "./widget/Powermenu/Verification";
 import Powermenu from "./widget/Powermenu";
 import ScreenRecordService from "./service/ScreenRecord";
-import GoogleOAuth2Service from "./service/GoogleOAuth2";
+// import GoogleOAuth2Service from "./service/GoogleOAuth2";
 import Dashboard from "./widget/Dashboard";
 
 function main() {
@@ -57,11 +58,12 @@ function main() {
 		osds.delete(gdkmonitor);
 	});
 
-	if (!GoogleOAuth2Service.isAuthenticated()) {
-		GoogleOAuth2Service.openAuthorizationWebView();
-	}
+	// if (!GoogleOAuth2Service.isAuthenticated()) {
+	// 	GoogleOAuth2Service.openAuthorizationWebView();
+	// }
 
-	monitorColorsChange();
+	// monitorColorsChange();
+	reloadScss('Public/ags/PoSayDone/home-manager/modules/ags/style/controlCenter.scss', '/tmp/astal/style.css', 'Public/ags/PoSayDone/home-manager/modules/ags/style/main.scss');
 	monitorDashboard();
 }
 

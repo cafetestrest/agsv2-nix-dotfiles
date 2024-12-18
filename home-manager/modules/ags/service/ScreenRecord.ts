@@ -1,5 +1,5 @@
-import { AstalIO, exec, execAsync, Gio, GLib, GObject, interval } from "astal";
-import { bash, ensureDirectory, sh } from "../lib/utils";
+import { AstalIO, execAsync, GLib, GObject, interval } from "astal";
+import { ensureDirectory } from "../lib/utils";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 
 const now = () => GLib.DateTime.new_now_local().format("%Y-%m-%d_%H-%M-%S");

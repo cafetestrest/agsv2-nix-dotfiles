@@ -1,9 +1,8 @@
 import { bind } from "astal";
-import { App, Gtk, Gdk } from "astal/gtk3";
+import { Gtk } from "astal/gtk3";
 import { spacing } from "../../../lib/variables";
 import { weather } from "../../../service/Weather";
-import { BarButtonStyle } from "../BarButton";
-import BarItem, { BarItemStyle } from "../BarItem";
+import BarItem from "../BarItem";
 
 export default () => {
 	const wthr = bind(weather);

@@ -1,4 +1,4 @@
-import { App, Gtk, Gdk } from "astal/gtk3";
+import { Gtk } from "astal/gtk3";
 import { ButtonProps } from "astal/gtk3/widget";
 
 export enum BarButtonStyle {

@@ -1,7 +1,7 @@
 import icons from "../../lib/icons";
 import { controlCenterPage } from "./index";
-import { App, Gtk, Gdk, Widget } from "astal/gtk3";
-import { bind, execAsync, timeout, Variable, GLib, Binding } from "astal";
+import { Gtk } from "astal/gtk3";
+import { Binding } from "astal";
 
 type PageProps = {
 	label: string;

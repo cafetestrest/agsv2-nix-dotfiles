@@ -1,12 +1,12 @@
-import { App, Gtk, Widget, astalify, ConstructProps } from "astal/gtk3";
+import { Gtk, Widget, astalify, ConstructProps } from "astal/gtk3";
 import { bind, execAsync, GObject, Variable } from "astal";
 import { spacing, uptime } from "../../../lib/variables";
 import NetworkButton from "../items/Network";
-import Volume from "../items/Volume";
+import Volume, { SinkButton, SinkRevealer } from "../items/Volume";
 import DND from "../items/DND";
 import Microphone from "../items/Microphone";
 import icons from "../../../lib/icons";
-import Brightness from "../items/Brightness";
+// import Brightness from "../items/Brightness";
 import FanProfileButton from "../items/FanProfile";
 import ScreenRecord from "../items/ScreenRecord";
 import ColorScheme from "../items/ColorScheme";
@@ -14,6 +14,8 @@ import ScreenRecordMenu from "../items/ScreenRecordMenu";
 import ScreenRecordService from "../../../service/ScreenRecord";
 import BluetoothButton from "../items/Bluetooth";
 import { toggleWindow } from "../../../lib/utils";
+import NightLight from "../items/NightLight";
+import Idle from "../items/Idle";
 
 class FlowBox extends astalify(Gtk.FlowBox) {
 	static {
@@ -49,6 +51,10 @@ export default () => {
 	if (Bluetooth != undefined) {
 		fb.add(Bluetooth);
 	}
+
+	fb.add(<NightLight />);
+	fb.add(<Idle />);
+
 	if (FanProfile != undefined) {
 		fb.add(FanProfile);
 	}
@@ -87,8 +93,14 @@ export default () => {
 					revealScreenRecord.set(!revealScreenRecord.get())
 				}
 			/>
-			<Volume />
-			{Brightness()}
+
+			<box>
+				<Volume />
+				<SinkButton />
+			</box>
+			<SinkRevealer />
+
+			{/* {Brightness()} */}
 			<box spacing={16} className="control-center__footer">
 				<button
 					className="control-center__powermenu-button"

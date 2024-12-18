@@ -1,6 +1,4 @@
-import { App, Gtk, Gdk, Widget } from "astal/gtk3";
-import { bind, execAsync, timeout, Variable, GLib } from "astal";
-import { range } from "../../lib/utils";
+import { Gtk, Widget } from "astal/gtk3";
 
 type ProgressProps = {
 	height?: number;
@@ -10,8 +8,8 @@ type ProgressProps = {
 };
 
 export default ({
-	height = 18,
-	width = 180,
+	height = 1.286,
+	width = 12.857,
 	vertical = false,
 	child,
 }: ProgressProps) => {
@@ -28,8 +26,8 @@ export default ({
 		className: "progress",
 		child: fill,
 		css: `
-            min-width: ${width}px;
-            min-height: ${height}px;
+            min-width: ${width}rem;
+            min-height: ${height}rem;
         `,
 	});
 
@@ -47,7 +45,7 @@ export default ({
 			const min = vertical ? width : height;
 			const preferred = (axisv - min) * value + min;
 
-			fill.css = `min-${axis}: ${preferred}px;`;
+			fill.css = `min-${axis}: ${preferred}rem;`;
 		},
 	});
 };

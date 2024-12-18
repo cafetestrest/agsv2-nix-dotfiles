@@ -96,6 +96,12 @@ const Player = ({ player }: PlayerProps) => {
 			className={`player player-${player.busName}`}
 			vexpand
 			setup={(self) => self.hook(PlayerColors, "notify::colors", () => {updateColors(self, PlayerColors.colors, "image")})}
+			visible={bind(player, "playback_status").as((v) => {
+				if (v != 2) {
+					return true;
+				}
+				return false;
+			})}
 		>
 			<box vexpand valign={Gtk.Align.START}>
 				<PlayerIcon />
@@ -120,9 +126,13 @@ const Player = ({ player }: PlayerProps) => {
 				<PlayPauseButton halign={Gtk.Align.END} />
 			</box>
 			<box vexpand valign={Gtk.Align.END} spacing={24}>
-				<ControlButton icon={icons.media.prev} onClick={() => player.previous()} className="player__previous" />
+				<box visible={bind(player, "canGoPrevious")}>
+					<ControlButton icon={icons.media.prev} onClick={() => player.previous()} className="player__previous" />
+				</box>
 				<PositionSlider />
-				<ControlButton icon={icons.media.next} onClick={() => player.next()} className="player__next" />
+				<box visible={bind(player, "canGoNext")}>
+					<ControlButton icon={icons.media.next} onClick={() => player.next()} className="player__next" />
+				</box>
 			</box>
 		</centerbox>
 	);
@@ -138,7 +148,7 @@ const PlayerSwitcher = ({ mpris, selectedPlayer }: { mpris: AstalMpris.Mpris; se
 	};
 
 	return (
-		<revealer revealChild={players.as((p) => p.length > 0)}>
+		<revealer revealChild={players.as((p) => p.length > 0)} >
 			<overlay>
 				<eventbox onScroll={(self, event) => changePlayer(event.direction === Gdk.ScrollDirection.UP ? 1 : -1)}>
 					<stack
@@ -150,7 +160,7 @@ const PlayerSwitcher = ({ mpris, selectedPlayer }: { mpris: AstalMpris.Mpris; se
 						{players.as((ps) => ps.map((player) => <Player player={player} />))}
 					</stack>
 				</eventbox>
-				<revealer valign={Gtk.Align.END} halign={Gtk.Align.CENTER} revealChild={players.as((p) => p.length > 1)}>
+				<revealer valign={Gtk.Align.END} halign={Gtk.Align.CENTER} revealChild={players.as((p) => p.length > 1)} visible={false}>
 					<box valign={Gtk.Align.END} halign={Gtk.Align.CENTER} spacing={4}>
 						{players.as((ps) =>
 							ps.map((player, idx) => (
@@ -175,7 +185,14 @@ const PlayerSwitcher = ({ mpris, selectedPlayer }: { mpris: AstalMpris.Mpris; se
 
 export default () => {
 	const mpris = AstalMpris.get_default();
-	const selectedPlayer = Variable<string>("");
 
-	return <PlayerSwitcher mpris={mpris} selectedPlayer={selectedPlayer} />;
+    return <box vertical>
+        {bind(mpris, "players").as(arr => arr.map(player => {
+				return (<Player player={player} />)
+			}
+		))}
+    </box>
+
+	// const selectedPlayer = Variable<string>("");
+	// return <PlayerSwitcher mpris={mpris} selectedPlayer={selectedPlayer} />;
 };

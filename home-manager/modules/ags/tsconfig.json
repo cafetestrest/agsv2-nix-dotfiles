@@ -1,19 +1,26 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"compilerOptions": {
-		"target": "ES2023",
-		"module": "ES2022",
-		"lib": ["ES2023"],
-		"strict": true,
-		"moduleResolution": "Bundler",
-		"skipLibCheck": true,
-		"checkJs": true,
-		"allowJs": true,
-		"jsx": "react-jsx",
-		"jsxImportSource": "/home/posaydone/.local/share/ags/gtk3",
-		"paths": {
-			"astal": ["/home/posaydone/.local/share/ags"],
-			"astal/*": ["/home/posaydone/.local/share/ags/*"]
-		}
-	}
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "allowJs": true,
+        "checkJs": true,
+        "experimentalDecorators": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "/nix/store/36kxv4nh9kcsjcjdjv3xsvqnpk53xja4-astal-gjs/share/astal/gjs/gtk3",
+        "lib": [
+            "ES2023"
+        ],
+        "module": "ES2022",
+        "moduleResolution": "Bundler",
+        "paths": {
+            "astal": [
+                "/nix/store/36kxv4nh9kcsjcjdjv3xsvqnpk53xja4-astal-gjs/share/astal/gjs"
+            ],
+            "astal/*": [
+                "/nix/store/36kxv4nh9kcsjcjdjv3xsvqnpk53xja4-astal-gjs/share/astal/gjs/*"
+            ]
+        },
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "ES2022"
+    }
 }

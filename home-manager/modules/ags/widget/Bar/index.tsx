@@ -1,23 +1,35 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3";
+import { bind } from "astal";
 import Workspaces from "./items/Workspaces";
-import { spacing } from "../../lib/variables";
-import ActiveApp from "./items/ActiveApp";
+import { spacing, ramGB, cpu, disk, upower } from "../../lib/variables";
+// import ActiveApp from "./items/ActiveApp";
 import Clock from "./items/Clock";
 import Battery from "./items/Battery";
 import Tray from "./items/Tray";
 import SystemIndicators from "./items/SystemIndicators";
 import Notifications from "./items/Notifications";
 import AppLauncher from "./items/AppLauncher";
-import KeyboardLayout from "./items/KeyboardLayout";
+// import KeyboardLayout from "./items/KeyboardLayout";
 import Weather from "./items/Weather";
 import RecordingIndicator from "./items/RecordingIndicator";
+import BarButton from "./BarButton";
+import icons from "../../lib/icons";
+import { bash } from "../../lib/utils";
+import Taskbar from "./items/Taskbar";
+import MediaIndicator from "./items/MediaIndicator";
 
 const Start = () => {
 	return (
-		<box halign={Gtk.Align.START} spacing={spacing}>
-			<AppLauncher />
-			<Workspaces />
-			<ActiveApp />
+		<box>
+			<box halign={Gtk.Align.START} spacing={spacing}>
+				<AppLauncher />
+				<Workspaces />
+				{/* <ActiveApp /> */}
+				<Taskbar />
+			</box>
+			<box halign={Gtk.Align.END} spacing={spacing}>
+				<MediaIndicator />
+			</box>
 		</box>
 	);
 };
@@ -30,18 +42,139 @@ const Center = () => {
 	);
 };
 
+const RamGbUsage = () => {
+	return (
+		<box spacing={spacing}>
+			<label label={"︁"}/>
+			<label label={bind(ramGB)}/>
+		</box>
+	);
+};
+
+const CpuUsage = () => {
+	return (
+		<box spacing={spacing}>
+			<label label={"︁"}/>
+			<label label={bind(cpu)}/>
+		</box>
+	);
+};
+
+const DiskUsage = () => {
+	return (
+		<box spacing={spacing}>
+			<label label={""}/>
+			<label label={bind(disk)}/>
+		</box>
+	);
+};
+
+const BluetoothPowerUsage = () => {
+	return <box>
+		{bind(upower).as(arr => arr.map(power => {
+			if (!power.model || !power.batteryPercentage || !power.iconName) {
+				return "";
+			}
+
+			return (<box spacing={spacing}>
+				<icon icon={power.iconName}/>
+				<label label={power.batteryPercentage + "%"}/>
+			</box>)
+			}
+		))}
+	</box>;
+};
+
+const NoteButton = () => {
+	return (<BarButton
+		className="note-button"
+		onClicked={() => {
+			bash('codium ~/Documents/note.md')
+		}}
+	>
+		<box
+			className="note-box"
+			valign={Gtk.Align.CENTER}
+			halign={Gtk.Align.CENTER}
+			hexpand={true}
+			vexpand={true}
+		>
+			<icon icon={icons.note}/>
+		</box>
+	</BarButton>)
+};
+
+const ScreenshotButton = () => {
+	return (<BarButton
+		className="screenshot-button"
+		onClickRelease={(_, event: Astal.ClickEvent) => {
+			switch (event.button) {
+				case Gdk.BUTTON_PRIMARY:
+					bash('screenshot 1')
+					break;
+				case Gdk.BUTTON_SECONDARY:
+					bash('screenshot')
+					break;
+				case Gdk.BUTTON_MIDDLE:
+					bash('screenshot 2')
+					break;
+			}
+		}}
+	>
+		<box
+			className="screenshot-box"
+			valign={Gtk.Align.CENTER}
+			halign={Gtk.Align.CENTER}
+			hexpand={true}
+			vexpand={true}
+		>
+			<icon icon={icons.screenshot}/>
+		</box>
+	</BarButton>)
+};
+
+const ColorPickerButton = () => {
+	return (<BarButton
+		className="color-picker-button"
+		onClicked={() => {
+			bash('hyprpicker -a')
+		}}
+	>
+		<box
+			className="color-picker-box"
+			valign={Gtk.Align.CENTER}
+			halign={Gtk.Align.CENTER}
+			hexpand={true}
+			vexpand={true}
+		>
+			<icon icon={icons.ui.colorpicker}/>
+		</box>
+	</BarButton>)
+};
+
 const End = () => {
 	return (
-		<box halign={Gtk.Align.END} spacing={spacing}>
-			<RecordingIndicator />
-			<Weather />
-			<KeyboardLayout />
-			<box className="bar__rounded-box" spacing={spacing / 2}>
+		<box>
+			<box halign={Gtk.Align.START} spacing={spacing}>
+				<Weather />
 				<Notifications />
-				<Tray />
-				<SystemIndicators />
 			</box>
-			<Battery />
+			<box halign={Gtk.Align.END} spacing={spacing}>
+				<CpuUsage />
+				<RamGbUsage />
+				<DiskUsage />
+				<BluetoothPowerUsage />
+				<RecordingIndicator />
+				<NoteButton />
+				<ScreenshotButton />
+				<ColorPickerButton />
+				{/* <KeyboardLayout /> */}
+				<box className="bar__rounded-box" spacing={spacing / 2}>
+					<Tray />
+					<SystemIndicators />
+				</box>
+				<Battery />
+			</box>
 		</box>
 	);
 };

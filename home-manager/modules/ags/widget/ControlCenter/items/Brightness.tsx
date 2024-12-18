@@ -1,5 +1,4 @@
-import AstalWp from "gi://AstalWp?version=0.1";
-import { Widget, Gtk } from "astal/gtk3";
+import { Gtk } from "astal/gtk3";
 import { bind } from "astal";
 import icons from "../../../lib/icons";
 import BrightnessService from "../../../service/Brightness";

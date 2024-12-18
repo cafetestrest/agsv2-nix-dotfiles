@@ -2,6 +2,7 @@ import { bind } from "astal";
 import ControlCenterButton from "../ControlCenterButton";
 import Bluetooth from "gi://AstalBluetooth?version=0.1";
 import icons from "../../../lib/icons";
+import { controlCenterPage } from "..";
 
 export default () => {
 	const bluetooth = Bluetooth.get_default();
@@ -32,7 +33,9 @@ export default () => {
 					bind(bluetooth, "isPowered"),
 					() => bluetooth.isPowered,
 				]}
-				onPrimaryClick={() => bluetooth.toggle()}
+				onPrimaryClick={() => {
+					controlCenterPage.set("bluetooth");
+				}}
 				menuName={"bluetooth"}
 			/>
 		);

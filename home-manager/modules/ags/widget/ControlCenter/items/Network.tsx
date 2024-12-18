@@ -1,7 +1,6 @@
 import { bind, Variable } from "astal";
 import icons from "../../../lib/icons";
 import ControlCenterButton from "../ControlCenterButton";
-import { controlCenterPage } from "../index";
 import Network from "gi://AstalNetwork?version=0.1";
 
 export default () => {
@@ -30,7 +29,7 @@ export default () => {
 		if (primary == Network.Primary.WIFI) {
 			return iconWifi;
 		} else {
-			return icons.network.wired;
+			return icons.network.wired.connected;
 		}
 	});
 

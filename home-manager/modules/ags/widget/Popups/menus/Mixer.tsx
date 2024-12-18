@@ -1,5 +1,5 @@
-import { App, Gtk, Gdk, Widget } from "astal/gtk3";
-import { bind, execAsync, timeout, Variable } from "astal";
+import { Gtk, Widget } from "astal/gtk3";
+import { bind } from "astal";
 import PopupMenu from "../PopupMenu";
 import AstalWp from "gi://AstalWp?version=0.1";
 import icons from "../../../lib/icons";

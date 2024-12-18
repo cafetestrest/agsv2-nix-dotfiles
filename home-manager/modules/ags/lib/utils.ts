@@ -1,5 +1,5 @@
 import { Gtk, App } from "astal/gtk3";
-import { GLib, monitorFile, writeFile, exec, Gio, execAsync } from "astal";
+import { GLib, monitorFile, exec, Gio, execAsync } from "astal";
 import { transparentScrimWindowNames, scrimWindowNames } from "./variables";
 import AstalNotifd from "gi://AstalNotifd?version=0.1";
 import { controlCenterPage } from "../widget/ControlCenter";
@@ -67,6 +67,13 @@ export function lookUpIcon(name?: string, size = 16) {
 		size,
 		Gtk.IconLookupFlags.USE_BUILTIN,
 	);
+}
+
+export function reloadScss(monitorFilePath: string, targetPath: string, execSassPath: string) {
+	monitorFile(`${GLib.getenv("HOME")}/${monitorFilePath}`, () => {
+		exec(`sass ${GLib.getenv("HOME")}/${execSassPath} ${targetPath}`);
+		App.apply_css(targetPath);
+	});
 }
 
 export function monitorColorsChange() {
