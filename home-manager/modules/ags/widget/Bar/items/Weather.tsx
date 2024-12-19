@@ -1,42 +1,47 @@
 import { bind } from "astal";
-import { Gtk } from "astal/gtk3";
-import { spacing } from "../../../lib/variables";
-import { weather } from "../../../service/Weather";
+import { Gtk, Widget } from "astal/gtk3";
+// import { spacing } from "../../../lib/variables";
+// import { weather } from "../../../service/Weather";
 import BarItem from "../BarItem";
+import { toggleWindow } from "../../../lib/utils";
 
 export default () => {
-	const wthr = bind(weather);
+	// const wthr = bind(weather);
 
-	const weatherData = {
-		icon: "",
-		temp: "",
-	};
+	// const weatherData = {
+	// 	icon: "",
+	// 	temp: "",
+	// };
 
-	const weatherIcon = wthr.as((w) => {
-		if (w) {
-			weatherData.icon = WEATHER_SYMBOL[w.current.condition.text];
-		}
-		return weatherData.icon;
-	});
+	// const weatherIcon = wthr.as((w) => {
+	// 	if (w) {
+	// 		weatherData.icon = WEATHER_SYMBOL[w.current.condition.text];
+	// 	}
+	// 	return weatherData.icon;
+	// });
 
-	const weatherTemp = wthr.as((w) => {
-		if (w) {
-			weatherData.temp = `${Math.round(w.current.temp_c)}°`;
-		}
-		return weatherData.temp;
-	});
+	// const weatherTemp = wthr.as((w) => {
+	// 	if (w) {
+	// 		weatherData.temp = `${Math.round(w.current.temp_c)}°`;
+	// 	}
+	// 	return weatherData.temp;
+	// });
 
 	return (
 		<revealer
 			transitionType={Gtk.RevealerTransitionType.CROSSFADE}
 			transitionDuration={300}
-			revealChild={wthr.as(Boolean)}
+			// revealChild={wthr.as(Boolean)}
+			revealChild={true}
 		>
 			<BarItem>
-				<box spacing={spacing}>
-					<label label={weatherIcon} />
-					<label label={weatherTemp} />
-				</box>
+				<button
+					onClicked={() => {
+						toggleWindow("weather");
+					}}
+				>
+					<label label={'weatherTemp'} />
+				</button>
 			</BarItem>
 		</revealer>
 	);

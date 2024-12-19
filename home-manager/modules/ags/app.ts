@@ -20,6 +20,7 @@ import Powermenu from "./widget/Powermenu";
 import ScreenRecordService from "./service/ScreenRecord";
 // import GoogleOAuth2Service from "./service/GoogleOAuth2";
 import Dashboard from "./widget/Dashboard";
+import Weather from "./widget/Dashboard/weather";
 
 function main() {
 	const bars = new Map<Gdk.Monitor, Gtk.Widget>();
@@ -36,6 +37,7 @@ function main() {
 	// Verification();
 	Powermenu();
 	Dashboard();
+	Weather();
 
 	for (const gdkmonitor of App.get_monitors()) {
 		bars.set(gdkmonitor, Bar(gdkmonitor));
@@ -63,7 +65,7 @@ function main() {
 	// }
 
 	// monitorColorsChange();
-	reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/bar.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
+	reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/scrim.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
 	monitorDashboard();
 }
 
