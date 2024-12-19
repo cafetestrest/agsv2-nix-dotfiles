@@ -8,7 +8,7 @@ export default () => {
 		return (
 			<box>
 				<overlay
-					className={"control-center__volume-slider"}
+					className={"control-center__volume-slider brightness"}
 					child={
 						<slider
 							draw_value={false}

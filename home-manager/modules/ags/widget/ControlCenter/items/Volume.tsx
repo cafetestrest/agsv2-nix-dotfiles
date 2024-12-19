@@ -16,6 +16,8 @@ const revealSinks = Variable(false);
 
 export const SinkButton = () => (
 	<button
+		// className={"control-center__sink-button"}
+		className={"control-center__powermenu-button sink"}
 		onClick={() =>
 			revealSinks.set(!revealSinks.get())
 		}
@@ -83,9 +85,10 @@ export default () => {
 			)}
 		>
 			<overlay
-				className={"control-center__volume-slider"}
+				className={"control-center__volume-slider volume"}
 				child={
 					<slider
+						className={"volumeslider"}
 						draw_value={false}
 						hexpand={true}
 						onDragged={({ value }) => {

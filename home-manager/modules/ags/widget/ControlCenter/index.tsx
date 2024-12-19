@@ -33,7 +33,7 @@ export default () => {
 			namespace="control-center"
 			className="ControlCenter"
 			layer={Astal.Layer.OVERLAY}
-			exclusivity={Astal.Exclusivity.NORMAL}
+			exclusivity={Astal.Exclusivity.EXCLUSIVE}
 			keymode={Astal.Keymode.EXCLUSIVE}
 			anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
 			application={App}
@@ -55,26 +55,30 @@ export default () => {
 				valign={Gtk.Align.START}
 			>
 				<box
-					className="control-center__container"
-					css={pageHeight}
-					valign={Gtk.Align.START}
+					className="control-center-out"
 				>
-					<stack
-						shown={bind(controlCenterPage)}
-						transitionType={
-							Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
-						}
-						transitionDuration={200}
-						setup={(self) => {
-							const NetworkWdgt = Network();
-							if (NetworkWdgt) self.add(NetworkWdgt);
-						}}
+					<box
+						className="control-center__container"
+						css={pageHeight}
+						valign={Gtk.Align.START}
 					>
-						<Main />
-						{Network()}
-						{/* {FanProfiles()} */}
-						{Bluetooth()}
-					</stack>
+						<stack
+							shown={bind(controlCenterPage)}
+							transitionType={
+								Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
+							}
+							transitionDuration={200}
+							setup={(self) => {
+								const NetworkWdgt = Network();
+								if (NetworkWdgt) self.add(NetworkWdgt);
+							}}
+						>
+							<Main />
+							{Network()}
+							{/* {FanProfiles()} */}
+							{Bluetooth()}
+						</stack>
+					</box>
 				</box>
 				<Media />
 			</box>

@@ -8,6 +8,7 @@ export default ({ onClicked }: { onClicked: () => void }) => {
 		<ControlCenterButton
 			className={"recorder-indicator"}
 			icon={icons.record}
+			label={"Screen record"}
 			onPrimaryClick={onClicked}
 			connection={[
 				bind(ScreenRecordService, "recording"),

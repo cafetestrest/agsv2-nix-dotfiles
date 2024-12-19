@@ -281,7 +281,7 @@ const WeatherInfo = (weatherData) => (
 	</box>
 );
 
-const Tooltip = ({ total }) => (<box
+const Tooltip = ({ total }: { total: number|null }) => (<box
 	className={"weather"}
 	setup={(self) => {
 		self.hook(weather, () => {

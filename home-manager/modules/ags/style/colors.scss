@@ -1,8 +1,11 @@
 @use 'sass:color' as color;
 
+$fg-color: #eeeeee;
+$accentFg: #141414;
+
 $background: #1a1110;
 
-$blue: #b8c4ff;
+$blue: #51a4e7;
 
 $blue_container: #374379;
 
@@ -14,7 +17,7 @@ $error: #ffb4ab;
 
 $error_container: #93000a;
 
-$green: #b1d18a;
+$green: #00D787;
 
 $green_container: #354e16;
 
@@ -46,7 +49,7 @@ $on_orange: #55200a;
 
 $on_orange_container: #ffdbcf;
 
-$on_primary: #561e18;
+$on_primary: $accentFg;
 
 $on_primary_container: #ffdad5;
 
@@ -86,7 +89,7 @@ $on_yellow: #452b00;
 
 $on_yellow_container: #ffddb3;
 
-$orange: #ffb59b;
+$orange: #E79E64;
 
 $orange_container: #72361e;
 
@@ -98,7 +101,7 @@ $outline: #a08c89;
 
 $outline_variant: #534341;
 
-$primary: #ffb4aa;
+$primary: $blue;
 
 $primary_container: #73342c;
 
@@ -114,7 +117,7 @@ $purple_source: #cba6f7;
 
 $purple_value: #cba6f7;
 
-$red: #ffb2b6;
+$red: #e55f86;
 
 $red_container: #723339;
 
@@ -124,7 +127,9 @@ $red_value: #f38ba8;
 
 $scrim: #000000;
 
-$secondary: #e7bdb7;
+// $secondary: #e7bdb7;
+// $secondary: rgba(23, 23, 23, 0.6);
+$secondary: #232323;
 
 $secondary_container: #5d3f3b;
 
@@ -165,24 +170,46 @@ $tertiary_fixed: #fcdfa6;
 
 $tertiary_fixed_dim: #dfc38c;
 
-$yellow: #f5bd6f;
+$yellow: #EBFF71;
 
 $yellow_container: #633f00;
 
 $yellow_source: #f9e2af;
 
 $yellow_value: #f9e2af;
-
-
+$magenta: #9077e7;
+$teal: #51e6e6;
 
 $theme: 'dark';
 $primary_transparent: color.adjust($primary, $alpha: -0.4);
 $primary_transparent_less: color.adjust($primary, $alpha: -0.2);
 $scrim_transparent: color.adjust($scrim, $alpha: -0.68);
 // $surface_transparent: color.adjust($surface, $alpha: -0.2);
-$surface_transparent: color.adjust($surface, $alpha: 0);
+$bg-color: #171717;
+
+// $surface_transparent: color.adjust($surface, $alpha: 0);
+$surface_transparent: $bg-color;
 $on_surface_transparent: color.adjust($on_surface, $alpha: -0.3);
 $inverse_surface_transparent: color.adjust($inverse_surface, $alpha: -0.92);
 $inverse_surface_transparent_variant: color.adjust($inverse_surface, $alpha: -0.82);
 $inverse_surface_transparent_overlay: linear-gradient(0deg, $inverse_surface_transparent, $inverse_surface_transparent);
 $inverse_surface_transparent_variant_overlay: linear-gradient(0deg, $inverse_surface_transparent_variant, $inverse_surface_transparent_variant);
+
+$_widget-bg: $fg-color;
+$accent: $blue;
+$_border-color: $fg-color;
+$shadowColor: #eeeeee;
+$hover: color.adjust($shadowColor, $alpha: -0.80);
+$buttonShadow: inset 0 0 0 1px $hover, inset 0 0 0 99px $hover;
+
+// $active-gradient: linear-gradient(to right, $blue, color.adjust($blue, $alpha: 6%));
+// $inverse_surface_transparent: $active-gradient;
+
+// .volumeslider trough highlight:focus
+// box-shadow: inset 0 0 0 1px rgba(238, 238, 238, 0.03), inset 0 0 0 99px rgba(238, 238, 238, 0.154);
+
+// .volumeslider trough
+// background-color: rgba(238, 238, 238, 0.06);
+
+// window#quicksettings .window-content .sink-selector button {
+// background-color: rgba(23, 23, 23, 0.6);

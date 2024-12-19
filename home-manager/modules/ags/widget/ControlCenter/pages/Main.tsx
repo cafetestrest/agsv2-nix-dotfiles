@@ -52,8 +52,6 @@ export default () => {
 		fb.add(Bluetooth);
 	}
 
-	fb.add(<NightLight />);
-	fb.add(<Idle />);
 
 	if (FanProfile != undefined) {
 		fb.add(FanProfile);
@@ -86,7 +84,35 @@ export default () => {
 			vertical
 			spacing={spacing}
 		>
-			{fb}
+			{/* {fb} */}
+
+			<box>
+				{/* <NetworkButton /> */}
+				<BluetoothButton />
+				<box className={"control-center-space"} />
+				<NightLight />
+			</box>
+
+			<box>
+				<Microphone />
+				<box className={"control-center-space"} />
+				<DND />
+			</box>
+
+			<box>
+				<Idle />
+				<box className={"control-center-space"} />
+				<ScreenRecord
+					onClicked={() => {
+						if (ScreenRecordService.recording) {
+							ScreenRecordService.stop();
+						} else {
+							revealScreenRecord.set(!revealScreenRecord.get());
+						}
+					}}
+				/>
+			</box>
+
 			<ScreenRecordMenu
 				revealMenu={bind(revealScreenRecord)}
 				closeMenu={() =>
@@ -96,6 +122,7 @@ export default () => {
 
 			<box>
 				<Volume />
+				<box className={"control-center-space"} />
 				<SinkButton />
 			</box>
 			<SinkRevealer />

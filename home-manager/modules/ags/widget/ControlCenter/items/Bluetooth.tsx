@@ -7,7 +7,7 @@ import { controlCenterPage } from "..";
 export default () => {
 	const bluetooth = Bluetooth.get_default();
 
-	if (bluetooth)
+	if (bluetooth) {
 		return (
 			<ControlCenterButton
 				name="bluetooth"
@@ -39,4 +39,7 @@ export default () => {
 				menuName={"bluetooth"}
 			/>
 		);
+	} else {
+		return <label />
+	}
 };
