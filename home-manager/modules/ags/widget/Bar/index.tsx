@@ -23,9 +23,9 @@ const Start = () => {
 		<box>
 			<box halign={Gtk.Align.START} spacing={spacing}>
 				<AppLauncher />
-				<Workspaces />
 				{/* <ActiveApp /> */}
 				<Taskbar />
+				<Workspaces />
 			</box>
 			<box halign={Gtk.Align.END} spacing={spacing}>
 				<MediaIndicator />

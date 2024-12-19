@@ -4,7 +4,7 @@ $itemsMinHeight: 1.5rem;
 
 .bar {
 	min-height: 1.8rem;
-	padding: 0 0.857rem;
+	margin: 0 0.12rem 0 0rem;
 	background: $surface_transparent;
 }
 
@@ -103,11 +103,12 @@ $itemsMinHeight: 1.5rem;
 
 .bar__workspaces-indicator {
 	padding: 0;
-	min-width: 0.571rem;
-	min-height: 0.571rem;
+	min-width: 0.371rem;
+	min-height: 0.371rem;
 	transition: all 0.3s;
 	background-color: $inverse_surface_transparent_variant;
 	border-radius: 7.143rem;
+	margin: 0 0.273rem;
 
 	&:hover {
 		background-color: $primary_transparent;
@@ -115,9 +116,13 @@ $itemsMinHeight: 1.5rem;
 
 	&.active,
 	&:active {
-		min-height: 0.857rem;
-		min-width: 2.857rem;
 		border-radius: 7.143rem;
+		background-color: $fg-color;
+	}
+
+	&.focused {
+		min-height: 0.68rem;
+		min-width: 1.857rem;
 		background-color: $primary;
 	}
 }

@@ -27,7 +27,7 @@ const setupWorkspaceTile = (i: number) => (self: Widget.Button) => {
 	};
 	return (
 	<box
-		className="bar__app-launcher.bar__button"
+		className="workspaces-box"
 		setup={(self) => {
 			if (ws === 0) {
 				self.hook(hypr, "event", () => self.children.map(btn => {
