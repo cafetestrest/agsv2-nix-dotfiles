@@ -58,13 +58,11 @@ export default () => {
 			<BarButton className="bar__tray">
 				<box spacing={4} hexpand={false} valign={Gtk.Align.CENTER}>
 					{bind(tray, "items").as((items) =>
-						items
-							.filter((item) => item.iconName != null)
-							.map((item) => {
-								if (item.iconName != null) {
-									return <BarTrayItem item={item} />;
-								}
-							}),
+						items.map((item) => {
+							if (item.iconThemePath)
+								App.add_icons(item.iconThemePath);
+							return <BarTrayItem item={item} />;
+						}),
 					)}
 				</box>
 			</BarButton>
