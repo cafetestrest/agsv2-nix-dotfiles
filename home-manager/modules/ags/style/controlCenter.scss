@@ -37,12 +37,16 @@ $buttonMinHeight: 2.714rem;
 .control-center__page_header_button {
 	background: $inverse_surface_transparent;
 	color: $on_surface;
-	min-width: $buttonMinHeight * 5.6;
+	min-width: $buttonMinHeight;
 	min-height: $buttonMinHeight;
 	border-radius: 7.143rem;
 	&:hover {
 		background-color: $inverse_surface_transparent_variant;
 	}
+}
+
+.toggles.control-center__button {
+	min-width: $buttonMinHeight * 3.5;
 }
 
 .control-center__page_item-header {

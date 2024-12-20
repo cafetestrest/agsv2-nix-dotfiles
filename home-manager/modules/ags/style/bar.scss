@@ -8,6 +8,20 @@ $itemsMinHeight: 1.5rem;
 	background: $surface_transparent;
 }
 
+.recording-box {
+	// border: 1px solid red;
+}
+
+.extra-buttons.bar__button {
+	padding: 0 0.45rem;
+}
+
+.taskbar {
+	.bar__button {
+		padding: 0 0.45rem;
+	}
+}
+
 .bar__item {
 	padding: 0;
 	font-size: 1rem; //14px
@@ -16,7 +30,7 @@ $itemsMinHeight: 1.5rem;
 	padding-right: 1.143rem;
 	min-height: $itemsMinHeight;
 	border-radius: 1.714rem;
-	background: $inverse_surface_transparent;
+	// background: $inverse_surface_transparent; //controls bar items background
 	color: $on_surface;
 	border: none;
 	outline: none;
@@ -35,8 +49,8 @@ $itemsMinHeight: 1.5rem;
 		}
 		&.bar__recording-indicator {
 			padding: 0;
-			min-height: $itemsMinHeight;
-			min-width: $itemsMinHeight;
+			// min-height: $itemsMinHeight; //todo check
+			// min-width: $itemsMinHeight; //todo check
 			background: $error_container;
 			color: $on_error_container;
 
@@ -46,11 +60,11 @@ $itemsMinHeight: 1.5rem;
 			}
 			&.spacing {
 				label {
-					min-width: 3.857rem;
-					margin-right: 0.571rem;
+					// min-width: 3.857rem;
+					// margin-right: 0.571rem;
 				}
-				padding-left: 1.143rem;
-				padding-right: 1.143rem;
+				// padding-left: 1.143rem;
+				// padding-right: 1.143rem;
 			}
 		}
 	}
@@ -203,3 +217,23 @@ $itemsMinHeight: 1.5rem;
 		border-bottom-left-radius: 1.714rem;
 	}
 }
+
+.usage {
+	.icon {
+		margin-left: 0.6rem;
+	}
+}
+
+.btwrapper{
+	margin-left: 0.2rem;
+}
+
+.btwrapper .bt-icon {
+	margin-left: 0.6rem;
+}
+
+.usage-box {
+	margin: 0;
+	padding: 0;
+}
+

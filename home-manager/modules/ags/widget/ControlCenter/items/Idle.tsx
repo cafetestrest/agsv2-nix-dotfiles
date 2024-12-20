@@ -8,6 +8,7 @@ export default () => {
 		const profile = bind(IdleModeService, "profile");
 		return (
 			<ControlCenterButton
+				className={"toggles"}
 				icon={profile.as((p) => icons.idle[p])}
 				label={profile.as((p) => profileName(p))}
 				onPrimaryClick={() => {

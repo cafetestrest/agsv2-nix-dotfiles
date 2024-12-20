@@ -44,8 +44,8 @@ const Center = () => {
 
 const RamGbUsage = () => {
 	return (
-		<box spacing={spacing}>
-			<label label={"︁"}/>
+		<box spacing={spacing} className={"ram usage"}>
+			<label label={"︁"} className={"ram icon"}/>
 			<label label={bind(ramGB)}/>
 		</box>
 	);
@@ -53,8 +53,8 @@ const RamGbUsage = () => {
 
 const CpuUsage = () => {
 	return (
-		<box spacing={spacing}>
-			<label label={"︁"}/>
+		<box spacing={spacing} className={"cpu usage"}>
+			<label label={"︁"} className={"cpu icon"}/>
 			<label label={bind(cpu)}/>
 		</box>
 	);
@@ -62,22 +62,22 @@ const CpuUsage = () => {
 
 const DiskUsage = () => {
 	return (
-		<box spacing={spacing}>
-			<label label={""}/>
+		<box spacing={spacing} className={"disk usage"}>
+			<label label={""} className={"disk icon"}/>
 			<label label={bind(disk)}/>
 		</box>
 	);
 };
 
 const BluetoothPowerUsage = () => {
-	return <box>
+	return <box className={"btwrapper"}>
 		{bind(upower).as(arr => arr.map(power => {
 			if (!power.model || !power.batteryPercentage || !power.iconName) {
 				return "";
 			}
 
-			return (<box spacing={spacing}>
-				<icon icon={power.iconName}/>
+			return (<box spacing={spacing} className={"bt-usage"}>
+				<icon icon={power.iconName} className={"bt-icon"}/>
 				<label label={power.batteryPercentage + "%"}/>
 			</box>)
 			}
@@ -87,7 +87,7 @@ const BluetoothPowerUsage = () => {
 
 const NoteButton = () => {
 	return (<BarButton
-		className="note-button"
+		className="note-button extra-buttons"
 		onClicked={() => {
 			bash('codium ~/Documents/note.md')
 		}}
@@ -106,7 +106,7 @@ const NoteButton = () => {
 
 const ScreenshotButton = () => {
 	return (<BarButton
-		className="screenshot-button"
+		className="screenshot-button extra-buttons"
 		onClickRelease={(_, event: Astal.ClickEvent) => {
 			switch (event.button) {
 				case Gdk.BUTTON_PRIMARY:
@@ -135,7 +135,7 @@ const ScreenshotButton = () => {
 
 const ColorPickerButton = () => {
 	return (<BarButton
-		className="color-picker-button"
+		className="color-picker-button extra-buttons"
 		onClicked={() => {
 			bash('hyprpicker -a')
 		}}
@@ -168,11 +168,15 @@ const End = () => {
 				<Notifications />
 			</box>
 			<box halign={Gtk.Align.END} spacing={spacing}>
-				<CpuUsage />
-				<RamGbUsage />
-				<DiskUsage />
-				<BluetoothPowerUsage />
-				<RecordingIndicator />
+				<box className={"recording-box"}>
+					<RecordingIndicator />
+				</box>
+				<box className={"usage-box"}>
+					<CpuUsage />
+					<RamGbUsage />
+					<DiskUsage />
+					<BluetoothPowerUsage />
+				</box>
 				<NoteButton />
 				<ScreenshotButton />
 				<ColorPickerButton />

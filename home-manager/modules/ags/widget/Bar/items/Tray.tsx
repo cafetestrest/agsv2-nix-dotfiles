@@ -1,7 +1,7 @@
 import Tray from "gi://AstalTray";
-import BarItem from "../BarItem";
 import { bind } from "astal";
 import { App, Gtk, Gdk } from "astal/gtk3";
+import BarButton from "../BarButton";
 
 type BarTrayItemProps = {
 	item: Tray.TrayItem;
@@ -55,7 +55,7 @@ export default () => {
 				});
 			}}
 		>
-			<BarItem className="bar__tray">
+			<BarButton className="bar__tray">
 				<box spacing={4} hexpand={false} valign={Gtk.Align.CENTER}>
 					{bind(tray, "items").as((items) =>
 						items
@@ -67,7 +67,7 @@ export default () => {
 							}),
 					)}
 				</box>
-			</BarItem>
+			</BarButton>
 		</revealer>
 	);
 };

@@ -7,6 +7,7 @@ export default () => {
 	const notifications = AstalNotifd.get_default();
 	return (
 		<ControlCenterButton
+			className={"toggles"}
 			name="bluetooth"
 			label="Do not disturb"
 			icon={bind(notifications, "dontDisturb").as(

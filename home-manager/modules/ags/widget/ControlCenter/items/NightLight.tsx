@@ -8,6 +8,7 @@ export default () => {
 		const profile = bind(NightlightModeService, "profile");
 		return (
 			<ControlCenterButton
+				className={"toggles"}
 				icon={profile.as((p) => icons.nightlight[p])}
 				label={profile.as((p) => profileName(p))}
 				onPrimaryClick={() => {

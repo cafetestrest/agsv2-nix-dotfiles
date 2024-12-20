@@ -1,9 +1,11 @@
-import { bind } from "astal";
-import { Gtk, Widget } from "astal/gtk3";
+// import { bind } from "astal";
+// import { Gtk, Widget } from "astal/gtk3";
+import { Gtk } from "astal/gtk3";
 // import { spacing } from "../../../lib/variables";
 // import { weather } from "../../../service/Weather";
-import BarItem from "../BarItem";
+// import BarItem from "../BarItem";
 import { toggleWindow } from "../../../lib/utils";
+import BarButton from "../BarButton";
 
 export default () => {
 	// const wthr = bind(weather);
@@ -34,15 +36,14 @@ export default () => {
 			// revealChild={wthr.as(Boolean)}
 			revealChild={true}
 		>
-			<BarItem>
-				<button
-					onClicked={() => {
-						toggleWindow("weather");
-					}}
-				>
-					<label label={'weatherTemp'} />
-				</button>
-			</BarItem>
+			<BarButton
+				className={"weather"}
+				onClicked={() => {
+					toggleWindow("weather");
+				}}
+			>
+				<label label={'weatherTemp'} />
+			</BarButton>
 		</revealer>
 	);
 };

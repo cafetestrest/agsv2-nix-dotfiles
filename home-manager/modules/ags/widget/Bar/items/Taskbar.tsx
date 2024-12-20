@@ -4,6 +4,7 @@ import AstalApps from "gi://AstalApps"
 import icons, { substitutions } from "../../../lib/icons";
 import { Astal } from "astal/gtk3";
 import { lookUpIcon } from "../../../lib/utils";
+import BarButton from "../BarButton";
 
 type Address = {
 	address: string;
@@ -35,12 +36,12 @@ export default () => {
             print
         );
 
-    return clients.as((clientList) => {
+    const clientList = clients.as((clientList) => {
         if (clientList.length === 0) {
             return <box />;
         }
         return (
-            <box className="Tray">
+            <box className="taskbar">
                 {clientList.map((client) => {
 
 				const cls = client.class;
@@ -51,7 +52,7 @@ export default () => {
 						: icons.fallback.executable;
 	
                     return (
-                        <button
+                        <BarButton
                             onClicked={() => {
                                 const address = client.get_address();
                                 focus({ address });
@@ -62,10 +63,14 @@ export default () => {
                                     self.set_icon(getHyprlandClientIcon(client, icon));
                                 }}
                             />
-                        </button>
+                        </BarButton>
                     );
                 })}
             </box>
         );
     });
+
+    return <box>
+        {clientList}
+    </box>
 };

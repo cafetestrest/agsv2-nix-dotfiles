@@ -10,6 +10,7 @@ export default () => {
 	if (bluetooth) {
 		return (
 			<ControlCenterButton
+				className={"toggles"}
 				name="bluetooth"
 				label={bind(bluetooth, "isConnected").as((isConnected) => {
 					if (isConnected) {

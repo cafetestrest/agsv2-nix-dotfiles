@@ -8,6 +8,7 @@ export default () => {
 
 	return (
 		<ControlCenterButton
+			className={"toggles"}
 			label={bind(mic, "mute").as((muted) =>
 				muted ? "Muted" : "Unmuted",
 			)}

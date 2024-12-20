@@ -24,7 +24,7 @@ export default ({ label, child, scanning, refresh = undefined }: PageProps) => {
 					className="control-center__page_header_button"
 					onClicked={() => controlCenterPage.set("main")}
 				>
-					<icon icon={icons.ui.arrow.left} />
+					<icon icon={icons.ui.arrow.left} className={"page-icon"} />
 				</button>
 				<label
 					className="control-center__page_header_title"
@@ -39,7 +39,7 @@ export default ({ label, child, scanning, refresh = undefined }: PageProps) => {
 						className="control-center__page_header_button"
 						onClicked={refresh}
 					>
-						<icon hexpand={false} icon={icons.ui.refresh} />
+						<icon hexpand={false} icon={icons.ui.refresh} className={"page-icon"} />
 					</button>
 				) : (
 					<box />

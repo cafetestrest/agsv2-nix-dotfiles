@@ -6,7 +6,7 @@ import ControlCenterButton from "../ControlCenterButton";
 export default ({ onClicked }: { onClicked: () => void }) => {
 	return (
 		<ControlCenterButton
-			className={"recorder-indicator"}
+			className={"recorder-indicator toggles"}
 			icon={icons.record}
 			label={"Screen record"}
 			onPrimaryClick={onClicked}
