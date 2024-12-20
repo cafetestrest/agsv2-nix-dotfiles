@@ -20,7 +20,7 @@ import MediaIndicator from "./items/MediaIndicator";
 
 const RamGbUsage = () => {
 	return (
-		<box spacing={spacing} className={"ram usage"}>
+		<box className={"ram usage"}>
 			<label label={"︁"} className={"ram icon"}/>
 			<label label={bind(ramGB)}/>
 		</box>
@@ -29,7 +29,7 @@ const RamGbUsage = () => {
 
 const CpuUsage = () => {
 	return (
-		<box spacing={spacing} className={"cpu usage"}>
+		<box className={"cpu usage"}>
 			<label label={"︁"} className={"cpu icon"}/>
 			<label label={bind(cpu)}/>
 		</box>
@@ -38,7 +38,7 @@ const CpuUsage = () => {
 
 const DiskUsage = () => {
 	return (
-		<box spacing={spacing} className={"disk usage"}>
+		<box className={"disk usage"}>
 			<label label={""} className={"disk icon"}/>
 			<label label={bind(disk)}/>
 		</box>
@@ -52,7 +52,7 @@ const BluetoothPowerUsage = () => {
 				return "";
 			}
 
-			return (<box spacing={spacing} className={"bt-usage"}>
+			return (<box className={"bt-usage"}>
 				<icon icon={power.iconName} className={"bt-icon"}/>
 				<label label={power.batteryPercentage + "%"}/>
 			</box>)
@@ -153,7 +153,7 @@ const Start = () => {
 				<Taskbar />
 				<Workspaces />
 			</box>
-			<box halign={Gtk.Align.END} spacing={spacing}>
+			<box halign={Gtk.Align.END}>
 				<MediaIndicator />
 			</box>
 		</box>
@@ -162,7 +162,7 @@ const Start = () => {
 
 const Center = () => {
 	return (
-		<box spacing={spacing}>
+		<box>
 			<Clock />
 		</box>
 	);
@@ -175,7 +175,7 @@ const End = () => {
 				<Weather />
 				<Notifications />
 			</box>
-			<box halign={Gtk.Align.END} spacing={spacing}>
+			<box halign={Gtk.Align.END}>
 				<box className={"recording-box"}>
 					<RecordingIndicator />
 				</box>

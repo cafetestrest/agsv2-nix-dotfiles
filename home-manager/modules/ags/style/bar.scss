@@ -13,7 +13,7 @@ $itemsMinHeight: 1.5rem;
 }
 
 .extra-buttons.bar__button {
-	padding: 0 0.2rem;
+	padding: 0 0.4rem;
 	margin: 0;
 	min-width: 1rem;
 }
@@ -242,25 +242,23 @@ $itemsMinHeight: 1.5rem;
 }
 
 .usage {
-	padding: 0;
+	padding: 0 0 0 0.4rem;
 	border: none;
 	outline: none;
 
 	.icon {
 		margin-left: 0.6rem;
+		padding: 0 0.6rem 0 0;
 	}
 }
 
 .btwrapper{
-	font-size: 1rem; //14px
-	border: none;
-	outline: none;
-	padding: 0;
-	margin-left: 0.2rem;
+	padding-right: 0.6rem;
 }
 
 .btwrapper .bt-icon {
 	margin-left: 0.6rem;
+	margin-right: 0.4rem;
 }
 
 .usage-box {
