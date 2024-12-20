@@ -40,6 +40,7 @@ const BluetoothIndicator = () => {
 	const bluetooth = Bluetooth.get_default();
 	return (
 		<icon
+			className={"bt-indicator-icon"}
 			visible={bind(bluetooth, "isPowered").as((isPowered) => isPowered)}
 			icon={bind(bluetooth, "isPowered").as((isPowered) =>
 				isPowered ? icons.bluetooth.enabled : icons.bluetooth.disabled,
@@ -64,6 +65,9 @@ const MicMuteIndicator = () => {
 	const mic = Wp.get_default()?.audio.defaultMicrophone!;
 	return (
 		<icon
+			className={bind(mic, "mute").as(
+				(muted) => muted ? "mic-indicator-icon-muted" : "mic-indicator-icon",
+			)}
 			// visible={bind(mic, "mute").as((muted) => muted)}
 			icon={bind(mic, "mute").as(
 				(muted) => icons.audio.mic[muted ? "muted" : "high"],

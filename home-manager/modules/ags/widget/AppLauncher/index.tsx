@@ -42,7 +42,6 @@ export default () => {
 			keymode={Astal.Keymode.EXCLUSIVE}
 			exclusivity={Astal.Exclusivity.NORMAL}
 			layer={Astal.Layer.OVERLAY}
-			anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
 			application={App}
 			onKeyPressEvent={(self, event) => {
 				const [keyEvent, keyCode] = event.get_keycode();

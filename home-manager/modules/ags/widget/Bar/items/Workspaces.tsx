@@ -49,11 +49,11 @@ const setupWorkspaceTile = (i: number) => (self: Widget.Button) => {
 				halign={Gtk.Align.CENTER}
 				valign={Gtk.Align.CENTER}
 				className="bar__workspaces-indicator"
-				cursor="pointer"
+				// cursor="pointer"
 				onClicked={() => hypr.dispatch("workspace", `${i}`)}
 				setup={setupWorkspaceTile(i)}
 				attribute={i}
-			/>
+			><box className={"workspace-dot"} /></button>
 			))}
 		</box>
 		</eventbox>

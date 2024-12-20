@@ -14,7 +14,7 @@ export default () => {
 			visible={notifications.get_notifications().length > 0}
 			revealChild={notifications.get_notifications().length > 0}
 			transitionDuration={300}
-			transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
+			transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
 			setup={(self) => {
 				self.hook(notifications, "notify::notifications", () => {
 					if (notifications.get_notifications().length > 0) {

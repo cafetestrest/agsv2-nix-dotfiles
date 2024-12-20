@@ -69,7 +69,7 @@ export default () => {
 			namespace="notifications"
 			className="notifications"
 			exclusivity={Astal.Exclusivity.NORMAL}
-			anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
+			anchor={Astal.WindowAnchor.TOP}
 			application={App}
 			onKeyPressEvent={(self, event) => {
 				const [keyEvent, keyCode] = event.get_keycode();

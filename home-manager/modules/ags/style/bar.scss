@@ -118,30 +118,49 @@ $itemsMinHeight: 1.5rem;
 	}
 }
 
-.bar__workspaces-indicator {
-	// border: 1px solid transparent;
-	padding: 0;
-	min-width: 0.371rem;
-	min-height: 0.371rem;
-	transition: all 0.3s;
+// .workspaces {
+// 	border: 1px solid red;
+// }
+
+.workspace-dot {
+	// min-width: 0.371rem;
+	// min-height: 0.371rem;
+	margin: 0.65rem 0.35rem;
 	background-color: $inverse_surface_transparent_variant;
 	border-radius: 7.143rem;
-	margin: 0 0.273rem;
+	transition: all 0.3s;
+}
+
+.bar__workspaces-indicator {
+	// border: 1px solid green;
+	// border: 1px solid transparent;
+	padding: 0;
+	margin: 0;
+	// min-width: 0.371rem;
+	// min-height: 0.371rem;
+	// background-color: $inverse_surface_transparent_variant;
+	// border-radius: 7.143rem;
+	// margin: 0 0.273rem;
 
 	&:hover {
-		background-color: $primary_transparent;
+		.workspace-dot {
+			background-color: $primary_transparent;
+		}
 	}
 
 	&.active,
 	&:active {
-		border-radius: 7.143rem;
-		background-color: $fg-color;
+		.workspace-dot {
+			background-color: $fg-color;
+		}
 	}
 
 	&.focused {
-		min-height: 0.68rem;
-		min-width: 1.857rem;
-		background-color: $primary;
+		.workspace-dot {
+			padding: 0.34rem 1rem;
+			background-color: $primary;
+			margin: 0.5rem 0.35rem;
+		}
 	}
 }
 
@@ -278,7 +297,6 @@ $itemsMinHeight: 1.5rem;
 // }
 
 .workspaces-box {
-	// border: 1px solid red;
 	padding: 0 0.4rem;
 }
 
@@ -302,4 +320,16 @@ $itemsMinHeight: 1.5rem;
 
 .bar__system-indicators {
 	padding: 0 0.5rem;
+}
+
+.bt-indicator-icon {
+	color: $accent;
+}
+
+.mic-indicator-icon {
+	color: greenyellow;
+}
+
+.mic-indicator-icon-muted {
+	color: $red;
 }
