@@ -37,6 +37,7 @@ export default () => {
 
 	return (
 		<revealer
+			className={"tray-revealer"}
 			visible={tray.get_items().length > 0}
 			revealChild={tray.get_items().length > 0}
 			transitionDuration={300}

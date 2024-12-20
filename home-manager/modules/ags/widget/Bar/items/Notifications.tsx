@@ -3,12 +3,14 @@ import { App, Astal, Gtk } from "astal/gtk3";
 import BarButton from "../BarButton";
 import Notifications from "gi://AstalNotifd";
 import { toggleWindow } from "../../../lib/utils";
+import icons from "../../../lib/icons";
 
 export default () => {
 	const notifications = Notifications.get_default();
 
 	return (
 		<revealer
+			className={"notification-revealer"}
 			visible={notifications.get_notifications().length > 0}
 			revealChild={notifications.get_notifications().length > 0}
 			transitionDuration={300}
@@ -28,7 +30,7 @@ export default () => {
 			}}
 		>
 			<BarButton
-				className={"bar__notifications"}
+				className={"bar__notifications"} //todo make it have revealer
 				onClicked={() => {
 					toggleWindow("notifications");
 				}}
@@ -48,13 +50,23 @@ export default () => {
 					}
 				}}
 			>
-				<label
-					valign={Gtk.Align.CENTER}
-					className="bar__notifications_label"
-					label={bind(notifications, "notifications").as((n) =>
-						n.length.toString(),
-					)}
-				/>
+				<box>
+					<icon
+						valign={Gtk.Align.CENTER}
+						className={"bar-notifications-icon"}
+						icon={bind(notifications, "dontDisturb").as(
+							(dnd) => icons.notifications[dnd ? "silent" : "noisy"],
+						)}
+					/>
+					<label
+						halign={Gtk.Align.START}
+						valign={Gtk.Align.CENTER}
+						className="bar__notifications_label"
+						label={bind(notifications, "notifications").as((n) =>
+							n.length > 1 ? n.length.toString(): '',
+						)}
+					/>
+				</box>
 			</BarButton>
 		</revealer>
 	);

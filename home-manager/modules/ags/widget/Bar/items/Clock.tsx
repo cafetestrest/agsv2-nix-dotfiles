@@ -10,6 +10,7 @@ export default () => {
 	);
 	return (
 		<BarButton
+			className={"clock-bar"}
 			onClicked={() => {
 				toggleWindow("dashboard");
 			}}

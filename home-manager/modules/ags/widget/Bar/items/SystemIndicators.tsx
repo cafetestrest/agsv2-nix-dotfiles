@@ -118,7 +118,7 @@ const AudioIndicator = () => {
 				)}
 				icon={bind(speaker, "volumeIcon")}
 			/>
-			<label label={bind(speaker, "volume").as(
+			<label className={"volume-percentage"} label={bind(speaker, "volume").as(
 					(v) => Math.round(v * 100).toString() + "%",
 				)} />
 		</box>

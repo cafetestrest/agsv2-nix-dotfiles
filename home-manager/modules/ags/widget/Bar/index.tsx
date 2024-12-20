@@ -18,30 +18,6 @@ import { bash, toggleWindow } from "../../lib/utils";
 import Taskbar from "./items/Taskbar";
 import MediaIndicator from "./items/MediaIndicator";
 
-const Start = () => {
-	return (
-		<box>
-			<box halign={Gtk.Align.START} spacing={spacing}>
-				<AppLauncher />
-				{/* <ActiveApp /> */}
-				<Taskbar />
-				<Workspaces />
-			</box>
-			<box halign={Gtk.Align.END} spacing={spacing}>
-				<MediaIndicator />
-			</box>
-		</box>
-	);
-};
-
-const Center = () => {
-	return (
-		<box spacing={spacing}>
-			<Clock />
-		</box>
-	);
-};
-
 const RamGbUsage = () => {
 	return (
 		<box spacing={spacing} className={"ram usage"}>
@@ -153,17 +129,49 @@ const ColorPickerButton = () => {
 };
 
 const PowerMenuButton = () => (
-	<button
+	<BarButton
+		className={"powermenu-button"}
 		onClick={() => toggleWindow("powermenu")}
 	>
-		<icon icon={icons.powermenu.shutdown} iconSize={16} />
-	</button>
+		<box
+			valign={Gtk.Align.CENTER}
+			halign={Gtk.Align.CENTER}
+			hexpand={true}
+			vexpand={true}
+		>
+			<icon icon={icons.powermenu.shutdown} iconSize={45} />
+		</box>
+	</BarButton>
 );
+
+const Start = () => {
+	return (
+		<box>
+			<box halign={Gtk.Align.START}>
+				<AppLauncher />
+				{/* <ActiveApp /> */}
+				<Taskbar />
+				<Workspaces />
+			</box>
+			<box halign={Gtk.Align.END} spacing={spacing}>
+				<MediaIndicator />
+			</box>
+		</box>
+	);
+};
+
+const Center = () => {
+	return (
+		<box spacing={spacing}>
+			<Clock />
+		</box>
+	);
+};
 
 const End = () => {
 	return (
 		<box>
-			<box halign={Gtk.Align.START} spacing={spacing}>
+			<box halign={Gtk.Align.START}>
 				<Weather />
 				<Notifications />
 			</box>
@@ -181,10 +189,10 @@ const End = () => {
 				<ScreenshotButton />
 				<ColorPickerButton />
 				{/* <KeyboardLayout /> */}
-				<box className="bar__rounded-box" spacing={spacing / 2}>
+				{/* <box className="bar__rounded-box" spacing={spacing / 2}> */}
 					<Tray />
 					<SystemIndicators />
-				</box>
+				{/* </box> */}
 				{/* <Battery /> */}
 				<PowerMenuButton />
 			</box>

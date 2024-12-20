@@ -42,7 +42,11 @@ export default () => {
 					toggleWindow("weather");
 				}}
 			>
-				<label label={'weatherTemp'} />
+				<label
+					className={"weather-label"}
+					valign={Gtk.Align.CENTER}
+					label={'0C'}
+				/>
 			</BarButton>
 		</revealer>
 	);

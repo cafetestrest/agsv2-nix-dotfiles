@@ -9,7 +9,7 @@ export default () => {
 	const ws: number = 0;
 
 	const focusWorkspace = (workspaceId: number) =>
-		hypr.dispatch("workspace", workspaceId.toString());
+		hypr.dispatch("workspace", workspaceId.toString()); //todo add on left / middle / right click ...
 
 // Adding `workspace-tile-focused` to focused worspace
 const setupWorkspaceTile = (i: number) => (self: Widget.Button) => {
@@ -26,32 +26,36 @@ const setupWorkspaceTile = (i: number) => (self: Widget.Button) => {
 	});
 	};
 	return (
-	<box
-		className="workspaces-box"
-		setup={(self) => {
-			if (ws === 0) {
-				self.hook(hypr, "event", () => self.children.map(btn => {
-					btn.visible = hypr.workspaces.some(ws => {
-						if (ws.id < 10)
-							return ws.id +1 >= btn.attribute
+		<eventbox
+			className="workspaces"
+		>
+		<box
+			className="workspaces-box"
+			setup={(self) => {
+				if (ws === 0) {
+					self.hook(hypr, "event", () => self.children.map(btn => {
+						btn.visible = hypr.workspaces.some(ws => {
+							if (ws.id < 10)
+								return ws.id +1 >= btn.attribute
 
-						return ws.id >= btn.attribute
-					});
-				}));
-			}
-		}}
-	>
-		{Array.from({ length: ws || 10 }, (_, i) => i + 1).map(i => (
-		<button
-			halign={Gtk.Align.CENTER}
-			valign={Gtk.Align.CENTER}
-			className="bar__workspaces-indicator"
-			cursor="pointer"
-			onClicked={() => hypr.dispatch("workspace", `${i}`)}
-			setup={setupWorkspaceTile(i)}
-			attribute={i}
-		/>
-		))}
-	</box>
+							return ws.id >= btn.attribute
+						});
+					}));
+				}
+			}}
+		>
+			{Array.from({ length: ws || 10 }, (_, i) => i + 1).map(i => (
+			<button
+				halign={Gtk.Align.CENTER}
+				valign={Gtk.Align.CENTER}
+				className="bar__workspaces-indicator"
+				cursor="pointer"
+				onClicked={() => hypr.dispatch("workspace", `${i}`)}
+				setup={setupWorkspaceTile(i)}
+				attribute={i}
+			/>
+			))}
+		</box>
+		</eventbox>
 	);
 };
