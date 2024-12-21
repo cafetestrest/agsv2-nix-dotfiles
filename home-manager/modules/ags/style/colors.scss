@@ -201,6 +201,7 @@ $red_transparent: color.adjust($red, $alpha: -0.3);
 $_border-color: $fg-color;
 $shadowColor: #eeeeee;
 $hover: color.adjust($shadowColor, $alpha: -0.80);
+$osd: color.adjust(gray, $alpha: -0.30);
 $buttonShadow: inset 0 0 0 1px $hover, inset 0 0 0 99px $hover;
 
 // $active-gradient: linear-gradient(to right, $blue, color.adjust($blue, $alpha: 6%));

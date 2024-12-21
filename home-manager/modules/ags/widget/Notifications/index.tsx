@@ -56,6 +56,7 @@ class NotificationsMap implements Subscribable {
 export default () => {
 	const notifs = new NotificationsMap();
 	const notifications = Notifd.get_default();
+	notifications.get_notifications().forEach((n) => n.dismiss()); // This will remove all existing notifications on startup
 
 	return (
 		<PopupWindow

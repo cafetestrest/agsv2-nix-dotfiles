@@ -137,8 +137,17 @@ export default () => {
 			onScroll={(self, event) => {
 				const defaultSpeaker = Wp.get_default()?.audio.defaultSpeaker;
 				if (defaultSpeaker) {
-					if (event.delta_y < 0) defaultSpeaker.volume += 0.02;
-					else defaultSpeaker.volume -= 0.02;	
+					if (event.delta_y > 0 && defaultSpeaker.volume <= 0.02) {
+						defaultSpeaker.volume = 0;
+						defaultSpeaker.mute = true;
+					} else if (event.delta_y < 0 && defaultSpeaker.volume >= 1) {
+						defaultSpeaker.volume = 1;
+					} else if (event.delta_y < 0) defaultSpeaker.volume += 0.02;
+					else defaultSpeaker.volume -= 0.02;
+
+					if (defaultSpeaker.mute && defaultSpeaker.volume >= 0.01) {
+						defaultSpeaker.mute = false;
+					}
 				}
 			}}
 			setup={(self) => {

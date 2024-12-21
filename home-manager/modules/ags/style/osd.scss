@@ -2,15 +2,24 @@
 
 .OSD,
 .osd {
-	background: transparent;
+	border-radius: 1.5rem;
+
+	// background: $whitesmoke;
+	background-color: $osd;
+
+	min-width: 12rem;
+	min-height: 15rem;
+
 	icon {
-		font-size: 1.143rem;
-		margin-left: 1.143rem;
+		font-size: 7rem;
+		margin-bottom: 2rem;
+		color: black;
 	}
 }
 
 .indicator .progress {
 	padding: 0;
+	margin: 1rem;
 
 	border-radius: 7.143rem;
 	margin-bottom: 1.429rem;
@@ -19,12 +28,18 @@
 	.fill {
 		transition: background-color 3s ease-in-out;
 		border-radius: 7.143rem;
-		background-color: $primary;
+		background-color: white;
 		color: $on_primary;
 		transition: min-width 0.1s;
 		&.muted {
-			background-color: $inverse_surface_transparent_variant;
-			color: $on_surface;
+			background-color: $surface_transparent;
+			// color: $on_surface;
 		}
 	}
+}
+
+.osd-indicator-box {
+}
+
+.osd-indicator-icon {
 }

@@ -92,8 +92,13 @@ export default () => {
 						draw_value={false}
 						hexpand={true}
 						onDragged={({ value }) => {
-							speaker.volume = value;
-							speaker.mute = false;
+							if (value === 0) {
+								speaker.volume = value;
+								speaker.mute = true;
+							} else {
+								speaker.volume = value;
+								speaker.mute = false;
+							}
 						}}
 						value={bind(speaker, "volume")}
 					/>

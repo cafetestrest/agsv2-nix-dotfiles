@@ -30,7 +30,7 @@ export default () => {
 			}}
 		>
 			<BarButton
-				className={"bar__notifications"} //todo make it have revealer
+				className={"bar__notifications"}
 				onClicked={() => {
 					toggleWindow("notifications");
 				}}

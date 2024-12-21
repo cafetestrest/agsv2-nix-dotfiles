@@ -16,11 +16,18 @@ function OnScreenProgress(window: Astal.Window, vertical: boolean) {
 		icon: bind(speaker, "volumeIcon"),
 	});
 
+	// const pillProgress = Progress({
+	// 	vertical,
+	// 	width: vertical ? 3.429 : 28.571,
+	// 	height: vertical ? 28.571 : 3.429,
+	// 	child: indicator,
+	// });
+
 	const progress = Progress({
 		vertical,
-		width: vertical ? 3.429 : 28.571,
-		height: vertical ? 28.571 : 3.429,
-		child: indicator,
+		width: 14,
+		height: 0.6,
+		child: <box></box>
 	});
 
 	let count = 0;
@@ -42,7 +49,10 @@ function OnScreenProgress(window: Astal.Window, vertical: boolean) {
 		halign: Gtk.Align.CENTER,
 		valign: Gtk.Align.END,
 		css: "min-height: 0.143rem;",
-		child: progress,
+		child: <box vertical={true} className={"osd-indicator-box"}>
+			<icon icon={bind(speaker, "volumeIcon")} className={"osd-indicator-icon"} />
+			{progress}
+		</box>,
 		setup: () => {
 			progress.hook(speaker, "notify::mute", () => {
 				progress.setMute(speaker.mute);
