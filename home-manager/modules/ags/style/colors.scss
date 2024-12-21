@@ -197,6 +197,7 @@ $inverse_surface_transparent_variant_overlay: linear-gradient(0deg, $inverse_sur
 
 $_widget-bg: $fg-color;
 $accent: $blue;
+$red_transparent: color.adjust($red, $alpha: -0.3);
 $_border-color: $fg-color;
 $shadowColor: #eeeeee;
 $hover: color.adjust($shadowColor, $alpha: -0.80);

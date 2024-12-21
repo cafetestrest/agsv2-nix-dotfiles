@@ -83,7 +83,11 @@ $itemsMinHeight: 1.5rem;
 }
 
 .distro-icon {
-	color: lightblue;
+	color: $accent;
+}
+
+.bar__notifications {
+	color: $yellow;
 }
 
 .bar__app-launcher.bar__button {
@@ -207,7 +211,7 @@ $itemsMinHeight: 1.5rem;
 // .weather-label {
 // }
 
-.weather {
+.weather-button {
 	padding: 0 0.4rem;
 }
 
@@ -287,7 +291,7 @@ $itemsMinHeight: 1.5rem;
 
 .powermenu-button {
 	padding: 0 0.4rem;
-	color: $red;
+	color: $red_transparent;
 }
 
 // .workspaces:hover {
@@ -331,5 +335,5 @@ $itemsMinHeight: 1.5rem;
 }
 
 .mic-indicator-icon-muted {
-	color: $red;
+	color: $red_transparent;
 }

@@ -42,6 +42,10 @@
     padding: 0;
 }
 
+.weather-popup-box { //main popup box
+	padding: 1rem;
+}
+
 .weather {
 	//weather popup
 	.weather-info {
@@ -61,11 +65,11 @@
 	///
 
 	.weather-spacing {
-		// padding-left: $spacing;
+		padding-left: 0.6rem;
 	}
 
 	.qsweather-widget {
-		margin: 0;
+		// margin-left: 0.4rem; //big weather widgets for hours
 	}
 
 	.qs-weather-box-child {

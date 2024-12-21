@@ -191,7 +191,7 @@ const WeatherBoxChild = (w) => (
 		vertical={true}
 		hexpand={true}
 		children={[
-			<label label={w.hour} className={"weather-hour"} />,
+			<label label={w.hour + "h"} className={"weather-hour"} />,
 			<label label={w.icon} className={"weather-icon"} />,
 			<label label={w.temperature} className={"weather-temperature"} />,
 			<box vexpand={true} />,
@@ -299,6 +299,10 @@ const Tooltip = ({ total }: { total: number|null }) => (<box
 				let forecastWidgetsNumber = 0;
 	
 				tooltip.forEach(w => {
+					if (w.indicator) {
+						return;
+					}
+
 					if (w.date !== prevDayName) {
 						weatherStatusIconArray = [];
 						prevDayName = w.date;
@@ -355,7 +359,10 @@ const Tooltip = ({ total }: { total: number|null }) => (<box
 				let w = null;
 				for (let i = 0; i < tooltip.length; i++) {
 					w = tooltip[i];
-	
+
+					if (w.indicator) {
+						continue;
+					}
 					// console.log('loop ' + w.date + ' h ' + w.hour + ' i ' + w.icon )
 	
 					// used to limit forecast to specified amount (if total variable is provided, it will display that amount of forecast widgets on a main one)
@@ -423,6 +430,7 @@ const Tooltip = ({ total }: { total: number|null }) => (<box
 export default () => {
 	return (
 		<PopupWindow
+			className={"weather-popup"}
 			name={"weather"}
 			namespace="weather"
 			scrimType="transparent"
@@ -438,7 +446,7 @@ export default () => {
 				}
 			}}
 		>
-			<box className={"calendar block"} spacing={10}>
+			<box className={"calendar block weather-popup-box"} spacing={10}>
 				< Tooltip total={null} />
 			</box>
 		</PopupWindow>
