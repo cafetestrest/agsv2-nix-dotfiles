@@ -193,4 +193,8 @@ export default {
         1: 'view-reveal-symbolic',
         0: 'view-conceal-symbolic',
     },
+	apps: {
+        apps: 'view-app-grid-symbolic',
+        search: 'folder-saved-search-symbolic',
+    },
 };

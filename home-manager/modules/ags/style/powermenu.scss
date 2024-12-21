@@ -19,11 +19,15 @@
 		background: $primary, $inverse_surface_transparent_variant_overlay;
 	}
 	&:focus {
-		box-shadow: 0 0 0 0.071rem $inverse_surface;
+		// box-shadow: 0 0 0 0.071rem $primary;
 	}
 	&:active {
 		background: $on_primary_container, $inverse_surface_transparent_overlay;
 	}
+}
+
+.powermenu-icon {
+	font-size: 1.3rem;
 }
 
 .verification {

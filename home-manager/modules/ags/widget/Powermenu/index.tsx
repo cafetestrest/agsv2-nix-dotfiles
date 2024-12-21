@@ -15,7 +15,7 @@ const PowermenuButton = ({ action, iconName }: PowermenuButtonProps) => (
 		className={`powermenu__button`}
 		onClicked={() => PowermenuService.action(action)}
 	>
-		<icon icon={iconName} />
+		<icon icon={iconName} className={"powermenu-icon"} />
 	</button>
 );
 

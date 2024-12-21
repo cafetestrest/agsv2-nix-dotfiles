@@ -1,8 +1,9 @@
-import { App, Astal, Widget } from "astal/gtk3";
+import { App, Gtk, Astal, Widget } from "astal/gtk3";
 import { bind, Variable } from "astal";
 import AstalApps from "gi://AstalApps?version=0.1";
 import AppItem from "./AppItem";
 import PopupWindow from "../../common/PopupWindow";
+import icons from "../../lib/icons";
 
 const apps = new AstalApps.Apps();
 
@@ -60,8 +61,16 @@ export default () => {
 			}}
 		>
 			<box className="app-launcher" vertical>
-				{Entry}
-				<scrollable vexpand>
+				<box className="entry-box" >
+					<icon
+						icon={icons.apps.search}
+						className="entry-icon"
+						halign={Gtk.Align.CENTER}
+						valign={Gtk.Align.CENTER}
+					/>
+					{Entry}
+				</box>
+				<scrollable vexpand className={"app-scroll-list"}>
 					<box className="app-launcher__list" vertical>
 						{items}
 					</box>
