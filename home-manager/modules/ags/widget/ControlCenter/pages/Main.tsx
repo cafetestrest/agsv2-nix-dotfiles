@@ -16,6 +16,7 @@ import BluetoothButton from "../items/Bluetooth";
 import { toggleWindow } from "../../../lib/utils";
 import NightLight from "../items/NightLight";
 import Idle from "../items/Idle";
+import { Tooltip } from "../../Dashboard/weather";
 
 class FlowBox extends astalify(Gtk.FlowBox) {
 	static {
@@ -120,35 +121,28 @@ export default () => {
 				}
 			/>
 
-			<box>
-				<Volume />
+			<box className={"qsvolume-box"}>
+				<Volume valign={Gtk.Align.CENTER}/>
 				<box className={"control-center-space"} />
 				<SinkButton />
 			</box>
 			<SinkRevealer />
 
 			{/* {Brightness()} */}
-			<box spacing={16} className="control-center__footer">
+			{/* <box spacing={16} className="control-center__footer">
 				<button
 					className="control-center__powermenu-button"
 					onClick={() => toggleWindow("powermenu")}
 				>
 					<icon icon={icons.powermenu.shutdown} iconSize={16} />
 				</button>
-				{/* <box hexpand />
+				<box hexpand />
 				<label
 					className="control-center__time-to-empty"
 					label={bind(uptime)}
 				/>
-				<button
-					className="control-center__settings-button"
-					onClick={() => {
-						execAsync("bash -c hyprsettings");
-					}}
-				>
-					<icon icon={icons.ui.settings} iconSize={16} />
-				</button> */}
-			</box>
+			</box> */}
+			< Tooltip total={5} />
 		</box>
 	);
 };

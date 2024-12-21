@@ -238,7 +238,6 @@ $buttonMinHeight: 2.714rem;
 }
 
 .control-center__powermenu-button.sink {
-	margin: 0.3rem 0 0 0;
 }
 
 .control-center__settings-button {
@@ -335,7 +334,6 @@ $buttonMinHeight: 2.714rem;
 }
 
 .volumeslider {
-	padding: 0.3rem 0 0 0;
 
 	trough{
 		highlight,
@@ -349,4 +347,8 @@ $buttonMinHeight: 2.714rem;
 			box-shadow: $buttonShadow;
 		}
 	}
+}
+
+.qsvolume-box {
+	margin-top: 0.3rem;
 }

@@ -25,9 +25,6 @@
     border-radius: 16px;
     padding: 0.55em;
     // margin: 0 5px;
-
-    min-width: 5em;
-    min-height: 10em;
 }
 
 .weather-temperature {
@@ -73,15 +70,9 @@
 	}
 
 	.qs-weather-box-child {
-		min-width: 5em;
-
 		.weather-icon {
 			font-size: 1.5em;
 		}
-	}
-
-	.qs-weather-box-main {
-		min-width: 16.5em;
 	}
 
 ///
@@ -136,3 +127,16 @@
     font-size: 16px;
 }
 //todo update to rems
+
+.weather-popup .qs-weather-box-main {
+	min-width: 16.5em;
+}
+
+.weather-popup .weather-info {
+    min-width: 5em;
+    min-height: 10em;
+}
+
+.weather-popup .qs-weather-box-child {
+	min-width: 5em;
+}
