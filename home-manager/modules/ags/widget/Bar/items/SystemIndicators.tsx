@@ -125,6 +125,19 @@ const AudioIndicator = () => {
 			<label className={"volume-percentage"} label={bind(speaker, "volume").as(
 					(v) => Math.round(v * 100).toString() + "%",
 				)} />
+			<icon
+				className={"headset-icon"}
+				visible={bind(speaker, 'icon').as((icon) => {
+					if (icon === 'audio-headset-bluetooth' || icon === 'audio-headset-analog-usb')
+						return true;
+					return false;
+				})}
+				icon={bind(speaker, 'icon').as((icon) => {
+					if (icon === 'audio-headset-bluetooth' || icon === 'audio-headset-analog-usb')
+						return icons.audio.type.headset;
+					return icons.audio.type.card;
+				}
+			)} />
 		</box>
 	);
 };

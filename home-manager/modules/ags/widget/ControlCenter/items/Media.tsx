@@ -186,7 +186,7 @@ const PlayerSwitcher = ({ mpris, selectedPlayer }: { mpris: AstalMpris.Mpris; se
 export default () => {
 	const mpris = AstalMpris.get_default();
 
-    return <box vertical>
+    return <box vertical className={"qs-media-indicator"}>
         {bind(mpris, "players").as(arr => arr.map(player => {
 				return (<Player player={player} />)
 			}

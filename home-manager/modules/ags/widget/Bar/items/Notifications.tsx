@@ -62,10 +62,27 @@ export default () => {
 						halign={Gtk.Align.START}
 						valign={Gtk.Align.CENTER}
 						className="bar__notifications_label"
-						label={bind(notifications, "notifications").as((n) =>
-							n.length > 1 ? n.length.toString(): '',
-						)}
+						label={bind(notifications, "notifications").as((n) => n.length > 1 ? n.length.toString(): '')}
 					/>
+					<revealer
+						className={"notification-label-revealer"}
+						setup={(self) => {
+							self.hook(notifications, "notify::notifications", () => {
+								self.reveal_child = true;
+
+								setTimeout(() => {
+									self.reveal_child = false;
+								}, 5000);	// 5 sec
+							});
+						}}
+					>
+						<label
+							halign={Gtk.Align.START}
+							valign={Gtk.Align.CENTER}
+							className="bar__notifications_label"
+							label={bind(notifications, "notifications").as(n => n.reverse()[0]?.summary || '')}
+						/>						
+					</revealer>
 				</box>
 			</BarButton>
 		</revealer>

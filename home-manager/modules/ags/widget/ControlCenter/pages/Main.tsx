@@ -17,66 +17,67 @@ import { toggleWindow } from "../../../lib/utils";
 import NightLight from "../items/NightLight";
 import Idle from "../items/Idle";
 import { Tooltip } from "../../Dashboard/weather";
+import Media from "../items/Media";
 
-class FlowBox extends astalify(Gtk.FlowBox) {
-	static {
-		GObject.registerClass(this);
-	}
+// class FlowBox extends astalify(Gtk.FlowBox) {
+// 	static {
+// 		GObject.registerClass(this);
+// 	}
 
-	constructor(
-		props: ConstructProps<Gtk.FlowBox, Gtk.FlowBox.ConstructorProps>,
-	) {
-		super(props as any);
-	}
-}
+// 	constructor(
+// 		props: ConstructProps<Gtk.FlowBox, Gtk.FlowBox.ConstructorProps>,
+// 	) {
+// 		super(props as any);
+// 	}
+// }
 
 export default () => {
 	const revealScreenRecord = Variable(false);
 
-	const fb = new FlowBox({
-		homogeneous: true,
-		selectionMode: Gtk.SelectionMode.NONE,
-		maxChildrenPerLine: 2,
-		minChildrenPerLine: 2,
-		rowSpacing: spacing,
-		columnSpacing: spacing,
-	});
+	// const fb = new FlowBox({
+	// 	homogeneous: true,
+	// 	selectionMode: Gtk.SelectionMode.NONE,
+	// 	maxChildrenPerLine: 2,
+	// 	minChildrenPerLine: 2,
+	// 	rowSpacing: spacing,
+	// 	columnSpacing: spacing,
+	// });
 
-	const FanProfile = FanProfileButton();
-	const Network = NetworkButton();
-	const Bluetooth = BluetoothButton();
+	// const FanProfile = FanProfileButton();
+	// const Network = NetworkButton();
+	// const Bluetooth = BluetoothButton();
 
-	if (Network != undefined) {
-		fb.add(Network);
-	}
-	if (Bluetooth != undefined) {
-		fb.add(Bluetooth);
-	}
+	// if (Network != undefined) {
+	// 	fb.add(Network);
+	// }
+	// if (Bluetooth != undefined) {
+	// 	fb.add(Bluetooth);
+	// }
 
 
-	if (FanProfile != undefined) {
-		fb.add(FanProfile);
-	}
-	fb.add(Microphone());
-	fb.add(DND());
-	fb.add(
-		new Widget.Box({
-			spacing,
-			homogeneous: true,
-			children: [
-				ColorScheme(),
-				ScreenRecord({
-					onClicked: () => {
-						if (ScreenRecordService.recording) {
-							ScreenRecordService.stop();
-						} else {
-							revealScreenRecord.set(!revealScreenRecord.get());
-						}
-					},
-				}),
-			],
-		}),
-	);
+	// if (FanProfile != undefined) {
+	// 	fb.add(FanProfile);
+	// }
+	// fb.add(Microphone());
+	// fb.add(DND());
+	// fb.add(
+	// 	new Widget.Box({
+	// 		spacing,
+	// 		homogeneous: true,
+	// 		children: [
+	// 			ColorScheme(),
+	// 			ScreenRecord({
+	// 				onClicked: () => {
+	// 					if (ScreenRecordService.recording) {
+	// 						ScreenRecordService.stop();
+	// 					} else {
+	// 						revealScreenRecord.set(!revealScreenRecord.get());
+	// 					}
+	// 				},
+	// 			}),
+	// 		],
+	// 	}),
+	// );
 
 	return (
 		<box
@@ -143,6 +144,7 @@ export default () => {
 				/>
 			</box> */}
 			< Tooltip total={5} />
+			<Media />
 		</box>
 	);
 };

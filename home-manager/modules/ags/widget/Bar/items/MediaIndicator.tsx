@@ -1,12 +1,15 @@
 import { Widget } from "astal/gtk3";
-import { bind } from "astal";
+import { bind, Variable } from "astal";
 import AstalMpris from "gi://AstalMpris?version=0.1";
 import icons from "../../../lib/icons";
 import { lookUpIcon } from "../../../lib/utils";
+import BarButton from "../BarButton";
 
 type PlayerProps = {
 	player: AstalMpris.Player;
 };
+
+const revealMedia = Variable(true);
 
 const Player = ({ player }: PlayerProps) => {
 	const PlayerIcon = () => (
@@ -31,13 +34,13 @@ const Player = ({ player }: PlayerProps) => {
 	});
 
 	const ControlButton = ({ icon, onClick, className }: { icon: string; onClick: () => void; className: string }) => (
-		<button onClicked={onClick} className={className}>
+		<BarButton onClicked={onClick} className={className}>
 			<icon icon={icon} />
-		</button>
+		</BarButton>
 	);
 
 	const PlayPauseButton = ({ className }: Widget.ButtonProps) => (
-		<button
+		<BarButton
 			onClicked={() => player.play_pause()}
 			className={`player__playpause ${className}`}
 			setup={(self) => {
@@ -53,7 +56,7 @@ const Player = ({ player }: PlayerProps) => {
 					status === AstalMpris.PlaybackStatus.PLAYING ? icons.media.playing : icons.media.stopped,
 				)}
 			/>
-		</button>
+		</BarButton>
 	);
 
 	return (
@@ -65,29 +68,47 @@ const Player = ({ player }: PlayerProps) => {
 			return false;
 		})}
 		>
-			<PlayerIcon />
-			<box>
-				<box className="player__title-box"
-                setup={(self) => {
-						self.hook(player, "notify::title", (_) => {
-							self.toggleClassName("dissappear", true);
-							setTimeout(() => {
-								self.toggleClassName("dissappear", false);
-								Title.label = player.title;
-								Artist.label = player.artist;
-							}, 300);
-						});
-					}}
-                >
-					{Title}
-					{Artist}
+			<BarButton
+				className={"media-player-icon-button"}
+				onClick={() =>
+					revealMedia.set(!revealMedia.get())
+				}
+			>
+				<box>
+					<PlayerIcon />
 				</box>
-                <box/>
-				<PlayPauseButton />
-			</box>
+			</BarButton>
+			<revealer
+				className={"media-revealer"}
+				revealChild={bind(revealMedia)}
+				visible={bind(revealMedia)}
+			>
+				<box>
+					<BarButton
+						className={"media-player-title-box-button"}
+						onClicked={() => player.play_pause()}
+					>
+						<box>
+							<box className="player__title-box"
+							setup={(self) => {
+									self.hook(player, "notify::title", (_) => {
+										self.toggleClassName("dissappear", true);
+										setTimeout(() => {
+											self.toggleClassName("dissappear", false);
+											Title.label = player.title;
+											Artist.label = player.artist;
+										}, 300);
+									});
+								}}
+							>{Title}   {Artist}</box>
+						</box>
+					</BarButton>
+				</box>
+			</revealer>
 			<box visible={bind(player, "canGoNext")}>
 				<ControlButton icon={icons.media.next} onClick={() => player.next()} className="player__next" />
 			</box>
+			<PlayPauseButton />
 			<box visible={bind(player, "canGoPrevious")}>
 				<ControlButton icon={icons.media.prev} onClick={() => player.previous()} className="player__previous" />
 			</box>

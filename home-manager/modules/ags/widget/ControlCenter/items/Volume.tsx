@@ -30,7 +30,9 @@ export const SinkButton = () => (
 
 export const SinkRevealer = () => Audio && (
 	<revealer
+		className={"sink-revealer"}
 		revealChild={bind(revealSinks)}
+		visible={bind(revealSinks)}
 		transitionType={Gtk.RevealerTransitionType.SLIDE_UP}
 	>
 		<box vertical={true}>
