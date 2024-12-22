@@ -132,6 +132,13 @@ const PowerMenuButton = () => (
 	<BarButton
 		className={"powermenu-button"}
 		onClick={() => toggleWindow("powermenu")}
+		onClickRelease={(self, event) => {
+			switch (event.button) {
+				// case Gdk.BUTTON_SECONDARY:
+					// return bash('openstartupapps')
+				// case Gdk.BUTTON_MIDDLE:
+					// return bash('openstartupapps')
+		}}}
 	>
 		<box
 			valign={Gtk.Align.CENTER}

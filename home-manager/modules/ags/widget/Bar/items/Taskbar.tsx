@@ -2,7 +2,7 @@ import { bind, execAsync } from "astal"
 import AstalHyprland from "gi://AstalHyprland"
 import AstalApps from "gi://AstalApps"
 import icons, { substitutions } from "../../../lib/icons";
-import { Astal } from "astal/gtk3";
+import { Astal, Gdk } from "astal/gtk3";
 import { lookUpIcon } from "../../../lib/utils";
 import BarButton from "../BarButton";
 
@@ -31,10 +31,8 @@ function getHyprlandClientIcon(client: AstalHyprland.Client, iconName: string) {
 
 export default () => {
     const clients = bind(Hyprland, 'clients');
-    const focus = ({ address }: Address) =>
-        execAsync(`hyprctl dispatch focuswindow address:0x${address}`).catch(
-            print
-        );
+
+	const focus = (address: string) => Hyprland.dispatch("focuswindow", `address:0x${address}`);
 
     const clientList = clients.as((clientList) => {
         if (clientList.length === 0) {
@@ -55,8 +53,19 @@ export default () => {
                         <BarButton
                             onClicked={() => {
                                 const address = client.get_address();
-                                focus({ address });
+                                focus(address);
                             }}
+                            onClickRelease={(self, event) => {
+                                const address = client.get_address();
+                                if (!address) {
+                                    return;
+                                }
+                                switch (event.button) {
+                                    case Gdk.BUTTON_SECONDARY://todo minimize
+                                        return focus(address);
+                                    case Gdk.BUTTON_MIDDLE: //todo fullscreen
+                                        return focus(address);
+                            }}}
                         >
                             <icon
                                 setup={(self) => {

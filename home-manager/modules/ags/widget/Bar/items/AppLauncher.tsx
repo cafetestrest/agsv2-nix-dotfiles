@@ -1,4 +1,4 @@
-import { App, Gtk, Widget } from "astal/gtk3";
+import { App, Gtk, Gdk } from "astal/gtk3";
 import BarButton from "../BarButton";
 import { toggleWindow } from "../../../lib/utils";
 
@@ -8,6 +8,13 @@ export default () => (
 		onClicked={() => {
 			toggleWindow("app-launcher");
 		}}
+		onClickRelease={(self, event) => {
+			switch (event.button) {
+				case Gdk.BUTTON_SECONDARY:
+					return toggleWindow("app-launcher");
+				case Gdk.BUTTON_MIDDLE:
+					return toggleWindow("app-launcher");
+		}}}
 		setup={(self) => {
 			const applauncherWindow = App.get_window("app-launcher");
 			if (applauncherWindow) {

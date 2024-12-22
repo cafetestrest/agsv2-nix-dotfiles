@@ -1,4 +1,4 @@
-import { Gtk, Widget } from "astal/gtk3";
+import { Gtk, Gdk, Widget } from "astal/gtk3";
 import Hyprland from "gi://AstalHyprland";
 // import { range } from "../../../lib/utils";
 // import BarItem from "../BarItem";
@@ -8,8 +8,7 @@ export default () => {
 	const hypr = Hyprland.get_default();
 	const ws: number = 0;
 
-	const focusWorkspace = (workspaceId: number) =>
-		hypr.dispatch("workspace", workspaceId.toString()); //todo add on left / middle / right click ...
+	const dispatch = (command: string) => hypr.dispatch("workspace", command);
 
 // Adding `workspace-tile-focused` to focused worspace
 const setupWorkspaceTile = (i: number) => (self: Widget.Button) => {
@@ -28,6 +27,20 @@ const setupWorkspaceTile = (i: number) => (self: Widget.Button) => {
 	return (
 		<eventbox
 			className="workspaces"
+			onScroll={(self, event) => {
+				if (event.delta_y < 0) {
+					dispatch('+1')
+				} else {
+					dispatch('-1')
+				}
+			}}
+			onClickRelease={(self, event) => {
+				switch (event.button) {
+					case Gdk.BUTTON_SECONDARY:
+						return dispatch('1')
+					case Gdk.BUTTON_MIDDLE:
+						return dispatch('1')
+			}}}
 		>
 		<box
 			className="workspaces-box"

@@ -2,7 +2,7 @@ import { Gtk, Widget, astalify, ConstructProps } from "astal/gtk3";
 import { bind, execAsync, GObject, Variable } from "astal";
 import { spacing, uptime } from "../../../lib/variables";
 import NetworkButton from "../items/Network";
-import Volume, { SinkButton, SinkRevealer } from "../items/Volume";
+import Volume, { SinkRevealer, revealSinks } from "../items/Volume";
 import DND from "../items/DND";
 import Microphone from "../items/Microphone";
 import icons from "../../../lib/icons";
@@ -84,6 +84,23 @@ export default () => {
 	// 	}),
 	// );
 
+	const SinkButton = () => (
+		<button
+			// className={"control-center__sink-button"}
+			className={"control-center__powermenu-button sink"}
+			onClick={() => {
+				revealScreenRecord.set(false);
+				revealScreenShot.set(false);
+				revealLightstripColor.set(false);
+				revealSinks.set(!revealSinks.get())
+			}}
+		>
+			<icon
+				icon={bind(revealSinks).as((v) => true === v ? icons.ui.arrow.up : icons.ui.arrow.right)}
+			/>
+		</button>
+	);
+
 	return (
 		<box
 			name="main"
@@ -123,6 +140,10 @@ export default () => {
 							<box className={"control-center-space"} />
 							<ScreenRecord
 								onClicked={() => {
+									revealSinks.set(false);
+									revealLightstripColor.set(false);
+									revealScreenShot.set(false);
+
 									if (ScreenRecordService.recording) {
 										ScreenRecordService.stop();
 									} else {
@@ -156,7 +177,12 @@ export default () => {
 								className={"screenshot-button toggles"}
 								icon={icons.screenshot}
 								label={"Screenshot"}
-								onClicked={() => {revealScreenShot.set(!revealScreenShot.get())}}
+								onClicked={() => {
+									revealSinks.set(false);
+									revealScreenRecord.set(false);
+									revealLightstripColor.set(false);
+									revealScreenShot.set(!revealScreenShot.get())
+								}}
 								menuName="arrow"
 							/>
 						</box>
@@ -176,7 +202,12 @@ export default () => {
 								className={"lightstrip-color-button toggles"}
 								icon={icons.brightness.indicator}
 								label={"Lightstrip"}
-								onClicked={() => {revealLightstripColor.set(!revealLightstripColor.get())}}
+								onClicked={() => {
+									revealSinks.set(false);
+									revealScreenRecord.set(false);
+									revealScreenShot.set(false);
+									revealLightstripColor.set(!revealLightstripColor.get())
+								}}
 								menuName="arrow"
 							/>
 							<box className={"control-center-space"} />
@@ -201,6 +232,10 @@ export default () => {
 						return "control-center-page"
 					})}
 					onClick={() =>{
+						revealScreenRecord.set(false);
+						revealScreenShot.set(false);
+						revealLightstripColor.set(false);
+						revealSinks.set(false)
 						revealFristPage.set(true)
 						revealSecondPage.set(false)
 					}}
@@ -214,6 +249,10 @@ export default () => {
 						return "control-center-page"
 					})}
 					onClick={() =>{
+						revealScreenRecord.set(false);
+						revealScreenShot.set(false);
+						revealLightstripColor.set(false);
+						revealSinks.set(false)
 						revealFristPage.set(false)
 						revealSecondPage.set(true)
 					}}

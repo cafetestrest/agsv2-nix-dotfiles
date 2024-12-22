@@ -339,6 +339,11 @@ $itemsMinHeight: 1.5rem;
 	padding-left: 0.3rem;
 }
 
+.bar .player__playpause.active {
+	color: $on_surface;
+	background: transparent;
+}
+
 .player__playpause {
 	padding: 0 0.6rem;
 }

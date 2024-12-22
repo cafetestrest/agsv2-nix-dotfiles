@@ -13,21 +13,7 @@ try {
 
 const Audio = WireplumberService && WireplumberService.audio;
 
-const revealSinks = Variable(false);
-
-export const SinkButton = () => (
-	<button
-		// className={"control-center__sink-button"}
-		className={"control-center__powermenu-button sink"}
-		onClick={() =>
-			revealSinks.set(!revealSinks.get())
-		}
-	>
-		<icon
-			icon={bind(revealSinks).as((v) => true === v ? icons.ui.arrow.up : icons.ui.arrow.right)}
-		/>
-	</button>
-);
+export const revealSinks = Variable(false);
 
 export const SinkRevealer = () => Audio && (
 	<revealer

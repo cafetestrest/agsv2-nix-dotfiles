@@ -1,8 +1,9 @@
 import { bind } from "astal";
-import { Gtk } from "astal/gtk3";
+import { Gtk, Gdk } from "astal/gtk3";
 import { weather } from "../../../service/Weather";
 import { toggleWindow } from "../../../lib/utils";
 import BarButton from "../BarButton";
+import { bash } from "../../../lib/utils";
 
 export default () => {
 	const weatherData = bind(weather).as((w) => {
@@ -32,6 +33,13 @@ export default () => {
 				onClicked={() => {
 					toggleWindow("weather");
 				}}
+				// onClickRelease={(self, event) => {
+				// 	switch (event.button) {
+				// 		case Gdk.BUTTON_SECONDARY:
+				// 			return weather.poll
+				// 		case Gdk.BUTTON_MIDDLE:
+				// 			return weather.poll
+				// }}} //todo check
 			>
 				<label
 					className={"weather-label"}
