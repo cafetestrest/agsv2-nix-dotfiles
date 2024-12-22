@@ -20,6 +20,7 @@ import { Tooltip } from "../../Dashboard/weather";
 import Media from "../items/Media";
 import ControlCenterButton from "../ControlCenterButton";
 import ScreenshotMenu, { revealScreenShot } from "../items/ScreenshotMenu";
+import LightstripColor, { revealLightstripColor } from "../items/LightstripColor";
 
 // class FlowBox extends astalify(Gtk.FlowBox) {
 // 	static {
@@ -88,86 +89,109 @@ export default () => {
 			name="main"
 			className="control-center__page main"
 			vertical
-			spacing={spacing}
+			// spacing={spacing}
 		>
 			{/* {fb} */}
 
-			<revealer
-				className={"page-revealer first-revealer"}
-				revealChild={bind(revealFristPage)}
-				visible={bind(revealFristPage)}
-				transition_duration={300}
-				transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
-			>
-				<box vertical>
-					<box>
-						<BluetoothButton />
-						<box className={"control-center-space"} />
-						<NightLight />
-					</box>
+			<box className={"control-center-toggles"}>
+				<revealer
+					className={"page-revealer first-revealer"}
+					revealChild={bind(revealFristPage)}
+					visible={bind(revealFristPage)}
+					transition_duration={300}
+					transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
+				>
+					<box vertical>
+						<box>
+							<BluetoothButton />
+							<box className={"control-center-space"} />
+							<NightLight />
+						</box>
 
-					<box className={"control-center-box-space"} />
+						<box className={"control-center-box-space"} />
 
-					<box>
-						<Microphone />
-						<box className={"control-center-space"} />
-						<DND />
-					</box>
+						<box>
+							<Microphone />
+							<box className={"control-center-space"} />
+							<DND />
+						</box>
 
-					<box className={"control-center-box-space"} />
+						<box className={"control-center-box-space"} />
 
-					<box>
-						<Idle />
-						<box className={"control-center-space"} />
-						<ScreenRecord
-							onClicked={() => {
-								if (ScreenRecordService.recording) {
-									ScreenRecordService.stop();
-								} else {
-									revealScreenRecord.set(!revealScreenRecord.get());
-								}
-							}}
+						<box>
+							<Idle />
+							<box className={"control-center-space"} />
+							<ScreenRecord
+								onClicked={() => {
+									if (ScreenRecordService.recording) {
+										ScreenRecordService.stop();
+									} else {
+										revealScreenRecord.set(!revealScreenRecord.get());
+									}
+								}}
+							/>
+						</box>
+
+						<ScreenRecordMenu
+							revealMenu={bind(revealScreenRecord)}
+							closeMenu={() =>
+								revealScreenRecord.set(!revealScreenRecord.get())
+							}
 						/>
 					</box>
+				</revealer>
 
-					<ScreenRecordMenu
-						revealMenu={bind(revealScreenRecord)}
-						closeMenu={() =>
-							revealScreenRecord.set(!revealScreenRecord.get())
-						}
-					/>
-				</box>
-			</revealer>
+				<revealer
+					className={"page-revealer second-revealer"}
+					revealChild={bind(revealSecondPage)}
+					visible={bind(revealSecondPage)}
+					transition_duration={300}
+					transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+				>
+					<box vertical>
+						<box>
+							<NetworkButton />
+							<box className={"control-center-space"} />
+							<ControlCenterButton
+								className={"screenshot-button toggles"}
+								icon={icons.screenshot}
+								label={"Screenshot"}
+								onClicked={() => {revealScreenShot.set(!revealScreenShot.get())}}
+								menuName="arrow"
+							/>
+						</box>
 
-			<revealer
-				className={"page-revealer second-revealer"}
-				revealChild={bind(revealSecondPage)}
-				visible={bind(revealSecondPage)}
-				transition_duration={300}
-				transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-			>
-				<box vertical>
-					<box>
-						<NetworkButton />
-						<box className={"control-center-space"} />
-						{/* {Brightness()} */}
-						<ControlCenterButton
-							className={"screenshot-button toggles"}
-							icon={icons.screenshot}
-							label={"Screenshot"}
-							onClicked={() => {revealScreenShot.set(!revealScreenShot.get())}}
-							menuName="arrow"
+						<ScreenshotMenu
+							revealMenu={bind(revealScreenShot)}
+							closeMenu={() =>
+								revealScreenShot.set(!revealScreenShot.get())
+							}
+						/>
+
+						<box className={"control-center-box-space"} />
+
+						<box>
+							{/* {Brightness()} */}
+							<ControlCenterButton
+								className={"lightstrip-color-button toggles"}
+								icon={icons.brightness.indicator}
+								label={"Lightstrip"}
+								onClicked={() => {revealLightstripColor.set(!revealLightstripColor.get())}}
+								menuName="arrow"
+							/>
+							<box className={"control-center-space"} />
+							<box hexpand className={"filler-button toggles"} />
+						</box>
+
+						<LightstripColor
+							revealMenu={bind(revealLightstripColor)}
+							closeMenu={() =>
+								revealLightstripColor.set(!revealLightstripColor.get())
+							}
 						/>
 					</box>
-
-					<ScreenshotMenu
-						revealMenu={bind(revealScreenShot)}
-						closeMenu={() =>
-							revealScreenShot.set(!revealScreenShot.get())
-						}
-					/>
-				</box>
-			</revealer>
+				</revealer>
+			</box>
 
 			<box halign={Gtk.Align.CENTER} className={"control-center-page-indicators"}>
 				<button
@@ -218,6 +242,7 @@ export default () => {
 					label={bind(uptime)}
 				/>
 			</box> */}
+			<box className={"control-center-box-space"} />
 			< Tooltip total={5} />
 			<Media />
 		</box>

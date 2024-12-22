@@ -67,6 +67,7 @@ function main() {
 	// monitorColorsChange();
 	// reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/bar.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
 	reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/controlCenter.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
+	// reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/player.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
 	// reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/dashboard.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
 	// reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/notificationsWindow.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
 	monitorDashboard();

@@ -1,6 +1,7 @@
 @use "./colors.scss" as *;
 
 $buttonMinHeight: 2.714rem;
+$togglesHeight: 10.7rem;
 
 .ControlCenter {
 	.control-center__container {
@@ -81,15 +82,11 @@ $buttonMinHeight: 2.714rem;
 	// .control-center-page-indicators {
 	// }
 
-	// .page-revealer {
-	// }
-
 	.control-center-box-space {
 		margin-bottom: 0.6rem;
 	}
 
 	.toggles.control-center__button {
-		// border: 1px solid red;
 		min-width: $buttonMinHeight * 3.8;
 	}
 
@@ -191,11 +188,9 @@ $buttonMinHeight: 2.714rem;
 		margin-top: 0.6rem;
 
 		// button {
-		// 	border: 1px solid red;
 		// }
 
 		// switch {
-		// 	border: 1px solid red;
 		// }
 	}
 
@@ -317,72 +312,57 @@ $buttonMinHeight: 2.714rem;
 
 	// all buttons in qs
 	.control-center__button:hover {
-		// border: 1px solid blue;
 		box-shadow: $buttonShadow;
 	}
 
 	.control-center__button:active {
-		// border: 1px solid green;
 	}
 
 	.control-center__button:focus {
-		// border: 1px solid yellow;
 		box-shadow: $buttonShadow;
 	}
 
 	// slider
 	.control-center__volume-slider slider {
-		// border: 1px solid red;
 	}
 
 	.control-center__volume-slider highlight slider:hover trough {
-		// border: 1px solid blue;
 		// box-shadow: $buttonShadow;
 		// background-color: $hover;
 	}
 
 	.control-center__volume-slider slider:active {
-		// border: 1px solid green;
 	}
 
 	.control-center__volume-slider slider:focus {
-		// border: 1px solid yellow;
 		// box-shadow: $buttonShadow;
 	}
 
 	.control-center__powermenu-button {
-		// border: 1px solid red;
 	}
 
 	.control-center__powermenu-button:hover {
-		// border: 1px solid blue;
 		box-shadow: $buttonShadow;
 	}
 
 	.control-center__powermenu-button:active {
-		// border: 1px solid green;
 	}
 
 	.control-center__powermenu-button:focus {
-		// border: 1px solid yellow;
 		box-shadow: $buttonShadow;
 	}
 
 	.control-center__sink-button {
-		// border: 1px solid red;
 	}
 
 	.control-center__sink-button:hover {
-		// border: 1px solid blue;
 		box-shadow: $buttonShadow;
 	}
 
 	.control-center__sink-button:active {
-		// border: 1px solid green;
 	}
 
 	.control-center__sink-button:focus {
-		// border: 1px solid yellow;
 		box-shadow: $buttonShadow;
 	}
 
@@ -409,12 +389,20 @@ $buttonMinHeight: 2.714rem;
 		margin-top: 0.3rem;
 	}
 
+	.lightstrip-color {
+		.fetch-new-ip {
+			padding: 0 0.4rem;
+			border-radius: 1.2rem;
+		}
+	}
+
+	.lightstrip-color,
 	.sink-box {
 		background: $inverse_surface_transparent;
 		border-radius: 2.286rem;
 		padding: 1.714rem;
 
-		button {
+		.cotrol-center-menu-button {
 			border-radius: 2.286rem;
 			background-color: $bgColorTransparent;
 			padding-left: 1rem;
@@ -427,7 +415,6 @@ $buttonMinHeight: 2.714rem;
 	}
 
 	.button-arrow {
-		// border: 1px solid red;
 	}
 
 	.qs-menu button,
@@ -438,5 +425,17 @@ $buttonMinHeight: 2.714rem;
 		&:hover {
 			background-color: $inverse_surface_transparent_variant;
 		}
+	}
+
+	.control-center__page {
+		.control-center-toggles {
+			// fix to make min height of control center toggles unifed with multiple pages
+			min-height: $togglesHeight;
+		}
+	}
+
+	// filler when 1 button in control center is missing
+	.filler-button {
+		min-width: $buttonMinHeight * 3.8 * 1.1;
 	}
 }
