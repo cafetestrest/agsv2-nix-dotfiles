@@ -2,7 +2,7 @@
 
 .dashboard {
 	border-radius: 2.714rem;
-	min-width: 30rem;
+	min-width: 29rem;
 	transition:
 		background-color 1s ease-in-out,
 		color 1s ease-in-out;
@@ -25,6 +25,23 @@
 }
 
 .calendar__header {
+	button {
+		padding: 0.4rem;
+		border-radius: 1.2rem;
+		background-color: $surface_container_highest;
+		color: $on_surface;
+		transition:
+			background-color 0.2s ease-in-out,
+			color 0.2s ease-in-out;
+		&:hover {
+			background: $primary_fixed;
+			color: $on_primary_fixed;
+		}
+		&:focus {
+			background-color: $hover;
+		}
+	}
+
 	margin-top: 0.857rem;
 	padding: 0.714rem;
 }
@@ -37,6 +54,15 @@
 }
 
 .calendar__button {
+	border-radius: 1.2rem;
+	&:hover {
+		background: $primary_fixed;
+		color: $on_primary_fixed;
+	}
+	&:focus {
+		background-color: $hover;
+	}
+
 	padding: 0.714rem 0.857rem;
 }
 

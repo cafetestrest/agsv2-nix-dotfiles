@@ -18,7 +18,7 @@ export default ({
 	return (
 		<box
 			vertical
-			className={"control-center__dropdown-menu"}
+			className={"control-center__dropdown-menu qs-menu"}
 			spacing={spacing * 2}
 			visible={revealMenu}
 		>

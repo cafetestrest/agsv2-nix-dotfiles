@@ -16,7 +16,7 @@ export default () => {
 						IdleModeService.nextProfile()
 					};
 				}}
-				menuName="profiles"
+				// menuName="profiles"
 				connection={[bind(IdleModeService, "profile"), () => IdleModeService?.profile === 1]}
 			/>
 		);

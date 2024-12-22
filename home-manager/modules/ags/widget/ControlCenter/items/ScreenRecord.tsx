@@ -14,6 +14,7 @@ export default ({ onClicked }: { onClicked: () => void }) => {
 				bind(ScreenRecordService, "recording"),
 				() => ScreenRecordService.recording,
 			]}
+			menuName="arrow"
 		/>
 	);
 };

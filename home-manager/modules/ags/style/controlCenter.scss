@@ -89,7 +89,8 @@ $buttonMinHeight: 2.714rem;
 	}
 
 	.toggles.control-center__button {
-		min-width: $buttonMinHeight * 3.5;
+		// border: 1px solid red;
+		min-width: $buttonMinHeight * 3.8;
 	}
 
 	.control-center__page_item-header {
@@ -139,7 +140,7 @@ $buttonMinHeight: 2.714rem;
 	.control-center__button {
 		background-color: $secondary; //button off (not active) color
 		color: $on_surface;
-		padding: 0 1rem 0 1rem;
+		padding: 0 0.5rem 0 1rem;
 		border-radius: 7.143rem;
 		min-height: 3.2rem;
 		min-width: 8rem;
@@ -188,6 +189,14 @@ $buttonMinHeight: 2.714rem;
 		border-radius: 2.286rem;
 		padding: 1.714rem;
 		margin-top: 0.6rem;
+
+		// button {
+		// 	border: 1px solid red;
+		// }
+
+		// switch {
+		// 	border: 1px solid red;
+		// }
 	}
 
 	.control-center__dropdown-menu_icon {
@@ -410,6 +419,24 @@ $buttonMinHeight: 2.714rem;
 			background-color: $bgColorTransparent;
 			padding-left: 1rem;
 			padding-right: 1rem;
+		}
+	}
+
+	.cotrol-center-menu-button {
+		padding: 0.4rem 0;
+	}
+
+	.button-arrow {
+		// border: 1px solid red;
+	}
+
+	.qs-menu button,
+	.qs-menu switch{
+		&:focus {
+			box-shadow: $buttonShadow;
+		}
+		&:hover {
+			background-color: $inverse_surface_transparent_variant;
 		}
 	}
 }

@@ -2,11 +2,9 @@ import { Gtk } from "astal/gtk3";
 import { Binding, Variable } from "astal";
 import icons from "../../../lib/icons";
 import { spacing } from "../../../lib/variables";
-import Button from "../../../common/Button";
-import ScreenRecordService from "../../../service/ScreenRecord";
+import { bash, toggleWindow } from "../../../lib/utils";
 
-const recordMicrophone = Variable(false);
-const recordInternalAudio = Variable(false);
+export const revealScreenShot = Variable(false);
 
 export default ({
 	revealMenu,
@@ -18,49 +16,72 @@ export default ({
 	return (
 		<box
 			vertical
-			className={"control-center__dropdown-menu"}
+			className={"control-center__dropdown-menu sink-box qs-menu"}
 			spacing={spacing * 2}
 			visible={revealMenu}
 		>
-			<icon
-				icon={icons.record}
-				className={"control-center__dropdown-menu_icon"}
-			/>
+			{/* <icon
+				icon={icons.screenshot}
+				className={"control-center--button-screenshot-icon"}
+			/> */}
 			<label
-				label={"Start recording?"}
+				label={"Screenshot Menu"}
 				className={"control-center__dropdown-menu_title"}
 			/>
-			<box
-				hexpand
-				className={"control-center__dropdown-menu_item"}
-				spacing={spacing * 2}
+			
+			<button
+				className={"cotrol-center-menu-button"}
+				onClicked={() => {
+					closeMenu
+					toggleWindow("control-center")
+					bash('screenshot')
+				}}
 			>
-				<icon icon={icons.audio.mic.high} />
-				<label label={"Record audio"} />
-				<switch hexpand halign={Gtk.Align.END} />
-			</box>
-			<box
-				hexpand
-				className={"control-center__dropdown-menu_item"}
-				spacing={spacing * 2}
-			>
-				<icon icon={icons.audio.type.speaker} />
-				<label label={"Record internal audio"} />
-				<switch hexpand halign={Gtk.Align.END} />
-			</box>
-			<box hexpand halign={Gtk.Align.END} spacing={spacing}>
-				<Button buttonType="outlined" onClicked={closeMenu}>
-					Cancel
-				</Button>
-				<Button
-					onClicked={() => {
-						ScreenRecordService.start();
-						closeMenu();
-					}}
+				<box
+					hexpand
+					className={"control-center__dropdown-menu_item"}
+					spacing={spacing * 2}
 				>
-					Start
-				</Button>
-			</box>
+					<icon icon={icons.screenshot} halign={Gtk.Align.CENTER} />
+					<label label={"Full display"} />
+				</box>
+			</button>
+
+			<button
+				className={"cotrol-center-menu-button"}
+				onClicked={() => {
+					closeMenu
+					toggleWindow("control-center")
+					bash('screenshot 1')
+				}}
+			>
+				<box
+					hexpand
+					className={"control-center__dropdown-menu_item"}
+					spacing={spacing * 2}
+				>
+					<icon icon={icons.select} halign={Gtk.Align.CENTER} />
+					<label label={"Select region"} />
+				</box>
+			</button>
+
+			<button
+				className={"cotrol-center-menu-button"}
+				onClicked={() => {
+					closeMenu
+					toggleWindow("control-center")
+					bash('screenshot 2')
+				}}
+			>
+				<box
+					hexpand
+					className={"control-center__dropdown-menu_item"}
+					spacing={spacing * 2}
+				>
+					<icon icon={icons.window} halign={Gtk.Align.CENTER} />
+					<label label={"Select window"} />
+				</box>
+			</button>
 		</box>
 	);
 };

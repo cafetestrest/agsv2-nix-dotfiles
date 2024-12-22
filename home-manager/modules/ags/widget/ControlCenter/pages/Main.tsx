@@ -19,6 +19,7 @@ import Idle from "../items/Idle";
 import { Tooltip } from "../../Dashboard/weather";
 import Media from "../items/Media";
 import ControlCenterButton from "../ControlCenterButton";
+import ScreenshotMenu, { revealScreenShot } from "../items/ScreenshotMenu";
 
 // class FlowBox extends astalify(Gtk.FlowBox) {
 // 	static {
@@ -154,19 +155,17 @@ export default () => {
 							className={"screenshot-button toggles"}
 							icon={icons.screenshot}
 							label={"Screenshot"}
-							onClicked={() => {//TODO
-								if (ScreenRecordService.recording) {
-									ScreenRecordService.stop();
-								} else {
-									revealScreenRecord.set(!revealScreenRecord.get());
-								}
-							}}
-							connection={[
-								bind(ScreenRecordService, "recording"),
-								() => ScreenRecordService.recording,
-							]}
+							onClicked={() => {revealScreenShot.set(!revealScreenShot.get())}}
+							menuName="arrow"
 						/>
 					</box>
+
+					<ScreenshotMenu
+						revealMenu={bind(revealScreenShot)}
+						closeMenu={() =>
+							revealScreenShot.set(!revealScreenShot.get())
+						}
+					/>
 				</box>
 			</revealer>
 

@@ -40,7 +40,7 @@ export default ({
 				if (event.button == 1 && onPrimaryClick) {
 					onPrimaryClick();
 				}
-				if (event.button == 3 && menuName) {
+				if (event.button == 3 && menuName && menuName !== 'arrow') {
 					if (menuName == "network") {
 						const network = Network.get_default();
 						const { wifi } = Network.get_default();
@@ -66,7 +66,7 @@ export default ({
 					/>
 				)}
 				{menuName && (
-					<box hexpand={false} halign={Gtk.Align.END}>
+					<box hexpand={false} halign={Gtk.Align.END} className={"button-arrow"}>
 						<icon
 							halign={Gtk.Align.END}
 							icon={icons.ui.arrow.right}

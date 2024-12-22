@@ -184,6 +184,8 @@ export default {
 	},
     note: 'view-dual-symbolic',
     screenshot: 'applets-screenshooter-symbolic',
+	select: 'edit-select-all-symbolic',
+	window: 'focus-windows-symbolic',
 	nightlight: {
         1: 'weather-clear-symbolic',
         0: 'night-light-disabled-symbolic',
