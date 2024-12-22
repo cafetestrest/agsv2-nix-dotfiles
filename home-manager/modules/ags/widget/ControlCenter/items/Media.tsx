@@ -31,6 +31,8 @@ const Player = ({ player }: PlayerProps) => {
 
 	const PlayerIcon = () => (
 		<icon
+			halign={Gtk.Align.END}
+			valign={Gtk.Align.START}
 			icon={bind(player, "entry").as((i) =>
 				lookUpIcon(`${i}-symbolic`) ? `${i}-symbolic` : lookUpIcon(i) ? i : icons.fallback.audio,
 			)}
@@ -85,12 +87,35 @@ const Player = ({ player }: PlayerProps) => {
 			drawValue={false}
 			hexpand
 			value={bind(player, "position").as((p) => (player.length > 0 ? p / player.length : p * 0.01))}
-			onDragged={({ value }) => (player.position = value * 100)}
+			onDragged={({ value }) => {
+				if (value && value < 0) {
+					player.set_position(0);
+				} else if (value && value > 1) {
+					player.set_position(1);
+				} else if (value && player.length) {
+					player.set_position(value * player.length)
+				}
+			}}
 		/>
 	);
 
+	const coverArt = bind(player, 'coverArt').as(
+        (c) => {
+			if (c)
+				return `background-image: url('${c}')`
+			return `background-image: none`
+		},
+    )
+
+	function lengthStr(length: number) {
+		const min = Math.floor(length / 60);
+		const sec = Math.floor(length % 60);
+		const sec0 = sec < 10 ? '0' : '';
+		return `${min}:${sec0}${sec}`;
+	}
+
 	return (
-		<centerbox
+		<box
 			name={player.busName}
 			vertical
 			className={`player player-${player.busName}`}
@@ -103,38 +128,60 @@ const Player = ({ player }: PlayerProps) => {
 				return false;
 			})}
 		>
-			<box vexpand valign={Gtk.Align.START}>
-				<PlayerIcon />
-			</box>
-			<box hexpand vexpand valign={Gtk.Align.CENTER}>
-				<box vertical halign={Gtk.Align.START} vexpand valign={Gtk.Align.CENTER} className="player__title-box"
-                setup={(self) => {
-						self.hook(player, "notify::title", (_) => {
-							self.toggleClassName("dissappear", true);
-							setTimeout(() => {
-								self.toggleClassName("dissappear", false);
-								Title.label = player.title;
-								Artist.label = player.artist;
-							}, 300);
-						});
-					}}
-                >
-					{Title}
-					{Artist}
+			<box className={"cover-box"} vertical={false}>
+				<box>
+					<box className="cover-art" css={coverArt} />
 				</box>
-                <box hexpand/>
-				<PlayPauseButton halign={Gtk.Align.END} />
-			</box>
-			<box vexpand valign={Gtk.Align.END} spacing={24}>
-				<box visible={bind(player, "canGoPrevious")}>
-					<ControlButton icon={icons.media.prev} onClick={() => player.previous()} className="player__previous" />
+				<box vertical>
+					<box>
+						<box vertical halign={Gtk.Align.START} vexpand valign={Gtk.Align.CENTER} className="player__title-box"
+						setup={(self) => {
+								self.hook(player, "notify::title", (_) => {
+									self.toggleClassName("dissappear", true);
+									setTimeout(() => {
+										self.toggleClassName("dissappear", false);
+										Title.label = player.title;
+										Artist.label = player.artist;
+									}, 300);
+								});
+							}}
+						>
+							{Title}
+							{Artist}
+						</box>
+						<box hexpand />
+						<box
+							halign={Gtk.Align.END}
+							valign={Gtk.Align.START}
+						>
+							<PlayerIcon />
+						</box>
+					</box>
+					<box vertical>
+						<PositionSlider />
+						<box vexpand valign={Gtk.Align.END}>
+							<label className={"player-position"} halign={Gtk.Align.START} label={bind(player, "position").as((v) => lengthStr(v))} visible={bind(player, "length").as((v) => v > 0)}/>
+							<box visible={bind(player, "canGoPrevious")}>
+								<box hexpand />
+								<ControlButton icon={icons.media.prev} onClick={() => player.previous()} className="player__previous" />
+								<box hexpand />
+							</box>
+							<PlayPauseButton/>
+							<box visible={bind(player, "canGoNext")}>
+								<box hexpand />
+								<ControlButton icon={icons.media.next} onClick={() => player.next()} className="player__next" />
+								<box hexpand />
+							</box>
+							<label className={"player-length"} halign={Gtk.Align.END} label={bind(player, "length").as((v) => lengthStr(v))} visible={bind(player, "length").as((v) => v > 0)}/>
+						</box>
+					</box>
 				</box>
-				<PositionSlider />
-				<box visible={bind(player, "canGoNext")}>
-					<ControlButton icon={icons.media.next} onClick={() => player.next()} className="player__next" />
-				</box>
+
+				{/* <box hexpand vexpand valign={Gtk.Align.CENTER}>
+					<box hexpand/>
+				</box> */}
 			</box>
-		</centerbox>
+		</box>
 	);
 };
 

@@ -2,46 +2,49 @@
 
 .ControlCenter {
 	.player {
-		min-height: 11.071rem;
-		background: $surface_transparent;
-		padding: 1.429rem;
-		border-radius: 2.143rem;
+		// min-height: 11.071rem;
+		background: $secondary;
+		// padding: 1.429rem;
+		border-radius: 1.067rem;
 		background-size: cover;
 		background-position: center;
 		transition: 0.5s background ease-in-out;
+		padding: 0.4rem;
 	}
 
 	.player__icon {
-		font-size: 1.429rem;
+		// font-size: 1.429rem;
+		margin-right: 0.8rem;
+		margin-top: 0.4rem;
 	}
 
 	.player__title {
-		font-weight: 600;
-		font-size: 1.357rem;
-		padding-right: 1.286rem;
+		// font-weight: 600;
+		// font-size: 1.357rem;
+		// padding-right: 1.286rem;
 	}
 
 	.player__artist {
-		padding-right: 1.286rem;
-		font-weight: 400;
-		font-size: 1.214rem;
+		// padding-right: 1.286rem;
+		// font-weight: 400;
+		// font-size: 1.214rem;
 	}
 
 	.player__playpause {
-		min-width: 4.286rem;
-		min-height: 4.286rem;
+		// min-width: 4.286rem;
+		// min-height: 4.286rem;
 		padding: 0;
-		background: $primary;
-		color: $on_primary;
+		// background: $primary;
+		color: #ffffff;
 		border-radius: 0;
 		transition:
 			background 0.3s ease-in-out,
 			border-radius 0.3s ease-in-out,
 			color 0.3s ease-in-out;
-		border-radius: 2.143rem;
+		// border-radius: 2.143rem;
 
 		&.active {
-			border-radius: 1.429rem;
+			// border-radius: 1.429rem;
 		}
 	}
 
@@ -63,9 +66,10 @@
 			transition:
 				background-color 0.3s ease-in-out,
 				color 0.3s ease-in-out;
-			border-radius: 7.143rem;
+				border-radius: 7.143rem;
 
 			highlight {
+				min-width: 0.8rem;
 				border-radius: 7.143rem;
 				background-color: $on_surface;
 				border-radius: 7.143rem;
@@ -75,12 +79,14 @@
 			}
 
 			slider {
+				background-color: transparent;
+
 				margin: -0.714rem;
-				padding: 0.143rem 0;
-				border-radius: 0.5rem;
-				border-radius: 0.714rem;
+				// padding: 0.143rem 0;
+				// border-radius: 0.5rem;
+				// border-radius: 0.714rem;
 				box-shadow: none;
-				background-color: $on_surface;
+				// background-color: $on_surface;
 
 				transition:
 					background-color 0.3s ease-in-out,
@@ -91,37 +97,54 @@
 
 
 	.player__indicator {
-		min-width: 0.571rem;
-		min-height: 0.571rem;
+		// min-width: 0.571rem;
+		// min-height: 0.571rem;
 		background: $inverse_surface_transparent_variant;
 		border-radius: 7.143rem;
-		margin-bottom: 0.571rem;
+		// margin-bottom: 0.571rem;
 		transition: 0.3s all ease-in-out;
 		&.selected {
 			background: $inverse_surface;
 		}
 	}
 
+	// @keyframes slide {
+	// 	from {
+	// 		margin-left: 0;
+	// 		opacity: 1;
+	// 	}
+	// 	to {
+	// 		margin-left: 0;
+	// 		opacity: 0;
+	// 	}
+	// }
+	
+	// @keyframes slide-back {
+	// 	from {
+	// 		margin-left: 0;
+	// 		opacity: 0;
+	// 	}
+	// 	to {
+	// 		margin-left: 0;
+	// 		opacity: 1;
+	// 	}
+	// }
 
-	@keyframes slide {
-		from {
-			margin-left: 0;
-			opacity: 1;
+	.cover-art {
+		image {
+			font-size: 8px;
+			color: $secondary;
 		}
-		to {
-			margin-left: -7.143rem;
-			opacity: 0;
-		}
+        background-size: cover;
+        background-position: center;
+
+		border-radius: 1.5rem;
+		margin-right: 0.4rem;
+		min-width: 6rem;
+		min-height: 6rem;
 	}
 
-	@keyframes slide-back {
-		from {
-			margin-left: 7.143rem;
-			opacity: 0;
-		}
-		to {
-			margin-left: 0;
-			opacity: 1;
-		}
+	.player-length {
+		margin-right: 0.4rem;
 	}
 }

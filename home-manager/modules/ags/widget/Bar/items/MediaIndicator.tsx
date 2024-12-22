@@ -105,12 +105,12 @@ const Player = ({ player }: PlayerProps) => {
 					</BarButton>
 				</box>
 			</revealer>
-			<box visible={bind(player, "canGoNext")}>
-				<ControlButton icon={icons.media.next} onClick={() => player.next()} className="player__next" />
-			</box>
-			<PlayPauseButton />
 			<box visible={bind(player, "canGoPrevious")}>
 				<ControlButton icon={icons.media.prev} onClick={() => player.previous()} className="player__previous" />
+			</box>
+			<PlayPauseButton />
+			<box visible={bind(player, "canGoNext")}>
+				<ControlButton icon={icons.media.next} onClick={() => player.next()} className="player__next" />
 			</box>
 		</box>
 	)
