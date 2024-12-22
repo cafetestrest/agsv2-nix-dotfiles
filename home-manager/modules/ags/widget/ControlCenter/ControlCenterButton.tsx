@@ -24,7 +24,7 @@ export default ({
 }: ControlCenterButtonProps) => {
 	return (
 		<button
-			className={`${className} control-center__button ${!label && "no-label"}`}
+			className={`${className} toggles control-center__button ${!label && "no-label"}`}
 			setup={(self) => {
 				if (connection) {
 					let [service, condition] = connection;

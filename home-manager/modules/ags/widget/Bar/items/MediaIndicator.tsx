@@ -23,12 +23,14 @@ const Player = ({ player }: PlayerProps) => {
 
 	const Title = new Widget.Label({
 		label: player.get_title(),
+		maxWidthChars: 40,
 		truncate: true,
 		className: "player__title",
 	});
 
 	const Artist = new Widget.Label({
 		label: player.get_artist(),
+		maxWidthChars: 20,
 		truncate: true,
 		className: "player__artist",
 	});

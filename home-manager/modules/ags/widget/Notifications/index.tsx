@@ -98,24 +98,26 @@ export default () => {
 							timeout(150, () => n.dismiss());
 						});
 					}}
-				>
+					>
 					<label
 						className="notifications-window__clear-label"
 						label={"Clear all"}
 					></label>
 				</button>
-				<scrollable vexpand>
-					<box
-						className="notifications-window__list"
-						visible={true}
-						orientation={Gtk.Orientation.VERTICAL}
-						spacing={6}
-						vexpand={true}
-						hexpand={true}
-					>
-						{bind(notifs)}
-					</box>
-				</scrollable>
+				<box className={"notification-scroll-box"}>
+					<scrollable vexpand className={"notifications-scrollable"}>
+						<box
+							className="notifications-window__list"
+							visible={true}
+							orientation={Gtk.Orientation.VERTICAL}
+							spacing={6}
+							vexpand={true}
+							hexpand={true}
+						>
+							{bind(notifs)}
+						</box>
+					</scrollable>
+				</box>
 			</box>
 		</PopupWindow>
 	);

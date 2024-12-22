@@ -2,6 +2,7 @@ import AstalWp from "gi://AstalWp?version=0.1";
 import { Gtk } from "astal/gtk3";
 import { bind, Variable} from "astal";
 import icons from "../../../lib/icons";
+import { spacing } from "../../../lib/variables";
 
 let WireplumberService: AstalWp.Wp | null;
 try {
@@ -35,7 +36,11 @@ export const SinkRevealer = () => Audio && (
 		visible={bind(revealSinks)}
 		transitionType={Gtk.RevealerTransitionType.SLIDE_UP}
 	>
-		<box vertical={true}>
+		<box vertical={true} spacing={spacing * 2} className={"sink-box"}>
+			<label
+				label={"Audio source"}
+				className={"control-center__dropdown-menu_title"}
+			/>
 			{bind(Audio, 'speakers').as((speakers) => {
 				return speakers.map((speaker) => {
 					return (
@@ -58,6 +63,7 @@ export const SinkRevealer = () => Audio && (
 											return icons.audio.type.card;
 									}
 								})} />
+								<box hexpand />
 								<label label={bind(speaker, 'description').as((desc) => {
 									if (desc.includes("HDMI Audio"))
 										return "HDMI Audio";
@@ -67,6 +73,7 @@ export const SinkRevealer = () => Audio && (
 
 									return desc;
 								})} truncate={true} maxWidthChars={40} />
+								<box hexpand />
 								<icon icon={bind(speaker, 'is_default').as((def) => true === def ? icons.ui.tick : "")} />
 							</box>
 						</button>

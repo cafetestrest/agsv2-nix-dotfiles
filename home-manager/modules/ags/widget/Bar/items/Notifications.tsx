@@ -52,7 +52,7 @@ export default () => {
 			>
 				<box>
 					<icon
-						valign={Gtk.Align.CENTER}
+						valign={Gtk.Align.CENTER} halign={Gtk.Align.START}
 						className={"bar-notifications-icon"}
 						icon={bind(notifications, "dontDisturb").as(
 							(dnd) => icons.notifications[dnd ? "silent" : "noisy"],
@@ -69,9 +69,11 @@ export default () => {
 						setup={(self) => {
 							self.hook(notifications, "notify::notifications", () => {
 								self.reveal_child = true;
+								self.visible = true;
 
 								setTimeout(() => {
 									self.reveal_child = false;
+									self.visible = false;
 								}, 5000);	// 5 sec
 							});
 						}}
@@ -79,7 +81,8 @@ export default () => {
 						<label
 							halign={Gtk.Align.START}
 							valign={Gtk.Align.CENTER}
-							className="bar__notifications_label"
+							className="bar-last-notification-label"
+							maxWidthChars={40}
 							label={bind(notifications, "notifications").as(n => n.reverse()[0]?.summary || '')}
 						/>						
 					</revealer>

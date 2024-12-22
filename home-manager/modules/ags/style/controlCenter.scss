@@ -46,6 +46,48 @@ $buttonMinHeight: 2.714rem;
 		}
 	}
 
+	.control-center-page {
+		.page-dot {
+			// min-width: 0.371rem;
+			// min-height: 0.371rem;
+			margin: 0.65rem 0.35rem;
+			background-color: $inverse_surface_transparent_variant;
+			border-radius: 7.143rem;
+			transition: all 0.3s;
+		}
+
+		&:hover {
+			.page-dot {
+				background-color: $primary_transparent;
+			}
+		}
+	
+		&.active,
+		&:active {
+			.page-dot {
+				background-color: $primary;
+			}
+		}
+
+		&:focus {
+			.page-dot {
+				// padding: 0.34rem 1rem;
+				box-shadow: $buttonShadow;
+				background-color: $shadowTransparent;
+			}
+		}
+	}
+
+	// .control-center-page-indicators {
+	// }
+
+	// .page-revealer {
+	// }
+
+	.control-center-box-space {
+		margin-bottom: 0.6rem;
+	}
+
 	.toggles.control-center__button {
 		min-width: $buttonMinHeight * 3.5;
 	}
@@ -145,6 +187,7 @@ $buttonMinHeight: 2.714rem;
 		background: $inverse_surface_transparent;
 		border-radius: 2.286rem;
 		padding: 1.714rem;
+		margin-top: 0.6rem;
 	}
 
 	.control-center__dropdown-menu_icon {
@@ -350,10 +393,23 @@ $buttonMinHeight: 2.714rem;
 	}
 
 	.qsvolume-box {
-		margin-top: 0.3rem;
+		// margin-top: 0.3rem;
 	}
 
 	.weather {
 		margin-top: 0.3rem;
+	}
+
+	.sink-box {
+		background: $inverse_surface_transparent;
+		border-radius: 2.286rem;
+		padding: 1.714rem;
+
+		button {
+			border-radius: 2.286rem;
+			background-color: $bgColorTransparent;
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
 	}
 }

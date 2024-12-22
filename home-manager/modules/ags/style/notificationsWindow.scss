@@ -19,11 +19,27 @@
 
 .notifications-window__clear {
 	background: none;
-	padding: 0.429rem 0;
+	padding: 0.429rem 0.5rem;
 	margin-right: 1.286rem;
+	border-radius: 1.2rem;
+
+	background-color: $surface_container_highest;
+	color: $on_surface;
+	transition:
+		background-color 0.2s ease-in-out,
+		color 0.2s ease-in-out;
+	&:hover {
+		background: $primary_fixed;
+		color: $on_primary_fixed;
+	}
+	&:focus {
+		background-color: $hover;
+	}
 }
 
 .notifications-window__list {
+	border-radius: 0.8rem;
+
 	revealer:first-child {
 		.notification {
 			border-top-left-radius: 1.714rem;
@@ -37,5 +53,31 @@
 			border-bottom-right-radius: 1.714rem;
 			margin-bottom: 0.714rem;
 		}
+	}
+}
+
+.notifications-scrollable {
+	border-radius: 2.143rem;
+	margin-bottom: 1rem;
+
+	.frame {
+		border-radius: 2.143rem;
+	}
+
+	.overlay-indicator {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.overlay-indicator:hover {
+		background-color: transparent;
+	}
+
+	.bottom {
+		background: transparent;
+	}
+	
+	.top {
+		background: transparent;
 	}
 }

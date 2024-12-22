@@ -86,10 +86,6 @@ $itemsMinHeight: 1.5rem;
 	color: $accent;
 }
 
-.bar__notifications {
-	color: $yellow;
-}
-
 .bar__app-launcher.bar__button {
 	// padding: 0;
 	padding: 0 0.2rem;
@@ -200,6 +196,7 @@ $itemsMinHeight: 1.5rem;
 }
 
 .bar__notifications {
+	color: $yellow;
 	padding: 0 0 0 0.6rem;
 	margin: 0;
 }
@@ -218,10 +215,14 @@ $itemsMinHeight: 1.5rem;
 .bar__notifications_label {
 	// font-size: 0.857rem;
 	border-radius: 0.643rem;
-	min-width: 1.286rem;
-	min-height: 1.286rem;
+	min-width: 1rem;
+	// min-height: 1.286rem;
 	// background: $inverse_surface;
 	// color: $surface;
+}
+
+.bar-last-notification-label {
+	padding-right: 0.4rem;
 }
 
 .bar__tray {

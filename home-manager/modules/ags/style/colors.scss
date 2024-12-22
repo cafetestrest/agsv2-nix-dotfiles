@@ -186,6 +186,7 @@ $primary_transparent_less: color.adjust($primary, $alpha: -0.2);
 $scrim_transparent: color.adjust($scrim, $alpha: -0.68);
 // $surface_transparent: color.adjust($surface, $alpha: -0.2);
 $bg-color: #171717;
+$bgColorTransparent: color.adjust($bg-color, $alpha: -0.4);
 
 // $surface_transparent: color.adjust($surface, $alpha: 0);
 $surface_transparent: $bg-color;
@@ -202,6 +203,7 @@ $_border-color: $fg-color;
 $shadowColor: #eeeeee;
 $hover: color.adjust($shadowColor, $alpha: -0.80);
 $osd: color.adjust(gray, $alpha: -0.30);
+$shadowTransparent: color.adjust($shadowColor, $alpha: -0.50);
 $buttonShadow: inset 0 0 0 1px $hover, inset 0 0 0 99px $hover;
 
 // $active-gradient: linear-gradient(to right, $blue, color.adjust($blue, $alpha: 6%));

@@ -92,8 +92,8 @@ const Player = ({ player }: PlayerProps) => {
 					player.set_position(0);
 				} else if (value && value > 1) {
 					player.set_position(1);
-				} else if (value && player.length) {
-					player.set_position(value * player.length)
+				} else if (value) {
+					player.set_position(player.length > 0 ? value * player.length: value * 100);
 				}
 			}}
 		/>
@@ -164,11 +164,11 @@ const Player = ({ player }: PlayerProps) => {
 							<box visible={bind(player, "canGoPrevious")}>
 								<box hexpand />
 								<ControlButton icon={icons.media.prev} onClick={() => player.previous()} className="player__previous" />
-								<box hexpand />
 							</box>
+							<box hexpand />
 							<PlayPauseButton/>
+							<box hexpand />
 							<box visible={bind(player, "canGoNext")}>
-								<box hexpand />
 								<ControlButton icon={icons.media.next} onClick={() => player.next()} className="player__next" />
 								<box hexpand />
 							</box>

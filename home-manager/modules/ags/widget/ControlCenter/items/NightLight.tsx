@@ -16,7 +16,7 @@ export default () => {
 						NightlightModeService.nextProfile()
 					};
 				}}
-				menuName="profiles"
+				// menuName="profiles"
 				connection={[profile, () => NightlightModeService?.profile !== 0]}
 			/>
 		);

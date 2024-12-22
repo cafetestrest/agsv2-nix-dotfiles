@@ -79,4 +79,7 @@
 		background: $primary_fixed;
 		color: $on_primary_fixed;
 	}
+	&:focus {
+		background-color: $hover;
+	}
 }

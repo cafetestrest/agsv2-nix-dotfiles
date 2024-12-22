@@ -18,6 +18,7 @@ import NightLight from "../items/NightLight";
 import Idle from "../items/Idle";
 import { Tooltip } from "../../Dashboard/weather";
 import Media from "../items/Media";
+import ControlCenterButton from "../ControlCenterButton";
 
 // class FlowBox extends astalify(Gtk.FlowBox) {
 // 	static {
@@ -33,6 +34,8 @@ import Media from "../items/Media";
 
 export default () => {
 	const revealScreenRecord = Variable(false);
+	const revealFristPage = Variable(true);
+	const revealSecondPage = Variable(false);
 
 	// const fb = new FlowBox({
 	// 	homogeneous: true,
@@ -88,39 +91,113 @@ export default () => {
 		>
 			{/* {fb} */}
 
-			<box>
-				{/* <NetworkButton /> */}
-				<BluetoothButton />
-				<box className={"control-center-space"} />
-				<NightLight />
-			</box>
+			<revealer
+				className={"page-revealer first-revealer"}
+				revealChild={bind(revealFristPage)}
+				visible={bind(revealFristPage)}
+				transition_duration={300}
+				transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
+			>
+				<box vertical>
+					<box>
+						<BluetoothButton />
+						<box className={"control-center-space"} />
+						<NightLight />
+					</box>
 
-			<box>
-				<Microphone />
-				<box className={"control-center-space"} />
-				<DND />
-			</box>
+					<box className={"control-center-box-space"} />
 
-			<box>
-				<Idle />
-				<box className={"control-center-space"} />
-				<ScreenRecord
-					onClicked={() => {
-						if (ScreenRecordService.recording) {
-							ScreenRecordService.stop();
-						} else {
-							revealScreenRecord.set(!revealScreenRecord.get());
+					<box>
+						<Microphone />
+						<box className={"control-center-space"} />
+						<DND />
+					</box>
+
+					<box className={"control-center-box-space"} />
+
+					<box>
+						<Idle />
+						<box className={"control-center-space"} />
+						<ScreenRecord
+							onClicked={() => {
+								if (ScreenRecordService.recording) {
+									ScreenRecordService.stop();
+								} else {
+									revealScreenRecord.set(!revealScreenRecord.get());
+								}
+							}}
+						/>
+					</box>
+
+					<ScreenRecordMenu
+						revealMenu={bind(revealScreenRecord)}
+						closeMenu={() =>
+							revealScreenRecord.set(!revealScreenRecord.get())
 						}
-					}}
-				/>
-			</box>
+					/>
+				</box>
+			</revealer>
 
-			<ScreenRecordMenu
-				revealMenu={bind(revealScreenRecord)}
-				closeMenu={() =>
-					revealScreenRecord.set(!revealScreenRecord.get())
-				}
-			/>
+			<revealer
+				className={"page-revealer second-revealer"}
+				revealChild={bind(revealSecondPage)}
+				visible={bind(revealSecondPage)}
+				transition_duration={300}
+				transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+			>
+				<box vertical>
+					<box>
+						<NetworkButton />
+						<box className={"control-center-space"} />
+						{/* {Brightness()} */}
+						<ControlCenterButton
+							className={"screenshot-button toggles"}
+							icon={icons.screenshot}
+							label={"Screenshot"}
+							onClicked={() => {//TODO
+								if (ScreenRecordService.recording) {
+									ScreenRecordService.stop();
+								} else {
+									revealScreenRecord.set(!revealScreenRecord.get());
+								}
+							}}
+							connection={[
+								bind(ScreenRecordService, "recording"),
+								() => ScreenRecordService.recording,
+							]}
+						/>
+					</box>
+				</box>
+			</revealer>
+
+			<box halign={Gtk.Align.CENTER} className={"control-center-page-indicators"}>
+				<button
+					className={bind(revealFristPage).as((r) => {
+						if (r)
+							return "control-center-page active"
+						return "control-center-page"
+					})}
+					onClick={() =>{
+						revealFristPage.set(true)
+						revealSecondPage.set(false)
+					}}
+				>
+					<box className={"page-dot"} />
+				</button>
+				<button
+					className={bind(revealSecondPage).as((r) => {
+						if (r)
+							return "control-center-page active"
+						return "control-center-page"
+					})}
+					onClick={() =>{
+						revealFristPage.set(false)
+						revealSecondPage.set(true)
+					}}
+				>
+					<box className={"page-dot"} />
+				</button>
+			</box>
 
 			<box className={"qsvolume-box"}>
 				<Volume valign={Gtk.Align.CENTER}/>
@@ -129,7 +206,6 @@ export default () => {
 			</box>
 			<SinkRevealer />
 
-			{/* {Brightness()} */}
 			{/* <box spacing={16} className="control-center__footer">
 				<button
 					className="control-center__powermenu-button"
