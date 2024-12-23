@@ -25,6 +25,15 @@
 }
 
 .calendar__header {
+	.sidebar-calendar-monthshift-btn {
+		margin-left: 1rem;
+		padding: 0 0.7rem;
+	}
+
+	.calendar__monthyear {
+		padding: 0.5rem 1rem;
+	}
+
 	button {
 		padding: 0.4rem;
 		border-radius: 1.2rem;

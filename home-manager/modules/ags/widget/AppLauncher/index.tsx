@@ -1,7 +1,7 @@
 import { App, Gtk, Astal, Widget } from "astal/gtk3";
 import { bind, Variable } from "astal";
 import AstalApps from "gi://AstalApps?version=0.1";
-import AppItem from "./AppItem";
+import AppItem, { MathResult } from "./AppItem";
 import PopupWindow from "../../common/PopupWindow";
 import icons from "../../lib/icons";
 
@@ -9,14 +9,32 @@ const apps = new AstalApps.Apps();
 
 const query = Variable<string>("");
 
+function containsMathOperation(text:string) {
+	// Define a regular expression to match mathematical operators
+	const mathOperationRegex = /[+\-*/]/;
+
+	// Use the test method to check if the text contains a math operation
+	return mathOperationRegex.test(text);
+}
+
 export default () => {
-	const items = query((query) =>
-		apps
+	const items = query((query) => {
+		let mathResult;
+		if (containsMathOperation(query)) {
+			try {
+				mathResult = eval(query);
+			} catch (error) {
+				// do nothing
+			}
+		}
+
+		return mathResult ? MathResult(mathResult.toString(), query.toString()) : apps
 			.fuzzy_query(query)
-			.map((app: AstalApps.Application) => AppItem(app)),
-	);
+			.map((app: AstalApps.Application) => AppItem(app))
+	});
 
 	const Entry = new Widget.Entry({
+		hexpand: true,
 		text: bind(query),
 		canFocus: true,
 		className: "app-launcher__input",
