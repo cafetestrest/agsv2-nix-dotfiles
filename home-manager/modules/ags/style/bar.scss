@@ -12,14 +12,14 @@ $itemsMinHeight: 1.5rem;
 }
 
 .extra-buttons.bar__button {
-	padding: 0 0.4rem;
+	padding: 0.1rem 0.4rem;
 	margin: 0;
 	min-width: 1rem;
 }
 
 .taskbar {
 	.bar__button {
-		padding: 0 0.45rem;
+		padding: 0.1rem 0.45rem;
 	}
 }
 
@@ -87,7 +87,7 @@ $itemsMinHeight: 1.5rem;
 
 .bar__app-launcher.bar__button {
 	// padding: 0;
-	padding: 0 0.2rem;
+	padding: 0.1rem 0.2rem;
 	transition: all 0.3s;
 	// background-color: $primary;
 	min-height: $itemsMinHeight;
@@ -194,19 +194,19 @@ $itemsMinHeight: 1.5rem;
 
 .bar__notifications {
 	color: $yellow;
-	padding: 0 0 0 0.6rem;
+	padding: 0.2rem 0 0.2rem 0.6rem;
 	margin: 0;
 }
 
 .clock-bar {
-	padding: 0 0.6rem;
+	padding: 0.1rem 0.6rem;
 }
 
 // .weather-label {
 // }
 
 .weather-button {
-	padding: 0 0.4rem;
+	padding: 0.1rem 0.4rem;
 }
 
 .bar__notifications_label {
@@ -288,7 +288,7 @@ $itemsMinHeight: 1.5rem;
 }
 
 .powermenu-button {
-	padding: 0 0.4rem;
+	padding: 0.1rem 0.4rem;
 	color: $red_transparent;
 }
 
@@ -320,7 +320,7 @@ $itemsMinHeight: 1.5rem;
 }
 
 .bar__system-indicators {
-	padding: 0 0.5rem;
+	padding: 0.1rem 0.5rem;
 }
 
 .bt-indicator-icon {
@@ -342,6 +342,9 @@ $itemsMinHeight: 1.5rem;
 .bar .player__playpause.active {
 	color: $on_surface;
 	background: transparent;
+	&:hover {
+		background: $hover;
+	}
 }
 
 .player__playpause {
