@@ -31,7 +31,7 @@ export const SinkRevealer = () => Audio && (
 				return speakers.map((speaker) => {
 					return (
 						<button
-							className={"sink-choose-button qs-menu"}
+							className={"sink-choose-button qs-menu cotrol-center-menu-button"}
 							onClick={() =>
 								speaker.set_is_default(true)
 							}

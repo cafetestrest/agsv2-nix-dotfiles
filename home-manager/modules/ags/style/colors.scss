@@ -128,7 +128,6 @@ $red_value: #f38ba8;
 $scrim: #000000;
 
 // $secondary: #e7bdb7;
-// $secondary: rgba(23, 23, 23, 0.6);
 $secondary: #232323;
 
 $secondary_container: #5d3f3b;
@@ -205,15 +204,3 @@ $hover: color.adjust($shadowColor, $alpha: -0.80);
 $osd: color.adjust(gray, $alpha: -0.30);
 $shadowTransparent: color.adjust($shadowColor, $alpha: -0.50);
 $buttonShadow: inset 0 0 0 1px $hover, inset 0 0 0 99px $hover;
-
-// $active-gradient: linear-gradient(to right, $blue, color.adjust($blue, $alpha: 6%));
-// $inverse_surface_transparent: $active-gradient;
-
-// .volumeslider trough highlight:focus
-// box-shadow: inset 0 0 0 1px rgba(238, 238, 238, 0.03), inset 0 0 0 99px rgba(238, 238, 238, 0.154);
-
-// .volumeslider trough
-// background-color: rgba(238, 238, 238, 0.06);
-
-// window#quicksettings .window-content .sink-selector button {
-// background-color: rgba(23, 23, 23, 0.6);

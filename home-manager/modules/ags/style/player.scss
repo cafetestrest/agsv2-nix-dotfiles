@@ -33,7 +33,7 @@
 	.player__playpause {
 		// min-width: 4.286rem;
 		// min-height: 4.286rem;
-		padding: 0;
+		padding: 0 0.4rem;
 		// background: $primary;
 		color: $on_surface;
 		border-radius: 0;
@@ -92,9 +92,19 @@
 					background-color 0.3s ease-in-out,
 					color 0.3s ease-in-out;
 			}
+
+			highlight,
+			progress {
+				background: linear-gradient(to right, #51a4e7, #6cb2eb); // todo add in colors
+			}
+
+			// different shade when hover/focus - same as in common file - &:hover
+			highlight:hover,
+			highlight:focus {
+				box-shadow: $buttonShadow;
+			}
 		}
 	}
-
 
 	.player__indicator {
 		// min-width: 0.571rem;
@@ -146,5 +156,16 @@
 
 	.player-length {
 		margin-right: 0.4rem;
+	}
+
+	.player button {
+		border-radius: 1.2rem;
+
+		&:focus {
+			box-shadow: $buttonShadow;
+		}
+		&:hover {
+			background-color: $inverse_surface_transparent_variant;
+		}
 	}
 }

@@ -22,77 +22,29 @@ import ControlCenterButton from "../ControlCenterButton";
 import ScreenshotMenu, { revealScreenShot } from "../items/ScreenshotMenu";
 import LightstripColor, { revealLightstripColor } from "../items/LightstripColor";
 
-// class FlowBox extends astalify(Gtk.FlowBox) {
-// 	static {
-// 		GObject.registerClass(this);
-// 	}
-
-// 	constructor(
-// 		props: ConstructProps<Gtk.FlowBox, Gtk.FlowBox.ConstructorProps>,
-// 	) {
-// 		super(props as any);
-// 	}
-// }
-
 export default () => {
 	const revealScreenRecord = Variable(false);
 	const revealFristPage = Variable(true);
 	const revealSecondPage = Variable(false);
 
-	// const fb = new FlowBox({
-	// 	homogeneous: true,
-	// 	selectionMode: Gtk.SelectionMode.NONE,
-	// 	maxChildrenPerLine: 2,
-	// 	minChildrenPerLine: 2,
-	// 	rowSpacing: spacing,
-	// 	columnSpacing: spacing,
-	// });
-
-	// const FanProfile = FanProfileButton();
-	// const Network = NetworkButton();
-	// const Bluetooth = BluetoothButton();
-
-	// if (Network != undefined) {
-	// 	fb.add(Network);
-	// }
-	// if (Bluetooth != undefined) {
-	// 	fb.add(Bluetooth);
-	// }
-
-
-	// if (FanProfile != undefined) {
-	// 	fb.add(FanProfile);
-	// }
-	// fb.add(Microphone());
-	// fb.add(DND());
-	// fb.add(
-	// 	new Widget.Box({
-	// 		spacing,
-	// 		homogeneous: true,
-	// 		children: [
-	// 			ColorScheme(),
-	// 			ScreenRecord({
-	// 				onClicked: () => {
-	// 					if (ScreenRecordService.recording) {
-	// 						ScreenRecordService.stop();
-	// 					} else {
-	// 						revealScreenRecord.set(!revealScreenRecord.get());
-	// 					}
-	// 				},
-	// 			}),
-	// 		],
-	// 	}),
-	// );
-
 	const SinkButton = () => (
 		<button
-			// className={"control-center__sink-button"}
 			className={"control-center__powermenu-button sink"}
 			onClick={() => {
 				revealScreenRecord.set(false);
 				revealScreenShot.set(false);
 				revealLightstripColor.set(false);
 				revealSinks.set(!revealSinks.get())
+			}}
+			onKeyReleaseEvent={(_, event) => {
+				const [keyEvent, keyCode] = event.get_keycode();
+
+				if (keyEvent && (keyCode === 36 || keyCode === 65 || keyCode === 104)) { //65:space, 36:return, 104:num return
+					revealScreenRecord.set(false);
+					revealScreenShot.set(false);
+					revealLightstripColor.set(false);
+					revealSinks.set(!revealSinks.get())
+				}
 			}}
 		>
 			<icon
@@ -108,8 +60,6 @@ export default () => {
 			vertical
 			// spacing={spacing}
 		>
-			{/* {fb} */}
-
 			<box className={"control-center-toggles"}>
 				<revealer
 					className={"page-revealer first-revealer"}
@@ -239,6 +189,18 @@ export default () => {
 						revealFristPage.set(true)
 						revealSecondPage.set(false)
 					}}
+					onKeyReleaseEvent={(_, event) => {
+						const [keyEvent, keyCode] = event.get_keycode();
+		
+						if (keyEvent && (keyCode === 36 || keyCode === 65 || keyCode === 104)) { //65:space, 36:return, 104:num return
+							revealScreenRecord.set(false);
+							revealScreenShot.set(false);
+							revealLightstripColor.set(false);
+							revealSinks.set(false)
+							revealFristPage.set(true)
+							revealSecondPage.set(false)
+						}
+					}}
 				>
 					<box className={"page-dot"} />
 				</button>
@@ -255,6 +217,18 @@ export default () => {
 						revealSinks.set(false)
 						revealFristPage.set(false)
 						revealSecondPage.set(true)
+					}}
+					onKeyReleaseEvent={(_, event) => {
+						const [keyEvent, keyCode] = event.get_keycode();
+		
+						if (keyEvent && (keyCode === 36 || keyCode === 65 || keyCode === 104)) { //65:space, 36:return, 104:num return
+							revealScreenRecord.set(false);
+							revealScreenShot.set(false);
+							revealLightstripColor.set(false);
+							revealSinks.set(false)
+							revealFristPage.set(false)
+							revealSecondPage.set(true)
+						}
 					}}
 				>
 					<box className={"page-dot"} />

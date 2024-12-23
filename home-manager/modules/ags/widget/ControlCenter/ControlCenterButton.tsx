@@ -1,4 +1,4 @@
-import { Gtk, Widget, Astal } from "astal/gtk3";
+import { Gtk, Gdk, Widget, Astal } from "astal/gtk3";
 import icons from "../../lib/icons";
 import { Subscribable } from "astal/binding";
 import { controlCenterPage } from ".";
@@ -36,16 +36,29 @@ export default ({
 					});
 				}
 			}}
-			onClickRelease={(_, event: Astal.ClickEvent) => {
-				if (event.button == 1 && onPrimaryClick) {
-					onPrimaryClick();
-				}
-				if (event.button == 3 && menuName && menuName !== 'arrow') {
-					if (menuName == "network") {
-						const network = Network.get_default();
-						const { wifi } = Network.get_default();
-						if (wifi == null) return;
-					}
+			onClickRelease={(self, event: Astal.ClickEvent) => {
+				switch (event.button) {
+					case Gdk.BUTTON_PRIMARY:
+						if (onPrimaryClick) {
+							onPrimaryClick();
+						}
+						break;
+					case Gdk.BUTTON_SECONDARY:
+					case Gdk.BUTTON_MIDDLE:
+						if (menuName && menuName !== 'arrow') {
+							if (menuName == "network") {
+								const network = Network.get_default();
+								const { wifi } = Network.get_default();
+								if (wifi == null) return;
+							}
+							controlCenterPage.set(menuName);
+						}
+						break;
+			}}}
+			onKeyReleaseEvent={(_, event) => {
+				const [keyEvent, keyCode] = event.get_keycode();
+
+				if (keyEvent && menuName && menuName !== 'arrow' && (keyCode === 36 || keyCode === 65 || keyCode === 104)) { //65:space, 36:return, 104:num return
 					controlCenterPage.set(menuName);
 				}
 			}}

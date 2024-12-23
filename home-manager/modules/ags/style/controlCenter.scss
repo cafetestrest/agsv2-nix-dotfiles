@@ -45,6 +45,10 @@ $togglesHeight: 10.7rem;
 		&:hover {
 			background-color: $inverse_surface_transparent_variant;
 		}
+
+		&:focus {
+			box-shadow: $buttonShadow;
+		}
 	}
 
 	.control-center-page {
@@ -421,6 +425,9 @@ $togglesHeight: 10.7rem;
 	.button-arrow {
 	}
 
+	.control-center__page.bluetooth button,
+	.control-center__page.bluetooth switch,
+	.qs-menu,
 	.qs-menu button,
 	.qs-menu switch{
 		&:focus {

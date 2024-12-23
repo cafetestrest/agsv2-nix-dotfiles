@@ -14,6 +14,13 @@ export default ({ onClicked }: { onClicked: () => void }) => {
 				bind(ScreenRecordService, "recording"),
 				() => ScreenRecordService.recording,
 			]}
+			onKeyReleaseEvent={(_, event) => {
+				const [keyEvent, keyCode] = event.get_keycode();
+
+				if (keyEvent && (keyCode === 36 || keyCode === 65 || keyCode === 104)) { //65:space, 36:return, 104:num return
+					onClicked()
+				}
+			}}
 			menuName="arrow"
 		/>
 	);
