@@ -47,8 +47,9 @@ const ScreenRecorderService = GObject.registerClass(
 
       ensureDirectory(this.#recordings);
       this.#file = `${this.#recordings}/${now()}.mp4`;
-      const output = hypr.focusedMonitor.name;
-      const cmd = `wl-screenrec --output ${output} --filename ${this.#file}`;
+      // const output = hypr.focusedMonitor.name;
+      // const cmd = `wl-screenrec --output ${output} --filename ${this.#file}`;
+      const cmd = `wf-recorder -c h264_vaapi -f ${this.#file}`;
 
       this.#recorder = AstalIO.Process.subprocess(cmd);
       this.notify("recording");

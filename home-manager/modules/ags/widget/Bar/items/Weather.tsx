@@ -33,13 +33,15 @@ export default () => {
 				onClicked={() => {
 					toggleWindow("weather");
 				}}
-				// onClickRelease={(self, event) => {
-				// 	switch (event.button) {
-				// 		case Gdk.BUTTON_SECONDARY:
-				// 			return weather.poll
-				// 		case Gdk.BUTTON_MIDDLE:
-				// 			return weather.poll
-				// }}} //todo check
+				onClickRelease={(self, event) => {
+					switch (event.button) {
+						case Gdk.BUTTON_SECONDARY:
+							weather.startPoll()
+							return weather.stopPoll()
+						case Gdk.BUTTON_MIDDLE:
+							weather.startPoll
+							return weather.stopPoll
+				}}} //todo check
 			>
 				<label
 					className={"weather-label"}

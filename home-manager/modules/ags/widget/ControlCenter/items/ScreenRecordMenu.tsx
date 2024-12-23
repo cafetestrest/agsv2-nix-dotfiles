@@ -38,6 +38,7 @@ export default ({
 				<icon icon={icons.audio.mic.high} />
 				<label label={"Record audio"} />
 				<switch hexpand halign={Gtk.Align.END} />
+				{/* //TODO check */}
 			</box>
 			<box
 				hexpand

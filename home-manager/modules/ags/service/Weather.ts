@@ -1,6 +1,6 @@
 import { Variable } from "astal";
 
-export const weather = Variable<any | null>(null).poll(
+export const weather = Variable<string | null>(null).poll(
 	600_000,
 	"openweathermap",
 	(out, prev) => {

@@ -131,14 +131,19 @@ const ColorPickerButton = () => {
 const PowerMenuButton = () => (
 	<BarButton
 		className={"powermenu-button"}
-		onClick={() => toggleWindow("powermenu")}
-		onClickRelease={(self, event) => {
+		onClickRelease={(_, event: Astal.ClickEvent) => {
 			switch (event.button) {
-				// case Gdk.BUTTON_SECONDARY:
-					// return bash('openstartupapps')
-				// case Gdk.BUTTON_MIDDLE:
-					// return bash('openstartupapps')
-		}}}
+				case Gdk.BUTTON_PRIMARY:
+					toggleWindow("powermenu")
+					break;
+				case Gdk.BUTTON_SECONDARY:
+					bash('openstartupapps')
+					break;
+				case Gdk.BUTTON_MIDDLE:
+					bash('openstartupapps')
+					break;
+			}
+		}}
 	>
 		<box
 			valign={Gtk.Align.CENTER}
