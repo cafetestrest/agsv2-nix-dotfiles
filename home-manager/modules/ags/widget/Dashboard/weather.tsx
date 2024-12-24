@@ -1,10 +1,26 @@
 import { App, Astal, Widget } from "astal/gtk3";
 import PopupWindow from "../../common/PopupWindow";
-import { weather } from "../../service/Weather";
+import { weather, TooltipItem } from "../../service/Weather";
 
-//TODO add types
+type TemperatureData = {
+	minTemp: number;
+	maxTemp: number;
+	rain: number;
+	icons: string[];
+	widgetsNumber: number;
+	data: TooltipItem[];
+};
 
-function getMostCommon(arr: []){
+type IconTemperatureData = {
+	minTemp: number;
+	maxTemp: number;
+	rain: number;
+	icons: string[];
+	widgetsNumber: number;
+	data: TooltipItem[];
+};
+
+function getMostCommon<T>(arr: T[]): T | undefined {
     return arr.sort((a,b) =>
           arr.filter(v => v===a).length
         - arr.filter(v => v===b).length
@@ -185,7 +201,7 @@ function weatherBackgroundStyle(icon: string, box: Widget.Box) {
     }
 }
 
-const WeatherBoxChild = (w) => (
+const WeatherBoxChild = (w: TooltipItem) => (
 	<box
 		className={"qs-weather-box-child"}
 		vertical={true}
@@ -196,13 +212,13 @@ const WeatherBoxChild = (w) => (
 			<label label={w.temperature} className={"weather-temperature"} />,
 			<box vexpand={true} />,
 			w.rain != '0 mm' ? <label label={w.rain} className={"weather-rain"} /> : <label />,
-			<label label={"  " + Math.round(w.wind.replace(/kph$/, '')) + ' kph'} className={"weather-wind"} />,
+			<label label={"  " + Math.round(Number(w.wind.replace(/kph$/, ''))) + ' kph'} className={"weather-wind"} />,
 		]}
 	>
 	</box>
 );
 
-const WeatherBoxChildWrapper = (w, temperatureDataPerDay, totalWeatherForecastDataArray: []) => (
+const WeatherBoxChildWrapper = (w: TooltipItem, temperatureDataPerDay: Record<string, TemperatureData>, totalWeatherForecastDataArray: TooltipItem[]) => (
 	<box
 		className={"qs-weather-box-child-wrapper"}
 		hexpand={true}
@@ -233,7 +249,7 @@ const WeatherBoxChildWrapper = (w, temperatureDataPerDay, totalWeatherForecastDa
 	</box>
 );
 
-const WeatherMainWidget = (widgetIcon: string, widgetDate: string, rain:number, temperatureDataPerDay, w, totalWeatherForecastDataArray: []) => (
+const WeatherMainWidget = (widgetIcon: string, widgetDate: string, rain:number, temperatureDataPerDay: Record<string, TemperatureData>, w: TooltipItem, totalWeatherForecastDataArray: TooltipItem[]) => (
 	<box
 		className={"qsweather-widget"}
 		vertical={true}
@@ -260,7 +276,7 @@ const WeatherMainWidget = (widgetIcon: string, widgetDate: string, rain:number, 
 	</box>
 )
 
-const WeatherInfo = (weatherData) => (
+const WeatherInfo = (weatherData: TooltipItem) => (
 	<box
 		className={"weather-info"}
 		vertical={true}
@@ -290,10 +306,10 @@ export const Tooltip = ({ total }: { total: number|null }) => (<box
 				self.get_children().forEach(ch => ch.destroy());
 	
 				let prevDayName: string|null = null;
-				let temperatureDataPerDay = {};
-				let weatherStatusIconArray: [] = [];
-				let weatherForecastDataArray: [] = [];
-				let totalWeatherForecastDataArray: [] = [];
+				let temperatureDataPerDay: Record<string, IconTemperatureData> = {};
+				let weatherStatusIconArray: string[] = [];
+				let weatherForecastDataArray: TooltipItem[] = [];
+				let totalWeatherForecastDataArray: TooltipItem[] = [];
 	
 				let totalWeatherForecastsCounter = total;
 				let forecastWidgetsNumber = 0;
@@ -329,7 +345,7 @@ export const Tooltip = ({ total }: { total: number|null }) => (<box
 						temperatureDataPerDay[date] = {
 						minTemp: temperature,
 						maxTemp: temperature,
-						rain: rain,
+						rain: Number(rain),
 						icons: [],
 						widgetsNumber: forecastWidgetsNumber,
 						data: weatherForecastDataArray,
@@ -338,14 +354,14 @@ export const Tooltip = ({ total }: { total: number|null }) => (<box
 						// Update min and max temperatures if necessary
 						temperatureDataPerDay[date].minTemp = Math.min(temperatureDataPerDay[date].minTemp, temperature);
 						temperatureDataPerDay[date].maxTemp = Math.max(temperatureDataPerDay[date].maxTemp, temperature);
-						temperatureDataPerDay[date].rain = Math.max(temperatureDataPerDay[date].rain, rain);
+						temperatureDataPerDay[date].rain = Math.max(temperatureDataPerDay[date].rain, Number(rain));
 						temperatureDataPerDay[date].icons = weatherStatusIconArray;
 						temperatureDataPerDay[date].widgetsNumber = forecastWidgetsNumber;
 						temperatureDataPerDay[date].data = weatherForecastDataArray;
 					}
 	
 					// add icon to the array in between somewhat sunny hours, used to later get most common icon for main widget days
-					if (w.hour >= 7 && w.hour <= 19) {
+					if (Number(w.hour) >= 7 && Number(w.hour) <= 19) {
 						weatherStatusIconArray.push(w.icon);
 					}
 				});

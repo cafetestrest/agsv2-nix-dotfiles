@@ -235,7 +235,7 @@ export default () => {
 
     return <box vertical className={"qs-media-indicator"}>
         {bind(mpris, "players").as(arr => arr.map(player => {
-				return (<Player player={player} />)
+				return (<Player player={player} />) // TODO add support for 2 media playing
 			}
 		))}
     </box>

@@ -28,7 +28,7 @@ const PlayerColorsService = GObject.registerClass(
 		}
 
 		#setColors(player: AstalMpris.Player) {
-			if (false && player.coverArt) { //TODO add matugen
+			if (false && player.coverArt) { // maybe add matugen?
 				execAsync(
 					`matugen image ${player.coverArt} --dry-run -j hex`,
 				).then((str) => {

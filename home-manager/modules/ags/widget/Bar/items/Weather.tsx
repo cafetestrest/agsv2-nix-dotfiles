@@ -1,9 +1,8 @@
 import { bind } from "astal";
-import { Gtk, Gdk } from "astal/gtk3";
+import { App, Gtk, Gdk } from "astal/gtk3";
 import { weather } from "../../../service/Weather";
 import { toggleWindow } from "../../../lib/utils";
 import BarButton from "../BarButton";
-import { bash } from "../../../lib/utils";
 
 export default () => {
 	const weatherData = bind(weather).as((w) => {
@@ -35,13 +34,21 @@ export default () => {
 				}}
 				onClickRelease={(self, event) => {
 					switch (event.button) {
-						case Gdk.BUTTON_SECONDARY:
+						case Gdk.BUTTON_SECONDARY: // todo check if does work
 							weather.startPoll()
 							return weather.stopPoll()
 						case Gdk.BUTTON_MIDDLE:
 							weather.startPoll
 							return weather.stopPoll
-				}}} //todo check
+				}}}
+				setup={(self) => {
+					const window = App.get_window("weather");
+					if (window) {
+						self.hook(window, "notify::visible", () => {
+							self.toggleClassName("active", window.visible);
+						});
+					}
+				}}
 			>
 				<label
 					className={"weather-label"}

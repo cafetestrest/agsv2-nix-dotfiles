@@ -144,6 +144,14 @@ const PowerMenuButton = () => (
 					break;
 			}
 		}}
+		setup={(self) => {
+			const window = App.get_window("powermenu");
+			if (window) {
+				self.hook(window, "notify::visible", () => {
+					self.toggleClassName("active", window.visible);
+				});
+			}
+		}}
 	>
 		<box
 			valign={Gtk.Align.CENTER}

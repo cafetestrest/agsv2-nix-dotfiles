@@ -374,7 +374,7 @@ $togglesHeight: 10.7rem;
 		trough{
 			highlight,
 			progress {
-				background: linear-gradient(to right, #51a4e7, #6cb2eb); // todo add in colors
+				background: $sliderGradient;
 			}
 
 			// different shade when hover/focus - same as in common file - &:hover

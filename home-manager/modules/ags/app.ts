@@ -71,6 +71,7 @@ function main() {
 	// reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/dashboard.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
 	// reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/appLauncher.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
 	// reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/notificationsWindow.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
+	// reloadScss('Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/weather.scss', '/tmp/astal/style.css', 'Public/ags/agsv2-nix-dotfiles/home-manager/modules/ags/style/main.scss');
 	monitorDashboard();
 }
 

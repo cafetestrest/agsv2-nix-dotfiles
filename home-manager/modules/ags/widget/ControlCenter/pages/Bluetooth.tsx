@@ -27,7 +27,7 @@ const DeviceItem = ({ device }: DeviceItemProps) => {
 				<icon icon={device.icon + "-symbolic"} />
 				<label label={device.name} />
 				{
-					//Todo: Add bluetooth battery percentage
+					// Todo: Add bluetooth battery percentage
 					// <label
 					// 	className="bluetooth__percentage"
 					// 	label={`${device.battery_percentage}%`}

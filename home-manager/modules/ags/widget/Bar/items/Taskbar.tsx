@@ -61,9 +61,9 @@ export default () => {
                                     return;
                                 }
                                 switch (event.button) {
-                                    case Gdk.BUTTON_SECONDARY://todo minimize
+                                    case Gdk.BUTTON_SECONDARY:// maybe minimize move to special workspace?
                                         return focus(address);
-                                    case Gdk.BUTTON_MIDDLE: //todo fullscreen
+                                    case Gdk.BUTTON_MIDDLE: // maybe fullscreen?
                                         return focus(address);
                             }}}
                         >
